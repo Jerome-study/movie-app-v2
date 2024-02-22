@@ -26,16 +26,16 @@ export const Footer = () => {
             &&
 
             <footer className="py-3" style={{ backgroundColor: "#0d253f"}}>
-            <Container>
-                <div className="text-center">
-                    <div>
-                        <h6 className="text-white">All posters, names and API are from </h6>
-                        <img className="w-100" style={{ maxWidth: "15rem"}} src="/tmdb-long.svg" />
-                        <h6 className="text-white">More info from the <Link to={"/about"}>About Page</Link> </h6>
+                <Container>
+                    <div className="text-center">
+                        <div>
+                            <h6 className="text-white">All posters, names and API are from </h6>
+                            <img className="w-100 mb-2" style={{ maxWidth: "15rem"}} src="/tmdb-long.svg" />
+                            <h6 className="text-white">More info from the <Link className="text-white " to={"/about"}>About Page</Link> </h6>
+                        </div>
                     </div>
-                </div>
-            </Container>
-        </footer>
+                </Container>
+            </footer>
             
         }
         </>

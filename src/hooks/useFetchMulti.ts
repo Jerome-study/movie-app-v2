@@ -18,7 +18,7 @@ export const useFetchMulti = (url: string) => {
                 setData({...finalResponse.data.results[0], ...firstResponse.data});
                 timer = setTimeout(() => {
                     setLoading(false);
-                }, 2000)
+                }, 1000)
                 
                 
             } catch(error) {

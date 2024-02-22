@@ -17,7 +17,7 @@ export const useFetchPrivate = (url: string) => {
                 setData(response.data);
                 timer = setTimeout(() => {
                     setLoading(false);
-                }, 2000)
+                }, 1000)
                 
                 
             } catch(error) {
