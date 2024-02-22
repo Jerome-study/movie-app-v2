@@ -27,7 +27,8 @@ export const Navigationbar = () => {
                                         <NavDropdown.Item onClick={() => setActive("/search")} to={"/search/person"} as={Link} eventKey={"4"}>Person</NavDropdown.Item>
                                         <NavDropdown.Divider />
                                     </NavDropdown>
-                                    <Nav.Link onClick={() => setActive("/signup")} to={"/signup"} as={Link} eventKey="5">
+                                    <Nav.Link className={active === "/about"? "active-link text-white fw-bolder": "text-light"} onClick={() => setActive("/about")} to={"/about"} as={Link} eventKey="5">About</Nav.Link>
+                                    <Nav.Link onClick={() => setActive("/signup")} to={"/signup"} as={Link} eventKey="6">
                                         <Button className={active === "/signup"? "active": ""} variant="outline-light">SignUp</Button>
                                     </Nav.Link>
                                 </Nav>

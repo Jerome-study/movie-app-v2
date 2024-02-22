@@ -2,6 +2,8 @@ import { MainComponent } from "../components/view/main"
 
 export const ViewPage = () => {
     return(
-        <MainComponent />
+        <div>
+            <MainComponent />
+        </div>
     )
 }
