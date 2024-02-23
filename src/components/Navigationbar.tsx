@@ -20,11 +20,11 @@ export const Navigationbar = () => {
 
     return (
         <>
-                <Navbar expand="lg" bg="primary" collapseOnSelect  className="shadow-sm text-white navbar-dark">
+                <Navbar expand="lg" style={{ backgroundColor: "#0d253f"}} collapseOnSelect  className="shadow-sm text-white navbar-dark">
                     <Container>
-                        <Navbar.Brand className='text-white fw-bolder' to={"/"} as={Link} onClick={() => setActive("/")} >MovieInfos</Navbar.Brand>
+                        <Navbar.Brand className='text-white fw-bolder' href='/'  >MovieInfos</Navbar.Brand>
                         <Navbar.Toggle className="border border-3"   aria-controls={`offcanvasNavbar-expand-lg`} />
-                        <Navbar.Offcanvas className="bg-primary w-75" id={`offcanvasNavbar-expand-md}`} aria-labelledby={`offcanvasNavbarLabel-expand-sm`} placement="end">
+                        <Navbar.Offcanvas className="w-75" id={`offcanvasNavbar-expand-md}`} aria-labelledby={`offcanvasNavbarLabel-expand-sm`} placement="end" style={{ backgroundColor:"#0d253f"}}>
                             <Offcanvas.Header className='ms-auto' closeButton />
                             <Offcanvas.Body>
                                 <Nav className="justify-content-end flex-grow-1 gap-3 align-items-lg-center">

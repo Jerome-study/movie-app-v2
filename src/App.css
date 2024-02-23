@@ -215,3 +215,34 @@
   letter-spacing: .1rem;
 }
 
+
+/* View Show */
+
+.poster-bg {
+  min-height: 34vh;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  
+}
+
+@media (min-width: 576px) {
+  .poster-bg {
+    min-height: 44vh;
+  }
+}
+
+
+@media (min-width: 768px) {
+  .poster-bg {
+    min-height: 54vh;
+  }
+}
+
+@media (min-width: 992px) {
+  .poster-bg {
+    min-height: 91vh;
+    background-position:unset ;
+    background-size: cover;
+  }
+}

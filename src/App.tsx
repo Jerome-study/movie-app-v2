@@ -16,12 +16,12 @@ function App() {
                 <Route element={<Layout />}>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/search/:category" element={<SearchPage />} />
-                    <Route path="/about" element={<AboutPage />}/>
                     <Route path="*" element={<h1>Page not found</h1>}/>
-                    <Route path="/view">
+                </Route>
+                <Route path="/view">
                         <Route path=":category/:id" element={<ViewPage />}/>
                     </Route>
-                </Route>
+                <Route path="/about" element={<AboutPage />}/>
             </Routes>
             <Footer />
         </>

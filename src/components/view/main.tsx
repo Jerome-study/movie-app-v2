@@ -4,6 +4,9 @@ import { Navigate } from "react-router-dom";
 import { createContext } from "react";
 import { Spinner } from "react-bootstrap";
 import { useFetchMulti } from "../../hooks/useFetchMulti";
+import {Container} from "react-bootstrap";
+
+
 
 export const DetailsContext = createContext<any>({});
 
@@ -27,16 +30,21 @@ export const MainComponent = () => {
     }
 
     return(
-        <main>
+        <main style={{ backgroundColor: "#f2f2f2", minHeight: "90vh"}}>
             <DetailsContext.Provider value={{ data }}>
-                {loading && <Spinner />}
+                {loading && 
+                
+                <Container className="text-center pt-5">
+                    <Spinner />
+                </Container>    
+                }
                 {!loading && 
                     <>
                         <HeroComponent category={category} />
                     </>
-                
+                    
                 }
-                
+                    
             </DetailsContext.Provider>
         </main>
     )
