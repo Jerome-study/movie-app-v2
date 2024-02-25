@@ -25,7 +25,8 @@ export const Navigationbar = () => {
                         <Navbar.Brand className='text-white fw-bolder' href='/'  >MovieInfos</Navbar.Brand>
                         <Navbar.Toggle className="border border-3"   aria-controls={`offcanvasNavbar-expand-lg`} />
                         <Navbar.Offcanvas className="w-75" id={`offcanvasNavbar-expand-md}`} aria-labelledby={`offcanvasNavbarLabel-expand-sm`} placement="end" style={{ backgroundColor:"#0d253f"}}>
-                            <Offcanvas.Header className='ms-auto' closeButton />
+                            <Offcanvas.Header className='ms-auto btn-close-white ' data-bs-theme="dark" closeButton />
+                                
                             <Offcanvas.Body>
                                 <Nav className="justify-content-end flex-grow-1 gap-3 align-items-lg-center">
                                     <Nav.Link className={active === "/"? "active-link text-white fw-bolder": "text-light"} onClick={() => setActive("/")} to={"/"} as={Link} eventKey="1">Home</Nav.Link>
@@ -38,8 +39,8 @@ export const Navigationbar = () => {
                                         <NavDropdown.Divider />
                                     </NavDropdown>
                                     <Nav.Link className={location.pathname.includes("about")? "active-link text-white fw-bolder": "text-light"} onClick={() => setActive("")} to={"/about"} as={Link} eventKey="5">About</Nav.Link>
-                                    <Nav.Link onClick={() => setActive("")} to={"/signup"} as={Link} eventKey="6">
-                                        <Button className={location.pathname.includes("signup")? "active": ""} variant="outline-light">SignUp</Button>
+                                    <Nav.Link onClick={() => setActive("")} to={"/SignIn"} as={Link} eventKey="6">
+                                        <Button className={location.pathname.includes("SignIn")? "active": ""} variant="outline-light">SignIn</Button>
                                     </Nav.Link>
                                 </Nav>
                             </Offcanvas.Body>

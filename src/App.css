@@ -5,6 +5,10 @@
 }
 
 
+/* Dropdown arrow */
+.dropdown>a::after {
+  color: white;
+}
 
 .card-width {
   font-size: 8px;
@@ -226,8 +230,16 @@
   
 }
 
+.text-overlays {
+  min-height: 34vh;
+}
+
 @media (min-width: 576px) {
   .poster-bg {
+    min-height: 44vh;
+  }
+
+  .text-overlays {
     min-height: 44vh;
   }
 }
@@ -237,12 +249,61 @@
   .poster-bg {
     min-height: 54vh;
   }
+
+  .text-overlays {
+    min-height: 54vh;
+  }
 }
 
 @media (min-width: 992px) {
   .poster-bg {
     min-height: 91vh;
+  }
+
+  .text-overlays {
+    min-height: 90vh;
+  }
+}
+
+@media (min-width: 1200px) {
+  .poster-bg {
     background-position:unset ;
-    background-size: cover;
+    min-height: 100vh;
+  }
+  .text-overlays {
+    min-height: 95vh;
+  }
+}
+
+
+/* Info-Tv-Typography */
+
+.info-tv h3 {
+  font-weight: 800;
+}
+
+
+.info-tv h6 {
+  font-weight: 700;
+  font-size: .90rem;
+}
+
+.info-tv span {
+  font-weight: 100;
+  font-size: 0.75rem;
+}
+
+@media (min-width: 1200px) {
+  .info-tv h3 {
+    font-size: 2rem;
+  }
+
+  .info-tv h6 {
+    font-size: .95rem;
+  }
+  
+  .info-tv span {
+    font-weight: 100;
+    font-size: .85rem;
   }
 }
