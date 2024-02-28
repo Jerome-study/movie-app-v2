@@ -4,6 +4,9 @@ import { Navigate } from "react-router-dom";
 import { createContext } from "react";
 import { Spinner } from "react-bootstrap";
 import { useFetchMulti } from "../../hooks/useFetchMulti";
+import {Container} from "react-bootstrap";
+
+
 
 export const DetailsContext = createContext<any>({});
 
@@ -17,8 +20,8 @@ export const MainComponent = () => {
         return <Navigate to={"*"} />
     }
 
-    const { data, loading , error } = useFetchMulti(import.meta.env.VITE_API_BASE_URL + `/${category}/` + id + "?api_key=");
-    if (error?.response.status === 404) {
+    let { data, loading , error } = useFetchMulti(import.meta.env.VITE_API_BASE_URL + `/${category}/` + id + "?api_key=", category, id);
+    if (error?.response?.status === 404) {
         return <Navigate to={"*"} />
     }
 
@@ -26,17 +29,23 @@ export const MainComponent = () => {
         return <h1>Something went Wrong</h1>
     }
 
+
     return(
-        <main>
+        <main style={{ backgroundColor: "#f2f2f2", minHeight: "90vh"}}>
             <DetailsContext.Provider value={{ data }}>
-                {loading && <Spinner />}
+                {loading && 
+                
+                <Container className="text-center pt-5">
+                    <Spinner />
+                </Container>    
+                }
                 {!loading && 
                     <>
                         <HeroComponent category={category} />
                     </>
-                
+                    
                 }
-                
+                    
             </DetailsContext.Provider>
         </main>
     )

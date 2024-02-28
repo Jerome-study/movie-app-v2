@@ -12,11 +12,11 @@ export const SearchBar = ({ category }: { category: string}) => {
     const [data, setData] = useState<any>();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<any>();
-    
+
     useEffect(() => {
         setData(null);
         setTitle("")
-    }, [category])
+    }, [category]);
 
     const getData = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
