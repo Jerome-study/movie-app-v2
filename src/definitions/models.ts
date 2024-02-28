@@ -37,3 +37,13 @@ export interface SearchProps {
     title?: string,
     profile_path?: string
 }
+
+
+export interface InputFormProps {
+    username: string,
+    password: string,
+    confirmPassword: string,
+    first_name?: string,
+    last_name?: string
+    confirm_password?: string
+}

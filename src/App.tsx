@@ -6,6 +6,8 @@ import { HomePage } from "./page/home";
 import { SearchPage } from "./page/search";
 import { ViewPage } from "./page/view";
 import { AboutPage } from "./page/about";
+import { SignInPage } from "./page/singin";
+import { SignUpPage } from "./page/signup";
 
 import "./App.css"
 function App() {
@@ -22,6 +24,8 @@ function App() {
                         <Route path=":category/:id" element={<ViewPage />}/>
                     </Route>
                 <Route path="/about" element={<AboutPage />}/>
+                <Route path="/signin" element={<SignInPage />} />
+                <Route path="/signup" element={<SignUpPage />} />
             </Routes>
             <Footer />
         </>
