@@ -4,16 +4,27 @@ const passport = require('passport');
 const MongoStore = require('connect-mongo');
 const authRouter = require("./routes/auth");
 const protectedRouter = require("./routes/protected");
+const cors = require("cors");
 const { verify } = require("./middleware//verify");
 const app = express();
 
+
+
 // ENV variables
 require("dotenv").config();
+
+
 // Database Config
 require("./config/database");
 
+
 // passport
 require("./config/passport");
+
+app.use(cors({
+    origin: process.env.ORIGINURL,
+    credentials: true
+}));
 
 
 app.use(express.json());

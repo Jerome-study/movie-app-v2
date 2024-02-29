@@ -2,9 +2,10 @@ const { userModel } = require("../models/userSchema");
 const bcrypt = require("bcryptjs");
 
 async function handleRegisterController(req,res) {
-    const { username , password, confirmPassword } = req.body;
+    const { username , first_name, last_name, password, confirm_password, } = req.body.data;
+    console.log(req.body.data)
     if (!username || !password) return res.json({ message: "Please fill all the fields" });
-    if (password !== confirmPassword) return res.json({ message: "Password do not match!" });
+    if (password !== confirm_password) return res.json({ message: "Password do not match!" });
     try {
         const foundUser = await userModel.findOne({ username });
         // If user found
@@ -14,6 +15,8 @@ async function handleRegisterController(req,res) {
         const hashedPassword = await bcrypt.hash(password, 10);
         const result = await userModel.create({
             username,
+            first_name,
+            last_name,
             password: hashedPassword
         });
         res.status(201).json({ message: "User is created" })
