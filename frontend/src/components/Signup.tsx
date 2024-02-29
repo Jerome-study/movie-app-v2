@@ -4,15 +4,34 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import { InputFormProps } from "../definitions/models"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { instance } from "../utils/utils";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const SignUpComponent = () => {
     const { register, handleSubmit,formState: { errors }, watch } = useForm<InputFormProps>();
-
-    const onSubmit: SubmitHandler<InputFormProps> = (data) => {
-        console.log(data)
+    const [error, setError] = useState<string>("");
+    const navigate = useNavigate();
+    const onSubmit: SubmitHandler<InputFormProps> = async (data) => {
+        try {
+            const response = await instance.post(import.meta.env.VITE_AUTH_REGISTER, {
+                data
+            })
+            if (response.status === 201) {
+                
+                navigate("/signin", { state: {
+                    message: response.data.message
+                }});
+            }
+        } catch(error : any) {
+           if (error.response.status) {
+            setError(error.response.data.message)
+            notify();
+           }
+        }
     }
     const notify = () => {
-        toast.dismiss();
+        console.log("render toast")
         toast.error(errors.username?.message, {
             toastId: 1
         });
@@ -31,6 +50,13 @@ export const SignUpComponent = () => {
         toast.error(errors.confirm_password?.message, {
             toastId: 5
         });
+
+        if (error) {
+            toast.error(error, {
+                toastId: 6
+            });
+        }
+
     }
 
     

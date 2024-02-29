@@ -4,13 +4,18 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import { InputFormProps } from "../definitions/models"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export const SignInComponent = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
     const { register, handleSubmit,formState: { errors } } = useForm<InputFormProps>();
-
     const onSubmit: SubmitHandler<InputFormProps> = (data) => {
         console.log(data)
     }
+
+
     const notify = () => {
         toast.dismiss();
         toast.error(errors.username?.message, {
@@ -19,8 +24,20 @@ export const SignInComponent = () => {
         toast.error(errors.password?.message, {
             toastId: 2
         });
+
+        if (location.state) {
+            toast.success(location.state?.message, {
+                toastId: 3,
+            })
+        }
     }
 
+    useEffect(() => {
+        if (location.state?.message) {
+            notify();
+            navigate(location.pathname, {})
+        }
+    }, [])
     
 
 
