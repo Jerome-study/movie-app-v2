@@ -6,13 +6,18 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { useFetchBackend } from "../hooks/useFetch";
 
 export const SignInComponent = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { register, handleSubmit,formState: { errors } } = useForm<InputFormProps>();
-    const onSubmit: SubmitHandler<InputFormProps> = (data) => {
-        console.log(data)
+    const onSubmit: SubmitHandler<InputFormProps> = async (data) => {
+        try {
+            
+        } catch(error) {
+            console.log(error)
+        }
     }
 
 

@@ -18,13 +18,12 @@ export const SignUpComponent = () => {
                 data
             })
             if (response.status === 201) {
-                
                 navigate("/signin", { state: {
                     message: response.data.message
                 }});
             }
         } catch(error : any) {
-           if (error.response.status) {
+           if (error?.response?.status) {
             setError(error.response.data.message)
             notify();
            }
