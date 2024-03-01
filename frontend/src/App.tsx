@@ -9,6 +9,7 @@ import { AboutPage } from "./page/about";
 import { SignInPage } from "./page/singin";
 import { SignUpPage } from "./page/signup";
 
+
 import "./App.css"
 function App() {
     return(

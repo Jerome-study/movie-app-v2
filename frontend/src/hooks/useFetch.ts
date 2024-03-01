@@ -1,7 +1,9 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import { instance } from "../utils/utils";
 
-export const useFetch = (url: string) => {
+
+
+export const useFetchBackend = (url: string) => {
 
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState();
@@ -11,7 +13,7 @@ export const useFetch = (url: string) => {
         setLoading(true);
         const getData = async () => {
             try {
-                const response = await axios.get(url);
+                const response = await instance.get(url);
                 setData(response.data);
                 setLoading(false)
                 
