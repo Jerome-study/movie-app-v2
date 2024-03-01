@@ -3,8 +3,8 @@ const express = require("express");
 const router = express.Router();
 
 
-router.get("/", (req,res) => {
-    res.send("Secret file")
+router.get("/getUser", (req,res) => {
+    res.send(req.user)
 })
 
 

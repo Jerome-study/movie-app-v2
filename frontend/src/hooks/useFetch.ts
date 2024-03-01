@@ -14,7 +14,6 @@ export const useFetchBackend = (url: string) => {
         const getData = async () => {
             try {
                 const response = await instance.get(url);
-                console.log(response)
                 setData(response.data);
                 setLoading(false)
                 

@@ -2,15 +2,13 @@
 
 
 const verify = (req,res,next) => {
-    console.log(req.user);
     if (!req.user) {
-        return res.sendStatus(401);
+        return res.sendStatus(204);
     }
     next();
 }
 
 const verifyAuth = (req,res,next) => {
-    console.log(req.user);
     if (!req.user) {
         return next();
     }

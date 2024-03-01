@@ -5,18 +5,25 @@ import { InputFormProps } from "../definitions/models"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { useFetchBackend } from "../hooks/useFetch";
+import { useEffect, useState } from "react";
+import { instance } from "../utils/utils";
 
 export const SignInComponent = () => {
     const location = useLocation();
     const navigate = useNavigate();
+    const [error, setError] = useState<string>("")
     const { register, handleSubmit,formState: { errors } } = useForm<InputFormProps>();
     const onSubmit: SubmitHandler<InputFormProps> = async (data) => {
+        const username = data.username;
+        const password = data.password
         try {
-            
-        } catch(error) {
-            console.log(error)
+            const response = await instance.post(import.meta.env.VITE_AUTH_LOGIN, { username, password });
+            if (response.data.message) {
+                window.location.href = "/"
+            }
+        } catch(error: any) {
+            setError(error.response.data.message);
+            notify();
         }
     }
 
@@ -35,6 +42,13 @@ export const SignInComponent = () => {
                 toastId: 3,
             })
         }
+
+        if (error) {{
+            toast.error(error, {
+                toastId: 4
+            })
+        }}
+
     }
 
     useEffect(() => {

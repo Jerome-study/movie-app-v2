@@ -3,7 +3,6 @@ const bcrypt = require("bcryptjs");
 
 async function handleRegisterController(req,res) {
     const { username , first_name, last_name, password, confirm_password, } = req.body.data;
-    console.log(req.body.data)
     if (!username || !password) return res.json({ message: "Please fill all the fields" });
     if (password !== confirm_password) return res.json({ message: "Password do not match!" });
     try {

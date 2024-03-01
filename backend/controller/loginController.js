@@ -6,7 +6,7 @@ async function handleLoginController(req,res,next) {
       return next(err); 
     }
     if (!user) {
-      return res.send({ message: info.message });
+      return res.status(303).send({ message: info.message });
     }
     req.login(user, function(err){
       if(err){
