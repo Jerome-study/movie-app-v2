@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 
 export const useFetchPrivate = (url: string) => {
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [data, setData] = useState<any>(null);
     const [error, setError] = useState<any>(null)
 
     useEffect(() => {
-        setLoading(true);
+        let running = true
         let timer: any;
         const getData = async () => {
             try {
@@ -27,7 +27,7 @@ export const useFetchPrivate = (url: string) => {
         }
         getData();
         return () => {
-            setLoading(true);
+            running = false
             clearTimeout(timer)
         }
 

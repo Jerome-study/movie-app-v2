@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 
 export const useFetchMulti = (url: string, category: string, id: number | string | undefined) => {
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [data, setData] = useState<any>(null);
     const [error, setError] = useState<any>(null)
 
     useEffect(() => {
-        setLoading(true);
+        let running = true
         let timer: any;
         const getData = async () => {
             try {
@@ -31,7 +31,7 @@ export const useFetchMulti = (url: string, category: string, id: number | string
         }
         getData();
         return () => {
-            setLoading(true);
+            running = false
             clearTimeout(timer)
         }
 

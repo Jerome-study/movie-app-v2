@@ -10,7 +10,7 @@ import { instance } from '../utils/utils';
 export const Navigationbar = () => {
     const location = useLocation();
     const [active, setActive] = useState<string>(location.pathname);
-    const { data }: any = useFetchBackend(import.meta.env.VITE_API_ISLOGGEDIN) 
+    const { data }: any = useFetchBackend(import.meta.env.VITE_API_GETUSER) 
     const navigate = useNavigate();
     useEffect(() => {
         if (location.pathname.split("").length > 1) {
@@ -34,7 +34,7 @@ export const Navigationbar = () => {
     return (
         <>
             {data?.id}
-                <Navbar expand="lg" style={{ backgroundColor: "#0d253f"}} collapseOnSelect  className="shadow-sm py-3 text-white navbar-dark">
+                <Navbar expand="lg" style={{ backgroundColor: "#0d253f"}} collapseOnSelect  className={`${data? "py-3": ""} shadow-sm text-white navbar-dark`}>
                     <Container>
                         <Navbar.Brand className='text-white fw-bolder' href='/'>MovieInfos</Navbar.Brand>
                         <Navbar.Toggle className="border border-3"   aria-controls={`offcanvasNavbar-expand-lg`} />
@@ -59,10 +59,10 @@ export const Navigationbar = () => {
                                         </Nav.Link>
                                     }
                                     { data && 
-                                        <NavDropdown color="white" title={<span className='text-white fw-bold'>{data?.username}</span>} id="basic-nav-dropdown">
-                                            <NavDropdown.Item>Profile</NavDropdown.Item>
-                                            <NavDropdown.Item>Watch List</NavDropdown.Item>
-                                            <NavDropdown.Item>Favorite</NavDropdown.Item>
+                                        <NavDropdown color="white" title={<span className='text-white fw-bold'>{data}</span>} id="basic-nav-dropdown">
+                                            <NavDropdown.Item to={"/profile"} as={Link}>Profile</NavDropdown.Item>
+                                            <NavDropdown.Item to={"/watch_list"} as={Link}>Watch List</NavDropdown.Item>
+                                            <NavDropdown.Item to={"/favorites"} as={Link} >Favorite</NavDropdown.Item>
                                             <NavDropdown.Item onClick={logoutButton}>Logout</NavDropdown.Item>
                                         </NavDropdown>
                                     }
