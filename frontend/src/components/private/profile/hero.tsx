@@ -19,9 +19,12 @@ export const HeroComponent = ({ data }: { data: UserProps}) => {
                                             </div>
                                             <h1>{data?.username}</h1>
                                             <p style={{ fontSize: "15px"}}>
-                                                <Link className="text-decoration-none text-muted link-primary"  to={"/profile/edit"}>
-                                                    {data?.nickname? data?.nickname: "Add Nickname"}
-                                                </Link>
+                                                {data?.nickname}
+                                                {!data?.nickname &&
+                                                    <Link reloadDocument className="text-decoration-none text-muted link-primary"  to={"/profile/edit"}>
+                                                        Add Nickname
+                                                    </Link>
+                                                }
                                             </p>
                                         </div>
                                     </div>
@@ -30,7 +33,7 @@ export const HeroComponent = ({ data }: { data: UserProps}) => {
                                             <div className="row">
                                                 <h6 className="col-6">Information</h6>
                                                 <p className="col-6 mb-0">
-                                                    <Link className="link-primary text-decoration-none text-danger" to={"/profile/edit"}>
+                                                    <Link className="link-primary text-decoration-none text-danger" reloadDocument to={"/profile/edit"}>
                                                         Edit Profile
                                                     </Link>
                                                 </p>
@@ -65,12 +68,12 @@ export const HeroComponent = ({ data }: { data: UserProps}) => {
                                                     {!data?.bio && 
                                                     
                                                     <p className="text-center" style={{ fontSize: "15px"}}>
-                                                        <Link className="link-primary text-decoration-none text-muted"  to={"/profile/edit"}>
+                                                        <Link className="link-primary text-decoration-none text-muted" reloadDocument to={"/profile/edit"}>
                                                             You must be boring, add some bio!
                                                         </Link>
                                                     </p>
                                                     }
-                                                    {data?.bio && <p className="text-info">{data?.bio}</p>}
+                                                    {data?.bio && <p className="text-muted" style={{ fontSize: "15px"}}>{data?.bio}</p>}
 
                                                 </div>
                                             </div>
