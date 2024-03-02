@@ -2,10 +2,8 @@ import { Button } from "react-bootstrap";
 import { Card } from "react-bootstrap";
 import { ShowProps } from "../../definitions/models";
 import {Container} from "react-bootstrap";
-import { viewShow } from "../../utils/utils";
-import { useNavigate } from "react-router-dom";
+import { viewShowReload } from "../../utils/utils";
 export const PersonDesign = ({ data }: {data: any}) => {
-    const navigate = useNavigate();
     return(
         <div className="py-5">
             <Container>
@@ -38,7 +36,7 @@ export const PersonDesign = ({ data }: {data: any}) => {
                 <div className="row gy-4">
                     {data?.known_for?.map((movie: ShowProps) => {
                         return(
-                            <div key={movie.id} className="col-4 col-md-3 col-lg-2" onClick={() => viewShow(movie, navigate)}>
+                            <div key={movie.id} className="col-4 col-md-3 col-lg-2" onClick={() => viewShowReload(movie)}>
                                 {movie.poster_path && 
                                     <Card className="bg-dark text-white h-100 search-result-card " style={{backgroundColor: "#eee"}}>
                                         <Card.Img className="h-100" src={import.meta.env.VITE_IMG_URL_POSTER + movie.poster_path } alt="Card image" />

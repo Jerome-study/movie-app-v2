@@ -11,6 +11,7 @@ import { SignInPage } from "./page/singin";
 import { SignUpPage } from "./page/signup";
 import { Protected } from "./ProtectedLayout";
 import { ProfilePage } from "./page/private/profile";
+import { EditProfilePage } from "./page/private/editprofile";
 
 function App() {
     return(
@@ -28,9 +29,14 @@ function App() {
                         <Route path="/favorites" element={<h1>favorite Page</h1>} />
                     </Route>
                 </Route>
+                {/* Private Routes without Layout */}
                 <Route element={<Protected />}>
-                    <Route path="/profile" element={<ProfilePage />} />
+                    <Route path="/profile">
+                        <Route path="" element={<ProfilePage />} />
+                        <Route path="edit" element={<EditProfilePage />} />
+                    </Route>
                 </Route>
+                {/* Private Routes without Layout */}
                 <Route path="/view">
                     <Route path=":category/:id" element={<ViewPage />}/>
                 </Route>
