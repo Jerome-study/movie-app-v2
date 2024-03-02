@@ -12,11 +12,15 @@ import { SignUpPage } from "./page/signup";
 import { Protected } from "./ProtectedLayout";
 import { ProfilePage } from "./page/private/profile";
 import { EditProfilePage } from "./page/private/editprofile";
+import { ToastContainer } from "react-toastify";
 
 function App() {
     return(
         <>
             <Navigationbar />
+            <div className="position-relative">
+                <ToastContainer className="position-absolute" style={{ top: "0"}} />
+            </div>
             <Routes>
                 <Route element={<Layout />}>
                     <Route path="/" element={<HomePage />} />

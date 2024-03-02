@@ -63,5 +63,14 @@ export interface UserProps {
 export interface FetchUserProps {
     data: UserProps,
     loading?: Boolean,
-    error?: any
+    error?: any,
+    refetch: Function
+}
+
+export interface EditProps {
+    username?: string,
+    first_name?: string,
+    last_name?: string,
+    bio?: string,
+    nickname?: string,
 }

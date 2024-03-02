@@ -11,7 +11,7 @@ import { FetchUserProps } from '../definitions/models';
 export const Navigationbar = () => {
     const location = useLocation();
     const [active, setActive] = useState<string>(location.pathname);
-    const { data }: FetchUserProps = useFetchBackend(import.meta.env.VITE_API_GETUSER) 
+    const { data, refetch }: FetchUserProps = useFetchBackend(import.meta.env.VITE_API_GETUSER) 
     const navigate = useNavigate();
     useEffect(() => {
         if (location.pathname.split("").length > 1) {
@@ -19,7 +19,9 @@ export const Navigationbar = () => {
         } else {
             setActive("/")
         }
+        refetch();
     }, [location.pathname])
+    
     
     const logoutButton = async () => {
         try {
