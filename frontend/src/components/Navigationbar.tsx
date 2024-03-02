@@ -7,10 +7,11 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useFetchBackend } from '../hooks/useFetch';
 import { instance } from '../utils/utils';
+import { FetchUserProps } from '../definitions/models';
 export const Navigationbar = () => {
     const location = useLocation();
     const [active, setActive] = useState<string>(location.pathname);
-    const { data }: any = useFetchBackend(import.meta.env.VITE_API_GETUSER) 
+    const { data }: FetchUserProps = useFetchBackend(import.meta.env.VITE_API_GETUSER) 
     const navigate = useNavigate();
     useEffect(() => {
         if (location.pathname.split("").length > 1) {
@@ -59,10 +60,10 @@ export const Navigationbar = () => {
                                         </Nav.Link>
                                     }
                                     { data && 
-                                        <NavDropdown color="white" title={<span className='text-white fw-bold'>{data}</span>} id="basic-nav-dropdown">
-                                            <NavDropdown.Item to={"/profile"} as={Link}>Profile</NavDropdown.Item>
-                                            <NavDropdown.Item to={"/watch_list"} as={Link}>Watch List</NavDropdown.Item>
-                                            <NavDropdown.Item to={"/favorites"} as={Link} >Favorite</NavDropdown.Item>
+                                        <NavDropdown color="white" title={<span className='text-white fw-bold'>{data?.username}</span>} id="basic-nav-dropdown">
+                                            <NavDropdown.Item to={"/profile"} as={Link} eventKey={"7"}>Profile</NavDropdown.Item>
+                                            <NavDropdown.Item to={"/watch_list"} as={Link} eventKey={"8"}>Watch List</NavDropdown.Item>
+                                            <NavDropdown.Item to={"/favorites"} as={Link} eventKey={"9"}>Favorite</NavDropdown.Item>
                                             <NavDropdown.Item onClick={logoutButton}>Logout</NavDropdown.Item>
                                         </NavDropdown>
                                     }

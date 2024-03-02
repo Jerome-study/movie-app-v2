@@ -10,7 +10,7 @@ import { AboutPage } from "./page/about";
 import { SignInPage } from "./page/singin";
 import { SignUpPage } from "./page/signup";
 import { Protected } from "./ProtectedLayout";
-
+import { ProfilePage } from "./page/private/profile";
 
 function App() {
     return(
@@ -24,12 +24,12 @@ function App() {
 
                     {/* Private Routes */}
                     <Route element={<Protected />}>
-                        <Route path="/profile" element={<h1>Profile Page</h1>} />
                         <Route path="/watch_list" element={<h1>Watch list Page</h1>} />
                         <Route path="/favorites" element={<h1>favorite Page</h1>} />
                     </Route>
-                    
-                    
+                </Route>
+                <Route element={<Protected />}>
+                    <Route path="/profile" element={<ProfilePage />} />
                 </Route>
                 <Route path="/view">
                     <Route path=":category/:id" element={<ViewPage />}/>
@@ -41,7 +41,6 @@ function App() {
             <Footer />
         </>
     )
- 
 }
 
 export default App
