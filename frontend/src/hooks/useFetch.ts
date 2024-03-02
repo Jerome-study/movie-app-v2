@@ -6,7 +6,7 @@ import { instance } from "../utils/utils";
 export const useFetchBackend = (url: string) => {
 
     const [loading, setLoading] = useState(false);
-    const [data, setData] = useState();
+    const [data, setData] = useState<any | null>();
     const [error, setError] = useState<any>()
 
     useEffect(() => {

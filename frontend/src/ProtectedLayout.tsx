@@ -1,0 +1,39 @@
+import { useEffect, useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import { instance } from "./utils/utils";
+import { Spinner } from "react-bootstrap";
+export const Protected = () => {
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(true)
+    useEffect(() => {
+        let running = true;
+        const getUser = async () => {
+            try {
+                const response = await instance.get(import.meta.env.VITE_API_ISLOGGEDIN);
+                if (running) {
+                    if (!response.data) {
+                        return navigate("/")
+                    }
+                    setLoading(false)
+                }
+            } catch(error) {
+
+            }
+        }
+        getUser();
+        return () => {
+            running = false
+        }
+    }, [])
+
+    if (loading) {
+        return <Spinner />  
+    }
+
+    return(
+        <>
+            <Outlet />
+        </>
+    )
+}
+

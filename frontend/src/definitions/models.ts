@@ -47,3 +47,21 @@ export interface InputFormProps {
     last_name?: string
     confirm_password?: string
 }
+
+
+export interface UserProps {
+    username?: string,
+    first_name?: string,
+    last_name?: string,
+    bio?: string,
+    nickname?: string,
+    id?: string,
+    created_at?: any,
+    updated_at?: any
+}
+
+export interface FetchUserProps {
+    data: UserProps,
+    loading?: Boolean,
+    error?: any
+}
