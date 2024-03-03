@@ -1,34 +1,15 @@
 import { Link } from "react-router-dom"
 import { Button } from "react-bootstrap"
 import { useForm, SubmitHandler } from "react-hook-form"
-import { InputFormProps } from "../definitions/models"
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { instance } from "../utils/utils";
+import { InputFormProps } from "../../definitions/models";
+import { instance } from "../../utils/utils";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-export const SignUpComponent = () => {
+import { toast } from 'react-toastify';
+export const FormComponent = ({ avatar }: { avatar: string}) => {
     const { register, handleSubmit,formState: { errors }, watch } = useForm<InputFormProps>();
-    const [error, setError] = useState<string>("");
     const navigate = useNavigate();
-    const onSubmit: SubmitHandler<InputFormProps> = async (data) => {
-        try {
-            const response = await instance.post(import.meta.env.VITE_AUTH_REGISTER, {
-                data
-            })
-            if (response.status === 201) {
-                navigate("/signin", { state: {
-                    message: response.data.message
-                }});
-            }
-        } catch(error : any) {
-           if (error?.response?.status) {
-            setError(error.response.data.message)
-            notify();
-           }
-        }
-    }
+    const [error, setError] = useState<string>("");
     const notify = () => {
         console.log("render toast")
         toast.error(errors.username?.message, {
@@ -55,17 +36,30 @@ export const SignUpComponent = () => {
                 toastId: 6
             });
         }
-
     }
-
-    
-
-
+    const onSubmit: SubmitHandler<InputFormProps> = async (data) => {
+        try {
+            data = {...data, avatar}
+            const response = await instance.post(import.meta.env.VITE_AUTH_REGISTER, {
+                data,
+                
+            })
+            if (response.status === 201) {
+                navigate("/signin", { state: {
+                    message: response.data.message
+                }});
+            }
+        } catch(error : any) {
+           if (error?.response?.status) {
+            setError(error.response.data.message)
+            notify();
+           }
+        }
+    }
     return(
         <>
-            <section className="d-flex justify-content-center align-items-center px-2" style={{ minHeight: "92vh", backgroundColor: "#f4f3f2"}}>
-                <div className="bg-light position-relative rounded rounded-3 border border-2 shadow-sm w-100 py-4 p-3" style={{ minHeight: "50vh", maxWidth: "25rem", fontSize: "12px"}}>
-                    <h1 className="text-center">SignIn</h1>
+            <div className="bg-light position-relative w-100 py-4 p-3 rounded-right" >
+                    <h1 className="text-center">SignUp</h1>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-floating mb-3 mt-3">
                             <input 
@@ -157,8 +151,8 @@ export const SignUpComponent = () => {
                             <Button style={{ fontSize: "12px"}} variant="outline-danger">SignIn</Button>
                         </Link> 
                     </div>
-                </div>
-            </section>
+                </div> 
+        
         </>
     )
 }

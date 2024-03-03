@@ -5,14 +5,15 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import { EditProps } from "../../../definitions/models";
 import { useNavigate } from "react-router-dom";
 import { instance } from "../../../utils/utils";
-import { useState } from "react";
-import { toast } from 'react-toastify';
+import { useEffect, useState } from "react";
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { Avatar1, Avatar2, Avatar3, Avatar4 } from "../../../utils/Avatars";
 
 
 export const EditPageComponent = () => {
     const { data, loading, error }: FetchUserProps = useFetchBackend(import.meta.env.VITE_API_GETALL);
+    const [avatar, setAvatar] = useState(data?.avatar);
     const navigate = useNavigate();
     const [userError, setUserError] = useState<string>("")
     const { register, handleSubmit } = useForm<EditProps>({
@@ -20,7 +21,6 @@ export const EditPageComponent = () => {
     });
 
     const notify = () => {
-        console.log("notify")
         if (userError) {
             toast.error(userError, {
                 toastId: 1
@@ -30,25 +30,29 @@ export const EditPageComponent = () => {
 
     const onSubmit: SubmitHandler<EditProps> = async (editData) => {
         try {
-            if ( data?.first_name === editData.first_name && data?.last_name === editData.last_name && data?.username === editData.username && data?.nickname === editData.nickname && data?.bio === editData.bio) {
+            if ( data?.first_name === editData.first_name && data?.last_name === editData.last_name && data?.username === editData.username && data?.nickname === editData.nickname && data?.bio === editData.bio && avatar === data?.avatar) {
                 return navigate("/profile")
             }
             const response = await instance.post(import.meta.env.VITE_API_EDITINFO, {
-                ...editData
+                ...editData,
+                avatar
             });
 
-            if (response.status === 200) {
-                return navigate("/profile", {
-                    state: {
-                        message: response?.data.message
-                    }
-                })
-            }
+            navigate("/profile", { state: {
+                message: response?.data.message
+            }});
         } catch(error: any) {
-            setUserError(error?.response?.data.message)
+            setUserError(error?.response?.data.error || error?.response?.data.message)
             notify();
         }
     }
+
+    useEffect(() => {
+        console.log("run")
+        if (data?.avatar) {
+            setAvatar(data?.avatar)
+        }
+    }, [data?.avatar])
 
     if (loading) {
         return <Spinner />
@@ -62,12 +66,24 @@ export const EditPageComponent = () => {
 
     return(
         <>
-            <section style={{ minHeight: "90vh"}}>
+            <section className="position-relative" style={{ minHeight: "90vh"}}>
+            <ToastContainer className="position-absolute" style={{ top: "0"}} />
                 <div className="card position-relative">
                     <div className="row g-0" style={{ minHeight: "90vh"}}>
                         <div className="col-md-4 py-4 gradient-custom d-flex justify-content-center text-center align-items-center">
-                            <div>
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="Avatar" className="img-fluid mb-4" style={{ width:"75%", maxWidth: "300px"}}  />
+                            <div className="w-100 px-5">
+                                <h1 className="text-center text-white">Avatar</h1>
+                                {data?.avatar && 
+                                    <img src={avatar} alt="Avatar" className="img-fluid mb-4" style={{ maxWidth: "12rem"}} />
+                                }
+                                <div>
+                                    <select className="form-select form-select-lg select-section bg-transparent" defaultValue={data?.avatar} aria-label=".form-select-lg example" onChange={(e) => setAvatar(e.target.value) }>
+                                        <option value={Avatar1}>Avatar 1</option>
+                                        <option value={Avatar2}>Avatar 2</option>
+                                        <option value={Avatar3}>Avatar 3</option>
+                                        <option value={Avatar4}>Avatar 4</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div className="col-md-8 py-4 px-3">

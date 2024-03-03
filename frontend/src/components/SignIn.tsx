@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { Button } from "react-bootstrap"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { InputFormProps } from "../definitions/models"
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -63,6 +63,7 @@ export const SignInComponent = () => {
     return(
         <>
             <section className="d-flex position-relative justify-content-center align-items-center px-2" style={{ minHeight: "92vh", backgroundColor: "#f4f3f2"}}>
+            <ToastContainer className="position-absolute" style={{ top: "0"}} />
                 <div className="bg-light position-relative rounded rounded-3 border border-2 shadow-sm w-100 py-4 p-3" style={{ minHeight: "50vh", maxWidth: "25rem"}}>
                     <h1 className="text-center">SignIn</h1>
                     <form onSubmit={handleSubmit(onSubmit)}>

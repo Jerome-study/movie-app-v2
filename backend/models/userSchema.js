@@ -16,12 +16,12 @@ const userSchema = new mongoose.Schema({
     },
     nickname: {
         type: String,
-        maxLength: 20,
+        maxLength: [20, "Nickname should not be exceeded above 20"],
         default: ""
     },
     bio: {
         type: String,
-        maxLength: 75,
+        maxLength: [75, "Bio should not be exceeded above 75"],
         default: ""
     },
     password: {
@@ -33,6 +33,10 @@ const userSchema = new mongoose.Schema({
     },
     watch_list: {
         type: []
+    },
+    avatar: {
+        type: String,
+        required: true
     }
 }, {
     timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
