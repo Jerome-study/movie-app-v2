@@ -14,7 +14,7 @@ export const TrendingPeopleComponent = () => {
 
     return(
         <div className="sticky-top pt-5" style={{ top: "0"}}>
-            <h4 className="text-lg-center mb-2">Trending People Today</h4>
+            <h4 className="text-lg-center mb-4">Trending People Today</h4>
             {loading && <TrendingCardSkeleton />}
             {!loading && 
                 <div className="d-flex gap-4 trending-wrap overflow-auto py-3 justify-content-lg-center trending-card-wrapper">

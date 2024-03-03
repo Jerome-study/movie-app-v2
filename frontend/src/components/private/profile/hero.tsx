@@ -15,7 +15,7 @@ export const HeroComponent = ({ data }: { data: UserProps}) => {
                                         <div>
                                             <div>
                                                 <img src={data?.avatar}
-                                                    alt="Avatar" className="img-fluid mb-4" style={{ width:"75%", maxWidth: "300px"}}  />
+                                                    alt="Avatar" className="img-fluid mb-4"/>
                                             </div>
                                             <h1>{data?.username}</h1>
                                             <p style={{ fontSize: "15px"}}>

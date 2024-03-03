@@ -7,13 +7,15 @@ import { createAvatar } from '@dicebear/core';
 import { adventurer } from '@dicebear/collection';
 
 const Felix = createAvatar(adventurer, {
-    seed: "Felix"
+    seed: "Felix",
+    backgroundColor: ["b6e3f4"],
+    radius: 50
 });
 
 const Avatar1 = Felix.toDataUriSync();
 
 export const SignUpComponent = () => {
-    const [avatar, setAvatar] = useState(Avatar1);
+    const [avatar, setAvatar] = useState<string>(Avatar1);
     return(
         <>
             <section className="d-flex position-relative justify-content-center align-items-center py-4 px-2" style={{ minHeight: "92vh", backgroundColor: "#f4f3f2"}}>

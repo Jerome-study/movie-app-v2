@@ -18,7 +18,7 @@ router.get("/getAll", (req,res) => {
 
 router.post("/editInfo", async (req,res) => {
     try {
-        const { username, first_name, last_name, nickname, bio } = req.body;
+        const { username, first_name, last_name, nickname, bio, avatar } = req.body;
         const user = await userModel.findById(req.user.id).select('-password');
         const sameUser = await userModel.findOne({ username, _id: { $ne: req.user.id } }).select('-password');
         
@@ -30,6 +30,7 @@ router.post("/editInfo", async (req,res) => {
         user.last_name = user.last_name === last_name? user.last_name: last_name
         user.bio = user.bio === bio? user.bio: bio
         user.nickname = user.nickname === nickname? user.nickname: nickname
+        user.avatar = user.avatar === avatar? user.avatar: avatar
 
         await user.save();
 
