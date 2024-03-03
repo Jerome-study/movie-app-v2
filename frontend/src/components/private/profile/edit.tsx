@@ -6,7 +6,7 @@ import { EditProps } from "../../../definitions/models";
 import { useNavigate } from "react-router-dom";
 import { instance } from "../../../utils/utils";
 import { useState } from "react";
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -20,7 +20,6 @@ export const EditPageComponent = () => {
     });
 
     const notify = () => {
-        console.log("notify")
         if (userError) {
             toast.error(userError, {
                 toastId: 1
@@ -37,15 +36,11 @@ export const EditPageComponent = () => {
                 ...editData
             });
 
-            if (response.status === 200) {
-                return navigate("/profile", {
-                    state: {
-                        message: response?.data.message
-                    }
-                })
-            }
+            navigate("/profile", { state: {
+                message: response?.data.message
+            }});
         } catch(error: any) {
-            setUserError(error?.response?.data.message)
+            setUserError(error?.response?.data.error || error?.response?.data.message)
             notify();
         }
     }
@@ -62,7 +57,8 @@ export const EditPageComponent = () => {
 
     return(
         <>
-            <section style={{ minHeight: "90vh"}}>
+            <section className="position-relative" style={{ minHeight: "90vh"}}>
+            <ToastContainer className="position-absolute" style={{ top: "0"}} />
                 <div className="card position-relative">
                     <div className="row g-0" style={{ minHeight: "90vh"}}>
                         <div className="col-md-4 py-4 gradient-custom d-flex justify-content-center text-center align-items-center">

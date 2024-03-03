@@ -45,7 +45,8 @@ export interface InputFormProps {
     confirmPassword: string,
     first_name?: string,
     last_name?: string
-    confirm_password?: string
+    confirm_password?: string,
+    avatar?:string
 }
 
 
@@ -57,7 +58,8 @@ export interface UserProps {
     nickname?: string,
     id?: string,
     created_at?: any,
-    updated_at?: any
+    updated_at?: any,
+    avatar?: string
 }
 
 export interface FetchUserProps {

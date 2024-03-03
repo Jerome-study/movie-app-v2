@@ -4,7 +4,7 @@ const router = express.Router();
 
 
 router.get("/getUser", (req,res) => {
-    res.send({username: req.user.username})
+    res.send({username: req.user.username, avatar: req.user.avatar})
 })
 
 router.get("/isLoggedIn", (req,res) => {
@@ -33,10 +33,11 @@ router.post("/editInfo", async (req,res) => {
 
         await user.save();
 
-        res.send({ message: "Updated"})
+        res.status(200).send({ message: "Updated"})
 
     } catch(error) {
-        console.log(error)
+        console.log( error.message.split(":")[2])
+        res.status(300).send({ error: error.message.split(":")[2]})
     }
 })
 

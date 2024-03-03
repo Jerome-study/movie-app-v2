@@ -2,7 +2,7 @@ const { userModel } = require("../models/userSchema");
 const bcrypt = require("bcryptjs");
 
 async function handleRegisterController(req,res) {
-    const { username , first_name, last_name, password, confirm_password, } = req.body.data;
+    const { username , first_name, last_name, password, confirm_password, avatar } = req.body.data;
     if (!username || !password) return res.json({ message: "Please fill all the fields" });
     if (password !== confirm_password) return res.json({ message: "Password do not match!" });
     try {
@@ -16,7 +16,8 @@ async function handleRegisterController(req,res) {
             username,
             first_name,
             last_name,
-            password: hashedPassword
+            password: hashedPassword,
+            avatar
         });
         res.status(201).json({ message: "User is created" })
     } catch(error) {

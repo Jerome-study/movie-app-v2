@@ -14,14 +14,14 @@ export const HeroComponent = ({ data }: { data: UserProps}) => {
                                     <div className="col-md-4 py-5 gradient-custom d-flex justify-content-center align-items-center text-center text-white ">
                                         <div>
                                             <div>
-                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                                                <img src={data?.avatar}
                                                     alt="Avatar" className="img-fluid mb-4" style={{ width:"75%", maxWidth: "300px"}}  />
                                             </div>
                                             <h1>{data?.username}</h1>
                                             <p style={{ fontSize: "15px"}}>
                                                 {data?.nickname}
                                                 {!data?.nickname &&
-                                                    <Link reloadDocument className="text-decoration-none text-muted link-primary"  to={"/profile/edit"}>
+                                                    <Link className="text-decoration-none text-muted link-primary"  to={"/profile/edit"}>
                                                         Add Nickname
                                                     </Link>
                                                 }
@@ -33,7 +33,7 @@ export const HeroComponent = ({ data }: { data: UserProps}) => {
                                             <div className="row">
                                                 <h6 className="col-6">Information</h6>
                                                 <p className="col-6 mb-0">
-                                                    <Link className="link-primary text-decoration-none text-danger" reloadDocument to={"/profile/edit"}>
+                                                    <Link className="link-primary text-decoration-none text-danger" to={"/profile/edit"}>
                                                         Edit Profile
                                                     </Link>
                                                 </p>
@@ -68,7 +68,7 @@ export const HeroComponent = ({ data }: { data: UserProps}) => {
                                                     {!data?.bio && 
                                                     
                                                     <p className="text-center" style={{ fontSize: "15px"}}>
-                                                        <Link className="link-primary text-decoration-none text-muted" reloadDocument to={"/profile/edit"}>
+                                                        <Link className="link-primary text-decoration-none text-muted" to={"/profile/edit"}>
                                                             You must be boring, add some bio!
                                                         </Link>
                                                     </p>

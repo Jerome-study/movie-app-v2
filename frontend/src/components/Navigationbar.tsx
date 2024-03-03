@@ -62,7 +62,11 @@ export const Navigationbar = () => {
                                         </Nav.Link>
                                     }
                                     { data && 
-                                        <NavDropdown color="white" title={<span className='text-white fw-bold'>{data?.username}</span>} id="basic-nav-dropdown">
+                                        <NavDropdown color="white" title={<span className='text-white fw-bold'>
+                                            <img className='me-2' src={data?.avatar} style={{ width: "30px"}} alt="" />
+                                            {data?.username}
+                                            
+                                        </span>} id="basic-nav-dropdown">
                                             <NavDropdown.Item to={"/profile"} as={Link} eventKey={"7"}>Profile</NavDropdown.Item>
                                             <NavDropdown.Item to={"/watch_list"} as={Link} eventKey={"8"}>Watch List</NavDropdown.Item>
                                             <NavDropdown.Item to={"/favorites"} as={Link} eventKey={"9"}>Favorite</NavDropdown.Item>
