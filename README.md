@@ -1,1 +1,1 @@
-The Main Branch
+The main branch
