@@ -50,7 +50,8 @@ app.use(session({
         mongoUrl: process.env.MONGODB_URI,
         collectionName: "session"
     }),
-    cookie: cookieConfig
+    cookie: cookieConfig,
+    proxy: true
 }));
 
 
