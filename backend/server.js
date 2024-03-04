@@ -32,9 +32,15 @@ app.use(express.json());
 const cookieConfig = {
     maxAge: 1000 * 60 * 60 * 24,
     secure: false,
-    sameSite: "lax",
+    sameSite: "none",
     httpOnly: true
 }
+
+if (process.env.NODE_ENV == "production") {
+    cookieConfig.secure = true
+    cookieConfig.sameSite = "none"
+}
+
 
 app.use(session({
     secret: process.env.SECRET_KEY,
