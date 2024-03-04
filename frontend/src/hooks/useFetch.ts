@@ -29,6 +29,7 @@ export const useFetchBackend = (url: string) => {
     }, [url]);
 
     const refetch = () => {
+        setLoading(true)
         const getData = async () => {
             try {
                 const response = await instance.get(url);
