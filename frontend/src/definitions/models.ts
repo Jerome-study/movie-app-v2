@@ -59,7 +59,8 @@ export interface UserProps {
     id?: string,
     created_at?: any,
     updated_at?: any,
-    avatar?: string
+    avatar?: string,
+    watch_list: []
 }
 
 export interface FetchUserProps {

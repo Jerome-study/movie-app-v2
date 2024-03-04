@@ -1,4 +1,3 @@
-import { Button } from "react-bootstrap";
 import { Card } from "react-bootstrap";
 import { ShowProps } from "../../definitions/models";
 import {Container} from "react-bootstrap";
@@ -21,12 +20,9 @@ export const PersonDesign = ({ data }: {data: any}) => {
                         <h4 className="text-center text-md-start d-none d-md-block">{data?.name}</h4>
                         <div className="mt-4 row gap-1">
                             <h6>Birthday: <span>{data?.birthday}</span></h6>
-                            <h6>Biography: <span>{data?.biography}</span></h6>
                             <h6>Specialty: <span>{data?.known_for_department}</span></h6>
+                            <h6>Biography: <span>{data?.biography}</span></h6>
                         </div>
-                    </div>
-                    <div>
-                        <Button>Add To Favorite</Button>
                     </div>
                 </div>
             </div>

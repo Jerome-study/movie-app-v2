@@ -3,6 +3,7 @@ import { ShowProps } from "../../../definitions/models";
 import { CastComponent } from "./cast";
 import { DetailsComponent } from "./details";
 import { SimilarComponent } from "./similar";
+import { ButtonComponent } from "./button";
 
 export const ShowDesign = ({ data, category }: { data: ShowProps, category: string }) => {
     const styles = {
@@ -11,6 +12,7 @@ export const ShowDesign = ({ data, category }: { data: ShowProps, category: stri
         url(${import.meta.env.VITE_IMG_URL_POSTER + data?.backdrop_path})`,
         backgroundRepeat: "no-repeat"
     }
+
     return(
         <>  
             <div className="poster-bg text-white " style={data?.backdrop_path? styles : {}} >
@@ -26,6 +28,7 @@ export const ShowDesign = ({ data, category }: { data: ShowProps, category: stri
                     <div className="row">
                         <div className="col-12 col-lg-7 mb-3">
                             <DetailsComponent data={data} category={category} />
+                            <ButtonComponent data={data}/>
                         </div>
                         <div className="col-12 col-lg-5">
                             <CastComponent cast={data?.cast}  />

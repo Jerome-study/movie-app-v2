@@ -58,7 +58,7 @@ export const HeroComponent = ({ data }: { data: UserProps}) => {
                                                 </div>
                                                 <div className="col-6 mb-3">
                                                     <h6>Watch List</h6>
-                                                    <p className="text-muted">0</p>
+                                                    <p className="text-muted">{data?.watch_list.length}</p>
                                                 </div>
                                             </div>
                                             <h6>Bio</h6>

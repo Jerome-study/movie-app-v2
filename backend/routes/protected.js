@@ -15,7 +15,6 @@ router.get("/getAll", (req,res) => {
     res.send(req.user);
 })
 
-
 router.post("/editInfo", async (req,res) => {
     try {
         const { username, first_name, last_name, nickname, bio, avatar } = req.body;
@@ -39,6 +38,65 @@ router.post("/editInfo", async (req,res) => {
     } catch(error) {
         console.log( error.message.split(":")[2])
         res.status(300).send({ error: error.message.split(":")[2]})
+    }
+})
+
+
+// Watch List
+
+router.post("/addWatch", async (req,res) => {{
+    const { id, name, category, poster_path } = req.body;
+    const data = {
+        id,
+        name,
+        category,
+        poster_path,
+    }
+
+    try {
+        const user = await userModel.findById(req.user.id);
+        const movieExist = await user.watch_list.find(movie => movie.data.id === id)
+        
+        if (movieExist) {
+            return res.sendStatus(303)
+        }
+
+        await user.watch_list.push({
+            data,
+            isChecked: false
+        });
+
+        await user.save();
+        res.send({ message: "Added To Watch List"})
+    } catch(error) {
+        console.log(error.message);
+    }
+}});
+
+
+router.get("/ifMovieExist/:id", async (req,res) => {
+    try {
+        const { id } = req.params;
+        const user = await userModel.findById(req.user.id);
+        const movieExist = await user.watch_list.find(movie => movie.data.id === Number(id));
+        res.send({message: movieExist});
+
+    } catch(error) {
+        console.log(error.message);
+    }
+});
+
+router.delete("/removeWatch/:id", async (req,res) => {
+    try {
+        const { id } = req.params;
+        const user = await userModel.findById(req.user.id);
+        const filteredWatchList = await user.watch_list.filter(movie => movie.data.id !== Number(id))
+        user.watch_list = filteredWatchList;
+        await user.save();
+        res.send({ message: "Remove From Watch List"})
+
+    } catch(error) {
+        console.log(error.message);
     }
 })
 
