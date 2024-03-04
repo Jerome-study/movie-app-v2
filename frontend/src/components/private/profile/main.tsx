@@ -19,10 +19,12 @@ export const MainComponent = () => {
     }
 
     useEffect(() => {
-        setTimeout(() => {
-            notify();
-            navigate(location.pathname, {})
-        }, 100)
+        if (location.state?.message) {
+            setTimeout(() => {
+                notify();
+                navigate(location.pathname, {})
+            }, 100)
+        }
     }, [])
 
     if (loading) {
