@@ -2,27 +2,29 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link, useNavigate } from 'react-router-dom';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import { Nav, Button, NavDropdown } from 'react-bootstrap';
+import { Nav, Button, NavDropdown, Spinner } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useFetchBackend } from '../hooks/useFetch';
 import { instance } from '../utils/utils';
 import { FetchUserProps } from '../definitions/models';
+
+export let refetchButton : Function;
 export const Navigationbar = () => {
     const location = useLocation();
     const [active, setActive] = useState<string>(location.pathname);
-    const { data, refetch }: FetchUserProps = useFetchBackend(import.meta.env.VITE_API_GETUSER) 
+    const { data, loading, refetch }: FetchUserProps = useFetchBackend(import.meta.env.VITE_API_GETUSER) 
     const navigate = useNavigate();
     useEffect(() => {
+        if (location.state?.message) {
+            refetch();
+        }
         if (location.pathname.split("").length > 1) {
             setActive("")
         } else {
             setActive("/")
         }
-        refetch();
-    }, [location.pathname])
-    
-    
+    }, [location.pathname]);
     const logoutButton = async () => {
         try {
             const response = await instance.post(import.meta.env.VITE_AUTH_LOGOUT);
@@ -56,12 +58,21 @@ export const Navigationbar = () => {
                                         <NavDropdown.Divider />
                                     </NavDropdown>
                                     <Nav.Link className={location.pathname.includes("about")? "active-link text-white fw-bolder": "text-light"} onClick={() => setActive("")} to={"/about"} as={Link} eventKey="5">About</Nav.Link>
-                                    { !data && 
+                                    { (!data && !loading) && 
                                         <Nav.Link onClick={() => setActive("")} to={"/signin"} as={Link} eventKey="6">
                                             <Button className={location.pathname.includes("signin") || location.pathname.includes("signup")? "active": ""} variant="outline-light">SignIn</Button>
                                         </Nav.Link>
                                     }
-                                    { data && 
+                                    {loading &&<div className='py-1'>
+                                    <Spinner
+                                        as="span"
+                                        animation="grow"
+                                        size="sm"
+                                        role="status"
+                                        aria-hidden="true"
+                                    />
+                                    </div> }
+                                    { (!loading && data) && 
                                         <NavDropdown color="white" title={<span className='text-white fw-bold'>
                                             <img className='me-2' src={data?.avatar} style={{ width: "30px"}} alt="" />
                                             {data?.username}
