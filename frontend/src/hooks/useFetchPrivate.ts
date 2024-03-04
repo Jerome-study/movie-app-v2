@@ -15,10 +15,10 @@ export const useFetchPrivate = (url: string) => {
             try {
                 const response = await axios.get(url + import.meta.env.VITE_API_KEY);
                 if (running) {
-                    setData(response.data);
                     timer = setTimeout(() => {
+                        setData(response.data);
                         setLoading(false);
-                    }, 1000)
+                    }, 3000)
                 }
             } catch(error) {
                 setError(error);
@@ -27,6 +27,7 @@ export const useFetchPrivate = (url: string) => {
         }
         getData();
         return () => {
+            setLoading(true)
             running = false
             clearTimeout(timer)
         }
