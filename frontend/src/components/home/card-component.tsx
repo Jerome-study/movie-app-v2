@@ -1,25 +1,12 @@
-import { Card } from "react-bootstrap"
-import { ShowProps } from "../../definitions/models"
-import { viewShow } from "../../utils/utils"
-import { useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react"
-import { CardSingleSkeleton } from "../../loading/skeletonCardSingle"
+import { Card } from "react-bootstrap";
+import { ShowProps } from "../../definitions/models";
+import { viewShow } from "../../utils/utils";
+import { useNavigate } from "react-router-dom";
 
 export const CardComponent = ({ movie }: { movie: ShowProps }) => {
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(true);
     const imageUrl = import.meta.env.VITE_IMG_URL_POSTER
     
-    useEffect(() => {
-        setTimeout(() => {
-            setLoading(false)
-        }, 4000)
-    },[])
-
-    if (loading) {
-        return <CardSingleSkeleton />
-    }
-
     return(
         <>
            {(movie.poster_path || movie.backdrop_path) && 

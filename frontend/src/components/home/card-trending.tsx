@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom"
 
 export const CardTrendingComponent = ({ person }: { person: PersonProps} ) => {
     const navigate = useNavigate();
+    const imageUrl = import.meta.env.VITE_IMG_URL_POSTER + person.profile_path
+    
     return(
         <>  
         {person.profile_path && 
@@ -12,7 +14,7 @@ export const CardTrendingComponent = ({ person }: { person: PersonProps} ) => {
                 <Card className="trending-card bg-white">
                     <div className="d-flex gap-2 p-1">
                         <div className="col">
-                            <Card.Img src={import.meta.env.VITE_IMG_URL_POSTER + person.profile_path} />
+                            <Card.Img src={imageUrl} style={{ backgroundColor:"#eee"}} />
                         </div>
                         <div className="col">
                             <Card.Body className="p-0 pt-2">
