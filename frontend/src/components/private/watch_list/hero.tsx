@@ -4,7 +4,7 @@ import { SpinnerLoading } from "../../../loading/spinner";
 import { ListComponent } from "./list";
 
 export const HeroComponent = () => {
-    let { data, loading, error, refetch } = useFetchBackend(import.meta.env.VITE_API_WATCH_LIST);
+    const { data, loading, error, refetch } = useFetchBackend(import.meta.env.VITE_API_WATCH_LIST);
     if (loading) {
         return <SpinnerLoading />
     }

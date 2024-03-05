@@ -12,8 +12,8 @@ export const ListComponent = ({ movie, refetch }: { movie: ShowPropsWatchList | 
 
     const removeShow = async () => {
         try {
-            const response = await instance.delete(import.meta.env.VITE_API_REMOVEMOVIE + `/${movie?.id}`);
             setGone(true)
+            const response = await instance.delete(import.meta.env.VITE_API_REMOVEMOVIE + `/${movie?.id}`);
             if (response.data.message === 0) {
                 refetch()
             }
