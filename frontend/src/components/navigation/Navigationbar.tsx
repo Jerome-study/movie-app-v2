@@ -80,7 +80,6 @@ export const Navigationbar = () => {
                                         </span>} id="basic-nav-dropdown">
                                             <NavDropdown.Item to={"/profile"} as={Link} eventKey={"7"}>Profile</NavDropdown.Item>
                                             <NavDropdown.Item to={"/watch_list"} as={Link} eventKey={"8"}>Watch List</NavDropdown.Item>
-                                            <NavDropdown.Item to={"/favorites"} as={Link} eventKey={"9"}>Favorite</NavDropdown.Item>
                                             <NavDropdown.Item onClick={logoutButton}>Logout</NavDropdown.Item>
                                         </NavDropdown>
                                     }

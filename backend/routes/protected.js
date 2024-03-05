@@ -93,8 +93,46 @@ router.delete("/removeWatch/:id", async (req,res) => {
         const filteredWatchList = await user.watch_list.filter(movie => movie.data.id !== Number(id))
         user.watch_list = filteredWatchList;
         await user.save();
-        res.send({ message: "Remove From Watch List"})
+        res.send({message:user.watch_list.length});
 
+    } catch(error) {
+        console.log(error.message);
+    }
+});
+
+
+router.get("/getWatchList", async (req,res) => {
+    try {
+        const user = await userModel.findById(req.user.id).select('-password');
+        res.send(user.watch_list)
+    } catch(error) {
+        console.log(error.message);
+    }
+})
+
+router.get("/ifMovieChecked/:id", async (req,res) => {
+    try {
+        const { id } = req.params;
+        const user = await userModel.findById(req.user.id).select('-password');
+        const movieCheck = await user.watch_list.find(movie => movie.data.id === Number(id) );
+        res.send(movieCheck.isChecked);
+    } catch(error) {
+        console.log(error.message);
+    }
+})
+
+router.post("/checkMovie/:id", async (req,res) => {
+    try {
+        const { id } = req.params;
+        const user = await userModel.findById(req.user.id).select('-password');
+        const movieIndex = await user.watch_list.findIndex(movie => movie.data.id === Number(id) );
+
+        user.watch_list[movieIndex].isChecked =  user.watch_list[movieIndex].isChecked? false : true;
+        
+        user.markModified("watch_list");
+        await user.save();
+        res.send({ message: "Success" });
+        
     } catch(error) {
         console.log(error.message);
     }

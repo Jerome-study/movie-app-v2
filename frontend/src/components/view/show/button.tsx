@@ -1,4 +1,4 @@
-import { Button, Spinner } from "react-bootstrap"
+import { Button } from "react-bootstrap"
 import { instance } from "../../../utils/utils"
 import { ShowProps, FetchUserProps } from "../../../definitions/models";
 import { useFetchBackend } from "../../../hooks/useFetch";
@@ -33,7 +33,7 @@ export const ButtonComponent = ({ data }: { data: ShowProps}) => {
     }
     
     if (loading) {
-        return <Spinner />
+        return <Button className="mt-2" variant="warning">Loading....</Button>
     }
 
     if (error) {
