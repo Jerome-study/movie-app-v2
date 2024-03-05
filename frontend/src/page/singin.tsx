@@ -1,4 +1,4 @@
-import { SignInComponent } from "../components/SignIn"
+import { SignInComponent } from "../components/signin/SignIn"
 
 
 export const SignInPage = () => {

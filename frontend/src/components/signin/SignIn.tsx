@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom"
 import { Button } from "react-bootstrap"
 import { useForm, SubmitHandler } from "react-hook-form"
-import { InputFormProps } from "../definitions/models"
+import { InputFormProps } from "../../definitions/models"
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { instance } from "../utils/utils";
+import { instance } from "../../utils/utils";
 
 export const SignInComponent = () => {
     const location = useLocation();

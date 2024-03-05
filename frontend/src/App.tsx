@@ -1,7 +1,7 @@
 import "./App.css"
 import { Routes, Route } from "react-router-dom";
-import { Navigationbar } from "./components/Navigationbar";
-import { Footer } from "./components/Footer";
+import { Navigationbar } from "./components/navigation/Navigationbar";
+import { Footer } from "./components/footer/Footer";
 import { Layout } from "./Layout";
 import { HomePage } from "./page/home";
 import { SearchPage } from "./page/search";
