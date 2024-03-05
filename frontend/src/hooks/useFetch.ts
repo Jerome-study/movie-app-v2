@@ -10,12 +10,14 @@ export const useFetchBackend = (url: string) => {
     const [error, setError] = useState<any>()
 
     useEffect(() => {
+        let running = true;
         const getData = async () => {
             try {
                 const response = await instance.get(url);
-                setData(response.data);
-                setLoading(false)
-                
+                if (running) {
+                    setData(response.data);
+                    setLoading(false)
+                }   
             } catch(error) {
                 setError(error);
                 setLoading(false)

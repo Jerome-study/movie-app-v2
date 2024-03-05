@@ -20,7 +20,8 @@ export interface ShowProps {
     number_of_seasons: number,
     number_of_episodes: number,
     runtime: number,
-    similar?: ShowProps[]
+    similar?: ShowProps[],
+    category?: string,
 }
 
 export interface Props {
@@ -77,3 +78,16 @@ export interface EditProps {
     bio?: string,
     nickname?: string,
 }
+
+export interface ShowPropsWatchList {
+    id?: number,
+    name?: string,
+    poster_path?: string,
+    category?: string
+}
+
+export interface WatchListProps {
+    data?: ShowPropsWatchList,
+    isChecked?: boolean
+}
+

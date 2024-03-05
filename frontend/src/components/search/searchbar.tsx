@@ -17,7 +17,7 @@ export const SearchBar = ({ category }: { category: string}) => {
         setData(null);
         setTitle("")
     }, [category]);
-
+    
     const getData = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true)
@@ -39,7 +39,7 @@ export const SearchBar = ({ category }: { category: string}) => {
 
     return(
         <div style={{ minHeight: "92vh"}}>
-            <h1>Search {category}</h1>
+            <h1>Search {category === "person"? "Actor/Actress" : category.charAt(0).toUpperCase() + category.slice(1)}</h1>
             <Form className="d-flex my-3" onSubmit={getData}>
                 <Form.Control
                 type="text"

@@ -1,5 +1,5 @@
 import { useFetchBackend } from "../../../hooks/useFetch"
-import { Spinner } from "react-bootstrap";
+import { SpinnerLoading } from "../../../loading/spinner";
 import { FetchUserProps } from "../../../definitions/models";
 import { HeroComponent } from "./hero";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -28,7 +28,7 @@ export const MainComponent = () => {
     }, [])
 
     if (loading) {
-        return <Spinner />
+        return <SpinnerLoading />
     }
 
     if (error) {

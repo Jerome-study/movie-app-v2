@@ -1,4 +1,4 @@
-import { Spinner, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { FetchUserProps } from "../../../definitions/models";
 import { useFetchBackend } from "../../../hooks/useFetch"
 import { useForm, SubmitHandler } from "react-hook-form"
@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Avatar1, Avatar2, Avatar3, Avatar4 } from "../../../utils/Avatars";
+import { SpinnerLoading } from "../../../loading/spinner";
 
 
 export const EditPageComponent = () => {
@@ -55,7 +56,7 @@ export const EditPageComponent = () => {
     }, [data?.avatar])
 
     if (loading) {
-        return <Spinner />
+        return <SpinnerLoading />
     }
 
     if (error) {

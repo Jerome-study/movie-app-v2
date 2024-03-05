@@ -5,9 +5,9 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Nav, Button, NavDropdown, Spinner } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useFetchBackend } from '../hooks/useFetch';
-import { instance } from '../utils/utils';
-import { FetchUserProps } from '../definitions/models';
+import { useFetchBackend } from '../../hooks/useFetch';
+import { instance } from '../../utils/utils';
+import { FetchUserProps } from '../../definitions/models';
 
 export let refetchButton : Function;
 export const Navigationbar = () => {
@@ -54,7 +54,7 @@ export const Navigationbar = () => {
                                         <NavDropdown.Item onClick={() => setActive("")} to={"/search/tv"}as={Link}  eventKey="3" >
                                             TV
                                         </NavDropdown.Item>
-                                        <NavDropdown.Item onClick={() => setActive("")} to={"/search/person"} as={Link} eventKey="4">Person</NavDropdown.Item>
+                                        <NavDropdown.Item onClick={() => setActive("")} to={"/search/person"} as={Link} eventKey="4">Actor/Actress</NavDropdown.Item>
                                         <NavDropdown.Divider />
                                     </NavDropdown>
                                     <Nav.Link className={location.pathname.includes("about")? "active-link text-white fw-bolder": "text-light"} onClick={() => setActive("")} to={"/about"} as={Link} eventKey="5">About</Nav.Link>
@@ -80,7 +80,6 @@ export const Navigationbar = () => {
                                         </span>} id="basic-nav-dropdown">
                                             <NavDropdown.Item to={"/profile"} as={Link} eventKey={"7"}>Profile</NavDropdown.Item>
                                             <NavDropdown.Item to={"/watch_list"} as={Link} eventKey={"8"}>Watch List</NavDropdown.Item>
-                                            <NavDropdown.Item to={"/favorites"} as={Link} eventKey={"9"}>Favorite</NavDropdown.Item>
                                             <NavDropdown.Item onClick={logoutButton}>Logout</NavDropdown.Item>
                                         </NavDropdown>
                                     }

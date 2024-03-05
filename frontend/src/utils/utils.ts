@@ -20,6 +20,10 @@ export const viewShowReload = (show: SearchProps ) => {
     window.location.href=`/view/${category}/${show.id}`
 }
 
+export const viewShowFromWatchList = (show: SearchProps | undefined, category: string | undefined) => {
+    window.location.href=`/view/${category}/${show?.id}`
+}
+
 export const instance = axios.create({
     baseURL: import.meta.env.VITE_BASE_URL,
     withCredentials: true

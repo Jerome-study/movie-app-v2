@@ -1,7 +1,7 @@
 import "./App.css"
 import { Routes, Route } from "react-router-dom";
-import { Navigationbar } from "./components/Navigationbar";
-import { Footer } from "./components/Footer";
+import { Navigationbar } from "./components/navigation/Navigationbar";
+import { Footer } from "./components/footer/Footer";
 import { Layout } from "./Layout";
 import { HomePage } from "./page/home";
 import { SearchPage } from "./page/search";
@@ -12,6 +12,7 @@ import { SignUpPage } from "./page/signup";
 import { Protected } from "./ProtectedLayout";
 import { ProfilePage } from "./page/private/profile";
 import { EditProfilePage } from "./page/private/editprofile";
+import { WatchListPage } from "./page/private/watch_list";
 function App() {
     return(
         <>
@@ -24,8 +25,7 @@ function App() {
 
                     {/* Private Routes */}
                     <Route element={<Protected />}>
-                        <Route path="/watch_list" element={<h1>Watch list Page</h1>} />
-                        <Route path="/favorites" element={<h1>favorite Page</h1>} />
+                        <Route path="/watch_list" element={<WatchListPage />} />
                     </Route>
                 </Route>
                 {/* Private Routes without Layout */}
