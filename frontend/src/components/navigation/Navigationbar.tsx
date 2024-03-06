@@ -63,14 +63,10 @@ export const Navigationbar = () => {
                                             <Button className={location.pathname.includes("signin") || location.pathname.includes("signup")? "active": ""} variant="outline-light">SignIn</Button>
                                         </Nav.Link>
                                     }
-                                    {loading &&<div className='py-1'>
-                                    <Spinner
-                                        as="span"
-                                        animation="grow"
-                                        size="sm"
-                                        role="status"
-                                        aria-hidden="true"
-                                    />
+                                    {loading &&<div className='my-2'>
+                                    <Spinner animation="grow" variant="info" />
+                                    <Spinner animation="grow" variant="info" />
+                                    <Spinner animation="grow" variant="info" />
                                     </div> }
                                     { (!loading && data) && 
                                         <NavDropdown color="white" title={<span className='text-white fw-bold'>

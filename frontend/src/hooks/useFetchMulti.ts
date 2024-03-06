@@ -10,7 +10,6 @@ export const useFetchMulti = (url: string, category: string, id: number | string
 
     useEffect(() => {
         let running = true
-        let timer: any;
         const getData = async () => {
             try {
                 const firstResponse = await axios.get(url + import.meta.env.VITE_API_KEY);
@@ -21,13 +20,8 @@ export const useFetchMulti = (url: string, category: string, id: number | string
                 
                 if (running) {
                     setData(category === "person"? {...finalResponse.data.results[0], ...firstResponse.data}:{...finalResponse.data, ...firstResponse.data, similar: similarResponse.data.results } );
-                    timer = setTimeout(() => {
-                        setLoading(false);
-                    }, 1000)
+                    setLoading(false);
                 }
-                
-                
-                
             } catch(error) {
                 setError(error);
                 setLoading(false)
@@ -36,7 +30,6 @@ export const useFetchMulti = (url: string, category: string, id: number | string
         getData();
         return () => {
             running = false
-            clearTimeout(timer)
         }
 
     }, [url]);

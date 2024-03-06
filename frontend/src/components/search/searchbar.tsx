@@ -24,9 +24,7 @@ export const SearchBar = ({ category }: { category: string}) => {
         try {
             const response = await axios.get(`${import.meta.env.VITE_SEARCH_URL}/${category}?query=${title}&api_key=${import.meta.env.VITE_API_KEY}`);
             setData(response.data.results);
-            setTimeout(() => {
-                setLoading(false)
-            }, 1000)
+            setLoading(false)
         } catch(error) {
             setError(error)
             setLoading(false)
