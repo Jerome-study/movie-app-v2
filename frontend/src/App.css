@@ -72,6 +72,10 @@
   width: 10rem;
 }
 
+.view-loading {
+  width: 18rem;
+  height: 30vh;
+}
 
 @media (min-width: 768px) {
   .carouselHero .carousel-item img {
@@ -80,6 +84,10 @@
 
   .carousel-loading {
     height: 45vh;
+  }
+
+  .view-loading {
+    height: 39vh;
   }
 
 
@@ -97,6 +105,10 @@
   .trending-card-loading {
     height: 13vh;
     width: 100%;
+  }
+
+  .view-loading {
+    height: 42vh;
   }
 }
 
@@ -124,6 +136,18 @@
     height: 20vh;
     width: 100%;
   }
+
+  .view-loading {
+    height: 30.5vh;
+  }
+
+}
+
+@media (min-width: 1400px) {
+  .view-loading {
+    height: 40vh;
+  }
+
 }
 
 
@@ -180,12 +204,46 @@
   width: 50%;
 }
 
+.poster-loading {
+  height: 30vh;
+}
+
 @media (min-width: 576px) {
   .poster-width {
     width: 100%;
     max-width: 17rem;
   }
+
+  .poster-loading {
+    height: 50vh;
+  }
+
 }
+
+@media (min-width: 768px) {
+  .poster-loading {
+    height: 50vh;
+  }
+}
+
+@media (min-width: 992px) {
+  .poster-loading {
+    height: 40vh;
+  }
+}
+
+@media (min-width: 1200px) {
+  .poster-loading {
+    height: 48.5vh;
+  }
+}
+
+@media (min-width: 1400px) {
+  .poster-loading {
+    height: 55.5vh;
+  }
+}
+
 
 /* View Infos Typography */
 
