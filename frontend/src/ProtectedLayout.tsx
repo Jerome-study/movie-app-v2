@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { instance } from "./utils/utils";
-import { Spinner } from "react-bootstrap";
+import { RetrievingLoading } from "./loading/retrieving";
 export const Protected = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true)
@@ -27,7 +27,7 @@ export const Protected = () => {
     }, [])
 
     if (loading) {
-        return <Spinner />  
+        return <RetrievingLoading />  
     }
 
     return(
