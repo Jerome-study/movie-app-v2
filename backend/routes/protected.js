@@ -63,7 +63,8 @@ router.post("/addWatch", async (req,res) => {{
 
         await user.watch_list.push({
             data,
-            isChecked: false
+            isChecked: false,
+            id
         });
 
         await user.save();
@@ -89,12 +90,17 @@ router.get("/ifMovieExist/:id", async (req,res) => {
 router.delete("/removeWatch/:id", async (req,res) => {
     try {
         const { id } = req.params;
-        const user = await userModel.findById(req.user.id);
-        const filteredWatchList = await user.watch_list.filter(movie => movie.data.id !== Number(id))
-        user.watch_list = filteredWatchList;
-        await user.save();
-        res.send({message:user.watch_list.length});
-
+        const user = await userModel.findOneAndUpdate({ _id: req.user.id }, { $pull: {
+            watch_list: {
+                id: Number(id)
+            }
+        }}).select('id').select('watch_list');
+        
+        if (!user) {
+            console.log("d")
+            return res.sendStatus(303);
+        }
+        res.send({ message: user.watch_list.length - 1})
     } catch(error) {
         console.log(error.message);
     }
@@ -113,9 +119,14 @@ router.get("/getWatchList", async (req,res) => {
 router.get("/ifMovieChecked/:id", async (req,res) => {
     try {
         const { id } = req.params;
-        const user = await userModel.findById(req.user.id).select('-password');
-        const movieCheck = await user.watch_list.find(movie => movie.data.id === Number(id) );
-        res.send(movieCheck.isChecked);
+        const user = await userModel.findOne({ _id: req.user.id }, {'watch_list': {
+            $elemMatch: { id: Number(id)}
+        }} )
+
+        if (!user.watch_list.length) {
+            return res.sendStatus(303);
+        }
+        res.send(user.watch_list[0].isChecked);
     } catch(error) {
         console.log(error.message);
     }
@@ -124,17 +135,20 @@ router.get("/ifMovieChecked/:id", async (req,res) => {
 router.post("/checkMovie/:id", async (req,res) => {
     try {
         const { id } = req.params;
-        const user = await userModel.findById(req.user.id).select('-password');
-        const movieIndex = await user.watch_list.findIndex(movie => movie.data.id === Number(id) );
-
-        user.watch_list[movieIndex].isChecked =  user.watch_list[movieIndex].isChecked? false : true;
-        
-        user.markModified("watch_list");
-        await user.save();
-        res.send({ message: "Success" });
-        
+        const { checked } = req.body
+        const newQuery = {
+            $set: {
+                'watch_list.$.isChecked': checked? false : true
+            }
+        }
+        const user = await userModel.findOneAndUpdate({ _id: req.user.id  , 'watch_list.id': Number(id) }, newQuery).select('watch_list')
+        if (!user) {
+            return res.status(400).send({ message: "No user found"});
+        }
+        res.send({ message: "Checked" })
     } catch(error) {
         console.log(error.message);
+        return res.sendStatus(400);
     }
 })
 
