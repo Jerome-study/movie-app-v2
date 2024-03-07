@@ -37,6 +37,7 @@ export const MainComponent = () => {
                 
                 <Container className="text-center pt-5">
                     <Spinner />
+                    <p>Retreiving Data</p>
                 </Container>    
                 }
                 {!loading && 

@@ -20,7 +20,7 @@ export const CardSkeleton = () => {
                 {size.map((num: any) => {
                     return(
                         <Card key={num.id} className="flex-shrink-0 shadow-sm rounded-3 p-1" aria-hidden="true">
-                            <div className="card-loading-height border rounded-3   " style={{ width: "12rem", backgroundColor:"#eee" }}>
+                            <div className="card-loading-height border rounded-3" style={{ width: "12rem", backgroundColor:"#eee" }}>
                                         
                             </div>
                         </Card> 

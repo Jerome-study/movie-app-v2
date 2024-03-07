@@ -6,18 +6,15 @@ import { useEffect, useState } from "react";
 export const ButtonComponent = ({ id, refetch, setGone } : { id: number | undefined, refetch: Function, setGone: Function}) => {
     const { data, loading, error } = useFetchBackend(import.meta.env.VITE_API_WATCH_CHECKED + `/${id}`);
     const [checked, setChecked] = useState<boolean | undefined>(data)
+    const [disable, setDisabled] = useState<any>()
     const checkedShow = async () => {
         try {
-            setChecked(() => {
-                if (checked) {
-                    return false
-                } else {
-                    return true
-                }
-            })
+            setDisabled(true)
+            setChecked(prev => !prev)
             await instance.post(import.meta.env.VITE_API_CHECKED + `/${id}`, {
                 checked
             })
+            setDisabled(false);
         } catch(error: any) {
             console.log(error.message)
         }
@@ -42,7 +39,7 @@ export const ButtonComponent = ({ id, refetch, setGone } : { id: number | undefi
     
 
     if (loading) {
-        return  <Button className="" style={{ fontSize: "12px"}} variant={"outline-success"}>Loading...</Button>
+        return  <Button className="w-100 mt-2" style={{ fontSize: "10px"}} variant={"warning"}>Loading...</Button>
     }
 
     if (error) {
@@ -50,12 +47,12 @@ export const ButtonComponent = ({ id, refetch, setGone } : { id: number | undefi
     }
     return(
         <>
-            <div className="row gap-4 mt-1 align-items-center">
+            <div className="row gap-3  mt-1 align-items-center">
                 <div className="col-4">
-                    <Button onClick={checkedShow} style={{ fontSize: "12px"}} variant={checked === true? "success": "outline-success"}>{checked === true? "Undone" : "Done"}</Button>
+                    <Button disabled={disable} onClick={checkedShow} style={{ fontSize: "10px"}} variant={checked === true? "success": "outline-success"}>{checked === true? "Undone" : "Done"}</Button>
                 </div>
                 <div className="col-4">
-                    <Button onClick={removeShow} style={{ fontSize: "12px"}} variant="outline-danger">Remove</Button>
+                    <Button onClick={removeShow} style={{ fontSize: "10px"}} variant="outline-danger">Remove</Button>
                 </div>
             </div>
         </>

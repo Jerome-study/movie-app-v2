@@ -1,4 +1,4 @@
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import { FetchUserProps } from "../../../definitions/models";
 import { useFetchBackend } from "../../../hooks/useFetch"
 import { useForm, SubmitHandler } from "react-hook-form"
@@ -9,14 +9,14 @@ import { useEffect, useState } from "react";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Avatar1, Avatar2, Avatar3, Avatar4 } from "../../../utils/Avatars";
-import { SpinnerLoading } from "../../../loading/spinner";
-
+import { SkeletonEdit } from "../../../loading/skeletonEdit";
 
 export const EditPageComponent = () => {
     const { data, loading, error }: FetchUserProps = useFetchBackend(import.meta.env.VITE_API_GETALL);
     const [avatar, setAvatar] = useState(data?.avatar);
     const navigate = useNavigate();
     const [userError, setUserError] = useState<string>("")
+    const [loaded, setLoaded] = useState(false)
     const { register, handleSubmit } = useForm<EditProps>({
         defaultValues: async () => data
     });
@@ -49,21 +49,18 @@ export const EditPageComponent = () => {
     }
 
     useEffect(() => {
-        console.log("run")
         if (data?.avatar) {
             setAvatar(data?.avatar)
         }
     }, [data?.avatar])
 
     if (loading) {
-        return <SpinnerLoading />
+        return <SkeletonEdit />
     }
 
     if (error) {
         return <h1>Something Went Wrong</h1>
     }
-
-    
 
     return(
         <>
@@ -75,7 +72,18 @@ export const EditPageComponent = () => {
                             <div className="w-100 px-5">
                                 <h1 className="text-center text-white">Avatar</h1>
                                 {data?.avatar && 
-                                    <img src={avatar} alt="Avatar" className="img-fluid mb-4" style={{ maxWidth: "12rem"}} />
+                                    <>
+                                        <img onLoad={() => setTimeout(() => setLoaded(true), 3000)} src={avatar} alt="Avatar" className="d-none" />
+                                        {loaded &&
+                                            <img src={avatar} alt="Avatar" className="img-fluid mb-4" style={{ maxWidth: "12rem"}} />
+                                        }
+                                        {!loaded &&
+                                            <div className="my-5">
+                                                <Spinner  size="sm"/>
+                                            </div>
+                                        
+                                        }
+                                    </>
                                 }
                                 <div>
                                     <select className="form-select form-select-lg select-section bg-transparent" defaultValue={data?.avatar} aria-label=".form-select-lg example" onChange={(e) => setAvatar(e.target.value) }>
@@ -138,7 +146,7 @@ export const EditPageComponent = () => {
                                 </div>
                                 <div>
                                     <Button type="submit" className="me-4" variant="outline-success">Update</Button>
-                                    <Button variant="outline-danger">Cancel</Button>
+                                    <Button variant="outline-danger" onClick={()=> navigate(-1)}>Cancel</Button>
                                 </div>
                             </form>
                         </div>

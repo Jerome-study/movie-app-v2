@@ -5,6 +5,7 @@ import { HeroComponent } from "./hero";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
+import { ProfileSkeleton } from "../../../loading/skeletonProfile";
 import 'react-toastify/dist/ReactToastify.css';
 export const MainComponent = () => {
     const { data, loading , error }: FetchUserProps = useFetchBackend(import.meta.env.VITE_API_GETALL);
@@ -28,7 +29,7 @@ export const MainComponent = () => {
     }, [])
 
     if (loading) {
-        return <SpinnerLoading />
+        return <ProfileSkeleton />
     }
 
     if (error) {
