@@ -8,11 +8,14 @@ export const ButtonComponent = ({ data }: { data: ShowProps}) => {
     const { data: response, loading, error } = useFetchBackend(import.meta.env.VITE_API_ISMOVIEEXIST + `/${data?.id}`)
     const { data: isLoggedIn}: FetchUserProps = useFetchBackend(import.meta.env.VITE_API_GETUSER) 
     const [watch, setWatch] = useState(response?.message);
+    const [disable1, setDisable1] = useState<any>()
+    const [disable2, setDisable2] = useState<any>()
     const addMovie = async () => {
         try {
             if (!isLoggedIn) {
                 return alert("You must be logged in First!")
             }
+            setDisable2(true)
             setWatch(true)
             await instance.post(import.meta.env.VITE_API_ADDMOVIE, {
                 id: data?.id,
@@ -20,6 +23,7 @@ export const ButtonComponent = ({ data }: { data: ShowProps}) => {
                 poster_path: data?.poster_path,
                 category: data?.title? "movie" : "tv"
             });
+            setDisable2(false)
         } catch(error) {
             
         }
@@ -27,8 +31,10 @@ export const ButtonComponent = ({ data }: { data: ShowProps}) => {
 
     const removeMovie = async () => {
         try {
+            setDisable1(true)
             setWatch(false)
-            await instance.delete(import.meta.env.VITE_API_REMOVEMOVIE + `/${data?.id}`);
+            await instance.delete(import.meta.env.VITE_API_REMOVEMOVIE + `/${data?.id}`); 
+            setDisable1(false)
         } catch(error) {
             
         }
@@ -39,7 +45,7 @@ export const ButtonComponent = ({ data }: { data: ShowProps}) => {
     }, [response])
     
     if (loading) {
-        return <Button className="mt-2" variant="warning">Loading....</Button>
+        return <Button className="mt-2" variant="warning" disabled>Loading....</Button>
     }
 
     if (error) {
@@ -49,8 +55,8 @@ export const ButtonComponent = ({ data }: { data: ShowProps}) => {
     return(
         <>  
             { watch?
-                <Button onClick={removeMovie} className="mt-2" variant="warning">Remove From Watch List</Button>:
-                <Button onClick={addMovie} className="mt-2" variant="warning">Add To Watch List</Button>
+                <Button onClick={removeMovie} className={`mt-2 ${disable2 && "disabled"}`} variant="warning">Remove From Watch List</Button>:
+                <Button onClick={addMovie} className={`mt-2 ${disable1 && "disabled"}`} variant="warning">Add To Watch List</Button>
             }
         </>
     )

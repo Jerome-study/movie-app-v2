@@ -89,5 +89,11 @@ export interface ShowPropsWatchList {
 export interface WatchListProps {
     data?: ShowPropsWatchList,
     isChecked?: boolean
-}
+} 
 
+export interface NavSigninProps{
+    data?: UserProps,
+    loading?: Boolean,
+    refetch: Function,
+    setActive: Function 
+}
