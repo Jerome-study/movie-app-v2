@@ -1,5 +1,4 @@
 import { useFetchBackend } from "../../../hooks/useFetch"
-import { SpinnerLoading } from "../../../loading/spinner";
 import { FetchUserProps } from "../../../definitions/models";
 import { HeroComponent } from "./hero";
 import { useLocation, useNavigate } from "react-router-dom";
