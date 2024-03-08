@@ -1,12 +1,11 @@
 import { Button } from "react-bootstrap"
 import { instance } from "../../../utils/utils"
-import { ShowProps, FetchUserProps } from "../../../definitions/models";
+import { ShowProps, UserProps } from "../../../definitions/models";
 import { useFetchBackend } from "../../../hooks/useFetch";
 import { useEffect, useState } from "react";
 
-export const ButtonComponent = ({ data }: { data: ShowProps}) => {
-    const { data: response, loading, error } = useFetchBackend(import.meta.env.VITE_API_ISMOVIEEXIST + `/${data?.id}`)
-    const { data: isLoggedIn}: FetchUserProps = useFetchBackend(import.meta.env.VITE_API_GETUSER) 
+export const ButtonComponent = ({ data, isLoggedIn }: { data: ShowProps, isLoggedIn: UserProps}) => {
+    const { data: response, loading, error } = useFetchBackend(import.meta.env.VITE_API_ISMOVIEEXIST + `/${data?.id}`) 
     const [watch, setWatch] = useState(response?.message);
     const [disable1, setDisable1] = useState<any>()
     const [disable2, setDisable2] = useState<any>()

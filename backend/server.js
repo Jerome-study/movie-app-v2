@@ -4,6 +4,7 @@ const passport = require('passport');
 const MongoStore = require('connect-mongo');
 const authRouter = require("./routes/auth");
 const protectedRouter = require("./routes/protected");
+const publicRouter = require("./routes/public");
 const cors = require("cors");
 const { verify } = require("./middleware//verify");
 const app = express();
@@ -64,7 +65,7 @@ app.use(passport.session());
 // Routes
 app.use("/auth",authRouter);
 app.use("/api", verify, protectedRouter);
-
+app.use("/public/api", publicRouter )
 
 
 const PORT = process.env.PORT;

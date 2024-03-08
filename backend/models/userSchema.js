@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    favorites: {
+    likes: {
         type: [],
     },
     watch_list: {
@@ -42,8 +42,49 @@ const userSchema = new mongoose.Schema({
     timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 });
 
+const likeBySchema = new mongoose.Schema({
+    id: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    username: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    avatar: {
+        type: String
+    }
+}, { _id: false})
+
+const movieSchema = new mongoose.Schema({
+    likes: {
+        type: Number,
+        required: true
+    },
+    id: {
+        type: Number,
+        required: true,
+    },
+    likedBy: [likeBySchema]
+
+}, { _id: false });
+
+const movieInfoSchema = new mongoose.Schema({
+    data: {
+        type: [movieSchema],
+        default: []
+    },
+
+    title: {
+        type: String,
+        default: "movieInfos"
+    }
+})
 
 
 const userModel = mongoose.model.users || mongoose.model("users", userSchema);
+const movieModel = mongoose.model.moviesInfos || mongoose.model("moviesInfos", movieInfoSchema);
 
-module.exports = { userModel };
+module.exports = { userModel, movieModel };
