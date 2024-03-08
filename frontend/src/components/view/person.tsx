@@ -3,7 +3,11 @@ import { ShowProps } from "../../definitions/models";
 import {Container} from "react-bootstrap";
 import { viewShowReload } from "../../utils/utils";
 import { Fragment, useState } from "react";
-export const PersonDesign = ({ data }: {data: any}) => {
+import { useContext } from "react";
+import { DetailsContext } from "./main";
+
+export const PersonDesign = () => {
+    const { data } = useContext(DetailsContext);
     const [loaded, setLoaded] = useState(false);
     const [loadedShow, setLoadedShow] = useState(false);
     return(

@@ -5,13 +5,12 @@ import { ShowDesign } from "./show/show";
 
 
 
-export const HeroComponent = ({ category }: { category: string}) => {
-    let { data } = useContext(DetailsContext);
-    
+export const HeroComponent = () => {
+    const { category } = useContext(DetailsContext);
 
     return(
         <>
-            {category === "person"? <PersonDesign data={data} /> : <ShowDesign  data={ data } category={ category }  />}
+            {category === "person"? <PersonDesign /> : <ShowDesign  />}
         </>
     )
 }

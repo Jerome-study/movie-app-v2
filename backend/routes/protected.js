@@ -1,5 +1,5 @@
 const express = require("express");
-const { userModel } = require("../models/userSchema");
+const { userModel, movieModel } = require("../models/userSchema");
 const router = express.Router();
 
 
@@ -150,6 +150,53 @@ router.post("/checkMovie/:id", async (req,res) => {
         console.log(error.message);
         return res.sendStatus(400);
     }
+});
+
+// Like
+
+router.post("/likeMovie/:id", async (req,res) => {
+    try {
+        const { id } = req.params;
+        const newQuery = {
+            $inc: {
+                'data.$.likes': 1
+            },
+            $push: {
+                'data.$.likedBy': {
+                    username: req.user.username,
+                    id: req.user.id,
+                    avatar: req.user.avatar
+                }
+            }
+        }
+        const movieInfos = await movieModel.findOneAndUpdate({ title: "movieInfos", 'data.id' : id }, newQuery)
+        res.send({ message: "liked"})
+    } catch(error) {
+        console.log(error.message);
+    }
 })
+
+
+router.post("/removeLike/:id", async (req,res) => {
+    try {
+        const { id } = req.params;
+        const newQuery = {
+            $inc: {
+                'data.$.likes': -1
+            },
+            $pull: {
+                'data.$.likedBy': {
+                    id: req.user.id
+                }
+            }
+        }
+        const movieInfos = await movieModel.findOneAndUpdate({ title: "movieInfos", 'data.id' : id }, newQuery)
+        res.send({ message: "removed"})
+        
+    } catch(error) {
+        console.log(error.message);
+    }
+})
+
 
 module.exports = router;

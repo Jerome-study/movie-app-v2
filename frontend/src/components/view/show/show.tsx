@@ -1,11 +1,17 @@
 import { Container } from "react-bootstrap"
-import { ShowProps } from "../../../definitions/models";
 import { CastComponent } from "./cast";
 import { DetailsComponent } from "./details";
 import { SimilarComponent } from "./similar";
 import { ButtonComponent } from "./button";
+import { LikeComponent } from "./like";
+import { DetailsContext } from "../main";
+import { useContext } from "react";
+import { useFetchBackend } from "../../../hooks/useFetch";
+import { FetchUserProps } from "../../../definitions/models";
 
-export const ShowDesign = ({ data, category }: { data: ShowProps, category: string }) => {
+export const ShowDesign = () => {
+    const { data, category } = useContext(DetailsContext);
+    const { data: isLoggedIn}: FetchUserProps = useFetchBackend(import.meta.env.VITE_API_GETUSER)
     const styles = {
         backgroundImage :`linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(13,9,7)), 
         linear-gradient(to top, rgba(0,0,0,0) 50%, rgba(0,0,0,1)),
@@ -28,14 +34,22 @@ export const ShowDesign = ({ data, category }: { data: ShowProps, category: stri
                     <div className="row">
                         <div className="col-12 col-lg-7 mb-3">
                             <DetailsComponent data={data} category={category} />
-                            <ButtonComponent data={data}/>
+                            <div className="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <ButtonComponent data={data} isLoggedIn={isLoggedIn}/>
+                                </div>
+                                
+                                <div>
+                                    <LikeComponent id={data?.id} isLoggedIn={isLoggedIn} />
+                                </div>
+                            </div>
                         </div>
                         <div className="col-12 col-lg-5">
                             <CastComponent cast={data?.cast}  />
                         </div>
                     </div>
                     <div className="py-4">
-                        <h3>Similar of "{data?.title || data?.name}"</h3>
+                        <h3>More like "{data?.title || data?.name}"</h3>
                         <SimilarComponent similar={data?.similar} />
                     </div>
                 </Container>

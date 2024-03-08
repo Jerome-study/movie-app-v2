@@ -20,7 +20,7 @@ export const MainComponent = () => {
         return <Navigate to={"*"} />
     }
 
-    let { data, loading , error } = useFetchMulti(import.meta.env.VITE_API_BASE_URL + `/${category}/` + id + "?api_key=", category, id);
+    const { data, loading , error } = useFetchMulti(import.meta.env.VITE_API_BASE_URL + `/${category}/` + id + "?api_key=", category, id);
     if (error?.response?.status === 404) {
         return <Navigate to={"*"} />
     }
@@ -32,7 +32,7 @@ export const MainComponent = () => {
 
     return(
         <main style={{ backgroundColor: "#f2f2f2", minHeight: "90vh"}}>
-            <DetailsContext.Provider value={{ data }}>
+            <DetailsContext.Provider value={{ data, category }}>
                 {loading && 
                 
                 <Container className="text-center pt-5">
@@ -42,7 +42,7 @@ export const MainComponent = () => {
                 }
                 {!loading && 
                     <>
-                        <HeroComponent category={category} />
+                        <HeroComponent />
                     </>
                     
                 }
