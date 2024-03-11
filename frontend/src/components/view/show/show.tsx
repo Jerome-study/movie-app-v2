@@ -3,20 +3,29 @@ import { CastComponent } from "./cast";
 import { DetailsComponent } from "./details";
 import { SimilarComponent } from "./similar";
 import { ButtonComponent } from "./button";
-import { LikeComponent } from "./like";
 import { DetailsContext } from "../main";
 import { useContext } from "react";
 import { useFetchBackend } from "../../../hooks/useFetch";
 import { FetchUserProps } from "../../../definitions/models";
+import { LikeAndComment } from "./interact";
+import { Spinner } from "react-bootstrap";
 
 export const ShowDesign = () => {
     const { data, category } = useContext(DetailsContext);
-    const { data: isLoggedIn}: FetchUserProps = useFetchBackend(import.meta.env.VITE_API_GETUSER)
+    const { data: isLoggedIn, loading}: FetchUserProps = useFetchBackend(import.meta.env.VITE_API_GETUSER);
+
     const styles = {
         backgroundImage :`linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(13,9,7)), 
         linear-gradient(to top, rgba(0,0,0,0) 50%, rgba(0,0,0,1)),
         url(${import.meta.env.VITE_IMG_URL_POSTER + data?.backdrop_path})`,
         backgroundRepeat: "no-repeat"
+    }
+
+    if (loading) {
+        return <div className="text-center mt-5" style={{ minHeight: "90vh"}}>
+            <Spinner />
+        <p>almost there</p>
+    </div>
     }
 
     return(
@@ -39,8 +48,8 @@ export const ShowDesign = () => {
                                     <ButtonComponent data={data} isLoggedIn={isLoggedIn}/>
                                 </div>
                                 
-                                <div>
-                                    <LikeComponent id={data?.id} isLoggedIn={isLoggedIn} />
+                                <div className="d-flex gap-1 align-items-center">
+                                    <LikeAndComment movie={data} isLoggedIn={isLoggedIn} />
                                 </div>
                             </div>
                         </div>

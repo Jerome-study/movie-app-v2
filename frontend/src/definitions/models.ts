@@ -97,3 +97,17 @@ export interface NavSigninProps{
     refetch: Function,
     setActive: Function 
 }
+
+export interface DataProps {
+    likes?: number,
+    comments?: [],
+    isLiked?: UserProps,
+    message?: string
+}
+
+export interface PersonCommentProps {
+    username?: string,
+    avatar?: string,
+    comment?: string,
+    id?: string
+}

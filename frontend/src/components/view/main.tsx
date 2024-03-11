@@ -24,11 +24,10 @@ export const MainComponent = () => {
     if (error?.response?.status === 404) {
         return <Navigate to={"*"} />
     }
-
+    
     if (error) {
         return <h1>Something went Wrong</h1>
     }
-
 
     return(
         <main style={{ backgroundColor: "#f2f2f2", minHeight: "90vh"}}>

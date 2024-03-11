@@ -1,10 +1,12 @@
 const express = require("express");
-const { userModel, movieModel } = require("../models/userSchema");
+const { userModel } = require("../models/userSchema");
+const { movieModel } = require("../models/movieSchema");
+const { middleWareApiPrivate } = require("../middleware/api");
 const router = express.Router();
-
+const mongoose = require("mongoose");
 
 router.get("/getUser", (req,res) => {
-    res.send({username: req.user.username, avatar: req.user.avatar})
+    res.send({username: req.user.username, avatar: req.user.avatar, id: req.user.id})
 })
 
 router.get("/isLoggedIn", (req,res) => {
@@ -195,6 +197,85 @@ router.post("/removeLike/:id", async (req,res) => {
         
     } catch(error) {
         console.log(error.message);
+    }
+});
+
+
+router.get("/movieInfo/:id", middleWareApiPrivate, async (req,res) => {
+    try {
+        const { id } = req.params;
+        const movie = await movieModel.findOne({ title: "movieInfos"});
+        const found = await movie.data.find(film => film.id === Number(id));
+        if (!found) {
+            const randomNum = Math.floor(Math.random() * 20000)
+            movie.data.push({
+                id : id,
+                likes: randomNum
+            })
+            await movie.save();
+            return res.send({ likes: randomNum, comments: [],  message: "first view" });
+        };
+        const isLiked = await found.likedBy.find(person => person.id == req?.user?.id);
+        res.send({ likes: found.likes, isLiked, comments: found.comments })
+    } catch(error) {
+        console.log(error.message + 'protected')
+    }
+});
+
+
+router.post("/postComment/:id", async (req,res) => {
+    try {
+        const { id } = req.params;
+        const { comment } = req.body;
+
+        const newQuery = {
+            $push: {
+                'data.$.comments': {
+                    username:req.user.username,
+                    comment: comment,
+                    avatar: req.user.avatar,
+                    id: req.user.id
+                }
+            },
+        }
+
+        const movieInfos = await movieModel.findOneAndUpdate({ title: "movieInfos", 'data.id': id }, newQuery, {upsert:true, new: true, runValidators: true, timeStamps: true});
+        const movie = await movieModel.findOne({ title: "movieInfos"});
+        const found = await movie.data.find(film => film.id === Number(id));
+        res.send({ comments: found.comments });
+    } catch(error) {
+        console.log(error.message + " comment error  ")
+    }
+});
+
+router.post("/editComment/:id", async (req,res) => {
+    try {
+        const { id } = req.params;
+        const { editComment, comment_id } = req.body;
+        const newQuery = {
+
+         $elemMatch: {
+            "data.$.comments" : {
+                _id: comment_id
+            }
+         },
+
+          $set: {
+            "data.$.comments.$[element].comment" : editComment
+          }
+        }
+        const movieInfos = await movieModel.findOneAndUpdate({ title: "movieInfos", 'data.id' : id}, newQuery, {
+            timeStamps: true,
+            upsert: true,
+            new: true,
+            arrayFilters: [{ 'element._id' : comment_id}]
+        });
+        const movie = await movieModel.findOne({ title: "movieInfos"});
+        const found = await movie.data.find(film => film.id === Number(id));
+        res.send({ comments: found.comments });
+
+    } catch(error) {
+        console.log(error.message + " comment edit error ");
     }
 })
 
