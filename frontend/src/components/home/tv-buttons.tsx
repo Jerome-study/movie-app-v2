@@ -8,7 +8,7 @@ export const TvButtonsComponent = ({ setMovie }: { setMovie: Function}) => {
         setActive(button.value);
         setMovie(button);
     };
-    // Changed Buttons Name
+    
     return(
         <>
             <div className="border border-3 rounded-pill">
@@ -20,7 +20,6 @@ export const TvButtonsComponent = ({ setMovie }: { setMovie: Function}) => {
                     )
                 })}
             </div>
-            
         </>
     )
 }
