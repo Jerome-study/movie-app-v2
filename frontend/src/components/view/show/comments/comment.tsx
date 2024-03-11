@@ -50,7 +50,6 @@ export const CommentComponent = () => {
         setDatas(data?.comments)
     }, [data]);
 
-    // Comment icon changed
     return(
         <>
             <div className="bg-dark px-2 py-1 rounded-3" onClick={handleShow}>
