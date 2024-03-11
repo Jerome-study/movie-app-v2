@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Button, Offcanvas } from "react-bootstrap";
+import { Button, Offcanvas, Spinner } from "react-bootstrap";
 import { PersonComponent } from "./person";
 import { CommentCreateLoading } from "../../../../loading/commentLoading";
 import { UserProps } from "../../../../definitions/models";
 
 
-export const OffcanvasComponent = ({setDatas, id, loadingComment, show, handleClose, data, handleClick, disable, isLoggedIn }: 
-    { setDatas: Function, id : number, loadingComment:boolean, show: Boolean, handleClose: Function, data: any, handleClick: (e: any, comment: string) => void, disable: boolean, isLoggedIn: UserProps }
+export const OffcanvasComponent = ({loading, setDatas, id, loadingComment, show, handleClose, data, handleClick, disable, isLoggedIn }: 
+    {loading: boolean, setDatas: Function, id : number, loadingComment:boolean, show: Boolean, handleClose: Function, data: any, handleClick: (e: any, comment: string) => void, disable: boolean, isLoggedIn: UserProps }
     ) => {
     const [comment, setComment] = useState("")
     const [beingEdited, setBeingEdited] = useState<string | null>("");
@@ -25,20 +25,28 @@ export const OffcanvasComponent = ({setDatas, id, loadingComment, show, handleCl
                         <Button disabled={disable} type="submit" variant="dark">Send</Button>
                     </div>
                 </form>
-                
-                {!data?.length && 
-                    <p className="text-muted">There are no comments</p>
-                }
-                <div className="mt-4">
-                    {loadingComment && <CommentCreateLoading />}
-                    {data?.map((person : any) => {
-                        return(
-                            <>
-                                <PersonComponent beingEdited={beingEdited} setBeingEdited={setBeingEdited} setDatas={setDatas} id={id} person={person} isLoggedIn={isLoggedIn} />
-                            </>
-                        )
-                    })}
+               {!loading && 
+                <>
+                    {!data?.length && 
+                        <p className="text-muted mt-5 text-center">There are no comments</p>
+                    }
+                    <div className="mt-4">
+                        {loadingComment && <CommentCreateLoading />}
+                        {data?.map((person : any) => {
+                            return(
+                                <>
+                                    <PersonComponent beingEdited={beingEdited} setBeingEdited={setBeingEdited} setDatas={setDatas} id={id} person={person} isLoggedIn={isLoggedIn} />
+                                </>
+                            )
+                        })}
+                    </div>
+                </>
+               }
+               {loading && 
+                <div className="mt-5 text-center">
+                    <Spinner animation="border" variant="danger" size="sm" />
                 </div>
+               }
             </Offcanvas.Body>
         </Offcanvas>
     )
