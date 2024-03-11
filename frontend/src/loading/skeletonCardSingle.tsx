@@ -2,10 +2,11 @@ import { Card } from "react-bootstrap"
 
 
 export const CardSingleSkeleton = () => {
+    // Flex shrink added
     return(
-        <Card className="shadow-sm rounded-3" aria-hidden="true">
-            <div className="card-loading-height border rounded-3 bg-dark" style={{ width: "12rem"}}>
-                                        
+        <Card className="flex-shrink-0 shadow-sm rounded-3 p-1" aria-hidden="true">
+            <div className="card-loading-height border rounded-3 " style={{ width: "11.5rem", backgroundColor:"#eee" }}>
+                
             </div>
         </Card> 
     )

@@ -1,4 +1,4 @@
-import { Container } from "react-bootstrap"
+import { Container, Spinner } from "react-bootstrap"
 import { CastComponent } from "./cast";
 import { DetailsComponent } from "./details";
 import { SimilarComponent } from "./similar";
@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { useFetchBackend } from "../../../hooks/useFetch";
 import { FetchUserProps } from "../../../definitions/models";
 import { LikeAndComment } from "./interact";
-import { Spinner } from "react-bootstrap";
+
 
 export const ShowDesign = () => {
     const { data, category } = useContext(DetailsContext);
@@ -21,12 +21,7 @@ export const ShowDesign = () => {
         backgroundRepeat: "no-repeat"
     }
 
-    if (loading) {
-        return <div className="text-center mt-5" style={{ minHeight: "90vh"}}>
-            <Spinner />
-        <p>almost there</p>
-    </div>
-    }
+    // Fix Loading state
 
     return(
         <>  
@@ -43,15 +38,25 @@ export const ShowDesign = () => {
                     <div className="row">
                         <div className="col-12 col-lg-7 mb-3">
                             <DetailsComponent data={data} category={category} />
-                            <div className="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <ButtonComponent data={data} isLoggedIn={isLoggedIn}/>
+                            {/* Fix Responsiveness when in sm */}
+                            {!loading && 
+                                <div className="row mt-3">
+                                    <div className="col-12 col-md-6 mb-2 justify-content-md-between">
+                                        <ButtonComponent data={data} isLoggedIn={isLoggedIn}/>
+                                    </div>
+                                    
+                                    <div className="col-12 col-md-6 d-flex gap-3 align-items-center justify-content-md-end">
+                                        <LikeAndComment movie={data} isLoggedIn={isLoggedIn} />
+                                    </div>
                                 </div>
-                                
-                                <div className="d-flex gap-1 align-items-center">
-                                    <LikeAndComment movie={data} isLoggedIn={isLoggedIn} />
+                            }
+                            {loading && 
+                                <div className="text-center mt-5">
+                                    <Spinner animation="grow" variant="danger" size="sm" />
+                                    <Spinner animation="grow" variant="danger" size="sm" />
+                                    <Spinner animation="grow" variant="danger" size="sm" />
                                 </div>
-                            </div>
+                            }
                         </div>
                         <div className="col-12 col-lg-5">
                             <CastComponent cast={data?.cast}  />
