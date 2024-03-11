@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { OffcanvasComponent } from "./offcanvas";
 import { instance } from "../../../../utils/utils";
 import { useContext } from "react";
 import { ContextLikeAndComment } from "../interact";
 import { PersonCommentProps } from "../../../../definitions/models";
+import { FaComment } from "react-icons/fa";
+
 
 export const CommentComponent = () => {
-    const { data, isLoggedIn, id} = useContext(ContextLikeAndComment)
+    const { data, isLoggedIn, id, loading} = useContext(ContextLikeAndComment)
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -44,11 +46,18 @@ export const CommentComponent = () => {
         
     }
 
+    useEffect(() => {
+        setDatas(data?.comments)
+    }, [data]);
+
+    // Comment icon changed
     return(
         <>
-            <div onClick={handleShow}>Comment</div>
+            <div className="bg-dark px-2 py-1 rounded-3" onClick={handleShow}>
+                <FaComment color="white" size={"2rem"} />
+            </div>
             {errorComment && errorComment}
-            <OffcanvasComponent setDatas={setDatas} id={id} loadingComment={loadingComment} disable={disable} data={datas} show={show} handleClose={handleClose} handleClick={handleClick} isLoggedIn={isLoggedIn}/>
+            <OffcanvasComponent loading={loading} setDatas={setDatas} id={id} loadingComment={loadingComment} disable={disable} data={datas} show={show} handleClose={handleClose} handleClick={handleClick} isLoggedIn={isLoggedIn}/>
         </>
     )    
 };

@@ -53,7 +53,7 @@ export const ButtonComponent = ({ data, isLoggedIn }: { data: ShowProps, isLogge
 
     return(
         <>  
-            {/* disable placement changed */}
+            
             { watch?
                 <Button disabled={disable2} onClick={removeMovie} className="mt2 w-100" variant="warning">Remove From Watch List</Button>:
                 <Button disabled={disable1} onClick={addMovie} className="mt2 w-100" variant="warning">Add To Watch List</Button>
