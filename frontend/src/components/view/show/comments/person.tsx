@@ -4,14 +4,20 @@ import { instance } from "../../../../utils/utils";
 import { useFetchBackend } from "../../../../hooks/useFetch";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { useContext } from "react";
+import { ContextLikeAndComment } from "../interact";
+import { PersonInfoCommentProps } from "../../../../definitions/models";
+import { Navigate } from "react-router-dom";
 
-export const PersonComponent = ({beingEdited, setBeingEdited, setDatas,  person, isLoggedIn, id }: {beingEdited : any, setBeingEdited: any, setDatas: any, person : any, isLoggedIn: any, id: number}) => {
+export const PersonComponent = ({beingEdited, setBeingEdited, setDatas,  person }: PersonInfoCommentProps ) => {
+    const { isLoggedIn, id } = useContext(ContextLikeAndComment)
     const url = isLoggedIn? import.meta.env.VITE_API_GETCOMMENTINFO + `/${person.id}` : import.meta.env.VITE_API_GETCOMMENTINFOPUBLIC + `/${person.id}`
     const { data: user, loading: userLoading } = useFetchBackend(url);
     const [editComment, setEditComment] = useState(person?.comment);
     const [loadingEdit, setLoadingEdit] = useState(false);
     const [deleteLoading, setDeleteLoading] = useState(false);
     const [errorEdit, setErrorEdit] = useState<any>()
+
     const handleClick = async (e : any) => {
         e.preventDefault();
         if (editComment === person.comment) {
@@ -44,7 +50,7 @@ export const PersonComponent = ({beingEdited, setBeingEdited, setDatas,  person,
             setDatas(response.data?.comments);
             setDeleteLoading(false);
         } catch(error: any) {
-            setErrorEdit("Please refresh the page, Error")
+            setErrorEdit("Please refresh the page, Error");
         }
     }
 
@@ -62,6 +68,7 @@ export const PersonComponent = ({beingEdited, setBeingEdited, setDatas,  person,
     
     return(
         <>
+            {errorEdit && <Navigate to={"*"} />}
             <div className="card shadow-sm pt-2 px-2 mb-2">
                 <div className="d-flex align-items-center justify-content-between">
                         <div className="d-flex gap-2 align-items-center">
@@ -85,7 +92,6 @@ export const PersonComponent = ({beingEdited, setBeingEdited, setDatas,  person,
                         </div>
                     <p className="text-muted" style={{ fontSize: "12px"}}>{person?.created_at?.split("T")[0]}</p>
                 </div>
-                <p>{errorEdit}</p>
                 { (beingEdited === person._id)? 
                     <form onSubmit={(e) => handleClick(e)}>
                         <textarea onChange={(e) => setEditComment(e.target.value) } className="w-100 mt-2 rounded ps-4" value={editComment} rows={4}>
@@ -102,9 +108,6 @@ export const PersonComponent = ({beingEdited, setBeingEdited, setDatas,  person,
                     
                 }
                 
-                                    
-                
-
                 {isLoggedIn.id === person.id && 
             
                   (beingEdited !== person._id) && 

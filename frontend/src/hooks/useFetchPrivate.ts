@@ -31,5 +31,23 @@ export const useFetchPrivate = (url: string) => {
         }
 
     }, [url]);
-    return { data, loading, error }
+
+    const refetch = () => {
+        setError(undefined)
+        setLoading(true)
+        const getData = async () => {
+            try {
+                const response = await axios.get(url + import.meta.env.VITE_API_KEY);
+                setData(response.data);
+                setLoading(false);   
+            } catch(error) {
+                setError(error);
+                setLoading(false)
+            }
+        }
+        getData();
+    }
+
+
+    return { data, loading, error, refetch }
 }

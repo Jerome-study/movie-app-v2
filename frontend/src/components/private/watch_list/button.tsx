@@ -2,6 +2,7 @@ import { Button } from "react-bootstrap";
 import { useFetchBackend } from "../../../hooks/useFetch";
 import { instance } from "../../../utils/utils";
 import { useEffect, useState } from "react";
+import { RefreshButton } from "../../../Refresh";
 
 export const ButtonComponent = ({ id, refetch, setGone } : { id: number | undefined, refetch: Function, setGone: Function}) => {
     const { data, loading, error } = useFetchBackend(import.meta.env.VITE_API_WATCH_CHECKED + `/${id}`);
@@ -43,7 +44,11 @@ export const ButtonComponent = ({ id, refetch, setGone } : { id: number | undefi
     }
 
     if (error) {
-        return <h1>Something Went Wrong</h1>
+        return <>
+            <div style={{ minHeight: "90vh"}}>
+                <RefreshButton refetch={refetch} />
+            </div>
+        </>
     }
     return(
         <>

@@ -5,10 +5,10 @@ import { useContext } from "react";
 import { ContextLikeAndComment } from "../interact";
 import { PersonCommentProps } from "../../../../definitions/models";
 import { FaComment } from "react-icons/fa";
-
+import { Navigate } from "react-router-dom";
 
 export const CommentComponent = () => {
-    const { data, isLoggedIn, id, loading} = useContext(ContextLikeAndComment)
+    const { data, isLoggedIn, id } = useContext(ContextLikeAndComment)
     const [datas, setDatas] = useState<[PersonCommentProps] | undefined>(data?.comments);
     const [disable, setDisable] = useState(false);
     const [loadingComment, setLoadingComment] = useState(false);
@@ -52,8 +52,8 @@ export const CommentComponent = () => {
             <div className="bg-dark px-2 py-1 rounded-3 " data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
                 <FaComment color="white" size={"2rem"} />
             </div>
-            {errorComment && errorComment}
-            <OffcanvasComponent loading={loading} setDatas={setDatas} id={id} loadingComment={loadingComment} disable={disable} data={datas} handleClick={handleClick} isLoggedIn={isLoggedIn}/>
+            {errorComment && <Navigate to={"*"} />}
+            <OffcanvasComponent setDatas={setDatas} loadingComment={loadingComment} disable={disable} data={datas} handleClick={handleClick} />
         </>
     )    
 };

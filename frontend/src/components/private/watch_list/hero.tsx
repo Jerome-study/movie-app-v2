@@ -2,6 +2,7 @@ import { WatchListProps } from "../../../definitions/models";
 import { useFetchBackend } from "../../../hooks/useFetch";
 import { SpinnerLoading } from "../../../loading/spinner";
 import { ListComponent } from "./list";
+import { RefreshButton } from "../../../Refresh";
 
 export const HeroComponent = () => {
     const { data, loading, error, refetch } = useFetchBackend(import.meta.env.VITE_API_WATCH_LIST);
@@ -10,7 +11,11 @@ export const HeroComponent = () => {
     }
 
     if (error) {
-        return <h1>Something Went Wrong</h1>
+        return <>
+            <div style={{ minHeight: "90vh"}}>
+                <RefreshButton refetch={refetch} />
+            </div>
+        </>
     }
     return(
         <>
