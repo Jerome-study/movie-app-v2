@@ -106,8 +106,25 @@ export interface DataProps {
 }
 
 export interface PersonCommentProps {
-    username?: string,
-    avatar?: string,
+    _id?: string,
+    created_at: string,
+    updated_at: string,
     comment?: string,
     id?: string
+}
+
+
+export interface OffCanvasProps {
+    setDatas: Function,
+    loadingComment: boolean,
+    disable: boolean,
+    data: [PersonCommentProps] | undefined,
+    handleClick: (e: any, comment: string) => void
+}
+
+export interface PersonInfoCommentProps {
+    beingEdited: string | null,
+    setBeingEdited: Function,
+    setDatas: Function,
+    person: PersonCommentProps
 }

@@ -4,14 +4,19 @@ import { instance } from "../../../../utils/utils";
 import { useFetchBackend } from "../../../../hooks/useFetch";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { useContext } from "react";
+import { ContextLikeAndComment } from "../interact";
+import { PersonInfoCommentProps } from "../../../../definitions/models";
 
-export const PersonComponent = ({beingEdited, setBeingEdited, setDatas,  person, isLoggedIn, id }: {beingEdited : any, setBeingEdited: any, setDatas: any, person : any, isLoggedIn: any, id: number}) => {
+export const PersonComponent = ({beingEdited, setBeingEdited, setDatas,  person }: PersonInfoCommentProps ) => {
+    const { isLoggedIn, id } = useContext(ContextLikeAndComment)
     const url = isLoggedIn? import.meta.env.VITE_API_GETCOMMENTINFO + `/${person.id}` : import.meta.env.VITE_API_GETCOMMENTINFOPUBLIC + `/${person.id}`
     const { data: user, loading: userLoading } = useFetchBackend(url);
     const [editComment, setEditComment] = useState(person?.comment);
     const [loadingEdit, setLoadingEdit] = useState(false);
     const [deleteLoading, setDeleteLoading] = useState(false);
     const [errorEdit, setErrorEdit] = useState<any>()
+
     const handleClick = async (e : any) => {
         e.preventDefault();
         if (editComment === person.comment) {
@@ -102,9 +107,6 @@ export const PersonComponent = ({beingEdited, setBeingEdited, setDatas,  person,
                     
                 }
                 
-                                    
-                
-
                 {isLoggedIn.id === person.id && 
             
                   (beingEdited !== person._id) && 

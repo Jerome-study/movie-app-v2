@@ -8,7 +8,7 @@ import { FaComment } from "react-icons/fa";
 
 
 export const CommentComponent = () => {
-    const { data, isLoggedIn, id, loading} = useContext(ContextLikeAndComment)
+    const { data, isLoggedIn, id } = useContext(ContextLikeAndComment)
     const [datas, setDatas] = useState<[PersonCommentProps] | undefined>(data?.comments);
     const [disable, setDisable] = useState(false);
     const [loadingComment, setLoadingComment] = useState(false);
@@ -53,7 +53,7 @@ export const CommentComponent = () => {
                 <FaComment color="white" size={"2rem"} />
             </div>
             {errorComment && errorComment}
-            <OffcanvasComponent loading={loading} setDatas={setDatas} id={id} loadingComment={loadingComment} disable={disable} data={datas} handleClick={handleClick} isLoggedIn={isLoggedIn}/>
+            <OffcanvasComponent setDatas={setDatas} loadingComment={loadingComment} disable={disable} data={datas} handleClick={handleClick} />
         </>
     )    
 };

@@ -2,12 +2,12 @@ import { useState } from "react";
 import { Button, Spinner } from "react-bootstrap";
 import { PersonComponent } from "./person";
 import { CommentCreateLoading } from "../../../../loading/commentLoading";
-import { UserProps } from "../../../../definitions/models";
+import { useContext } from "react";
+import { ContextLikeAndComment } from "../interact";
+import { OffCanvasProps } from "../../../../definitions/models";
 
-
-export const OffcanvasComponent = ({loading, setDatas, id, loadingComment, data, handleClick, disable, isLoggedIn }: 
-    {loading: boolean, setDatas: Function, id : number, loadingComment:boolean, data: any, handleClick: (e: any, comment: string) => void, disable: boolean, isLoggedIn: UserProps }
-    ) => {
+export const OffcanvasComponent = ({setDatas, loadingComment, disable, data, handleClick }: OffCanvasProps ) => {
+    const { loading } = useContext(ContextLikeAndComment)
     const [comment, setComment] = useState("")
     const [beingEdited, setBeingEdited] = useState<string | null>("");
 
@@ -35,7 +35,7 @@ export const OffcanvasComponent = ({loading, setDatas, id, loadingComment, data,
                         {loadingComment && <CommentCreateLoading />}
                         {data?.map((person : any) => {
                             return(
-                                <PersonComponent key={person._id} beingEdited={beingEdited} setBeingEdited={setBeingEdited} setDatas={setDatas} id={id} person={person} isLoggedIn={isLoggedIn} />
+                                <PersonComponent key={person._id} beingEdited={beingEdited} setBeingEdited={setBeingEdited} setDatas={setDatas} person={person} />
                             )
                         })}
                     </div>
