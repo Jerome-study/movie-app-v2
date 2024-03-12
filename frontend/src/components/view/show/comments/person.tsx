@@ -2,12 +2,15 @@ import { useEffect, useState } from "react"
 import { Button, Spinner } from "react-bootstrap";
 import { instance } from "../../../../utils/utils";
 import { useFetchBackend } from "../../../../hooks/useFetch";
-
+import { FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 
 export const PersonComponent = ({beingEdited, setBeingEdited, setDatas,  person, isLoggedIn, id }: {beingEdited : any, setBeingEdited: any, setDatas: any, person : any, isLoggedIn: any, id: number}) => {
-    const { data: user, loading: userLoading } = useFetchBackend(import.meta.env.VITE_API_GETCOMMENTINFO + `/${person.id}`);
+    const url = isLoggedIn? import.meta.env.VITE_API_GETCOMMENTINFO + `/${person.id}` : import.meta.env.VITE_API_GETCOMMENTINFOPUBLIC + `/${person.id}`
+    const { data: user, loading: userLoading } = useFetchBackend(url);
     const [editComment, setEditComment] = useState(person?.comment);
     const [loadingEdit, setLoadingEdit] = useState(false);
+    const [deleteLoading, setDeleteLoading] = useState(false);
     const [errorEdit, setErrorEdit] = useState<any>()
     const handleClick = async (e : any) => {
         e.preventDefault();
@@ -25,7 +28,23 @@ export const PersonComponent = ({beingEdited, setBeingEdited, setDatas,  person,
             setLoadingEdit(false)
         } catch(error : any) {
             setErrorEdit("Please refresh the page, Error")
-            console.log(error.response.data)
+        }
+    };
+
+    const deleteComment = async () => {
+        try {
+            setDeleteLoading(true);
+            const response = await instance.post(import.meta.env.VITE_API_DELETECOMMENT, {
+                comment_id : person._id,
+                movie_id : id
+            });
+            if (response === null) {
+                return console.log("no data")
+            }
+            setDatas(response.data?.comments);
+            setDeleteLoading(false);
+        } catch(error: any) {
+            setErrorEdit("Please refresh the page, Error")
         }
     }
 
@@ -43,7 +62,7 @@ export const PersonComponent = ({beingEdited, setBeingEdited, setDatas,  person,
     
     return(
         <>
-            <div className="card shadow-sm pt-2 px-2 mb-4">
+            <div className="card shadow-sm pt-2 px-2 mb-2">
                 <div className="d-flex align-items-center justify-content-between">
                         <div className="d-flex gap-2 align-items-center">
                             {!userLoading && 
@@ -88,11 +107,22 @@ export const PersonComponent = ({beingEdited, setBeingEdited, setDatas,  person,
 
                 {isLoggedIn.id === person.id && 
             
-                  (beingEdited !== person._id) &&  <p onClick={() => {setBeingEdited(person._id)}} className="ms-auto">edit</p> 
+                  (beingEdited !== person._id) && 
+                  <div className="d-flex ms-auto gap-3" aria-disabled>
+                    <p className={`${deleteLoading && "pe-none"}`} onClick={() => {setBeingEdited(person._id)}}>
+                        <FaEdit size={"1.5rem"} />
+                    </p> 
+                    <p>
+                        <MdDelete className={`${deleteLoading && "pe-none"}`} onClick={deleteComment} color="red" size={"1.8rem"} />
+                    </p> 
+                  </div>
                 
-                }
-                                    
+                }                    
             </div>
+            { deleteLoading && <div className="d-flex gap-2 align-items-center m-0 ">
+            <Spinner size="sm"/>
+            <p className="my-2">Deleting this comment...</p>
+        </div>}
         </>
     )
 }

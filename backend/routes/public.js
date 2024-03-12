@@ -1,5 +1,6 @@
 const express = require("express");
 const { movieModel } = require("../models/movieSchema");
+const { userModel } = require("../models/userSchema");
 const router = express.Router();
 const { middleWareApi } = require("../middleware/api");
 
@@ -24,6 +25,19 @@ router.get("/movieInfo/:id", middleWareApi, async (req,res) => {
         
     } catch(error) {
         console.log(error.message + "public")
+    }
+});
+
+router.get("/getCommentInfo/:id", async (req,res) => {
+    try {
+        const { id } = req.params;
+        const user = await userModel.findById(id).select("avatar").select("username")
+        if (!user) {
+            return res.sendStatus(404);
+        }
+        res.send({ info: user})
+    } catch(error) {
+        console.log(error.message + "get comment info error");
     }
 });
 

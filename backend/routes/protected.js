@@ -251,13 +251,6 @@ router.post("/editComment/:id", async (req,res) => {
         const { id } = req.params;
         const { editComment, comment_id } = req.body;
         const newQuery = {
-
-         $elemMatch: {
-            "data.$.comments" : {
-                _id: comment_id
-            }
-         },
-
           $set: {
             "data.$.comments.$[element].comment" : editComment
           }
@@ -288,7 +281,26 @@ router.get("/getCommentInfo/:id", async (req,res) => {
     } catch(error) {
         console.log(error.message + "get comment info error");
     }
-})
+});
+
+router.post("/deleteComment", async (req,res) => {
+    try {
+        const { comment_id, movie_id } = req.body
+        const newQuery = {
+            $pull : {
+                'data.$.comments' : {
+                    _id: comment_id
+                } 
+            }
+        }
+        const movieInfos = await movieModel.findOneAndUpdate({ title: "movieInfos", 'data.id' : movie_id }, newQuery);
+        const movie = await movieModel.findOne({ title: "movieInfos"});
+        const found = await movie.data.find(film => film.id === Number(movie_id));
+        res.send({ comments: found.comments });
+    } catch(error) {
+        console.log(error.message + "get comment info error");
+    }
+});
 
 
 module.exports = router;

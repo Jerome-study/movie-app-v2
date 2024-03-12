@@ -19,8 +19,8 @@ export const TrendingCardSkeleton = () => {
             <div className="d-flex gap-4 trending-wrap overflow-auto py-3 justify-content-lg-center trending-card-wrapper">
                 {size.map((num: any) => {
                     return(
-                        <Card key={num.id} className="flex-shrink-0 flex-lg-shrink-1 col-lg-5 p-1 bg-white" aria-hidden="true">
-                            <div className="trending-card-loading" style={{ background: "#eee"}}>
+                        <Card key={num.id} className="flex-shrink-0 flex-lg-shrink-1 col-lg-5 bg-dark" aria-hidden="true">
+                            <div className="trending-card-loading">
                             </div>
                         </Card> 
                     )
