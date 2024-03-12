@@ -3,6 +3,7 @@ const { movieModel } = require("../models/movieSchema");
 
 
 const middleWareApi = async (req,res, next) => {
+    console.log("public middleware");
     try {
         const movie = await movieModel.findOne({ title: "movieInfos"});
         if (!movie) {
@@ -24,6 +25,7 @@ const middleWareApi = async (req,res, next) => {
 
 
 const middleWareApiPrivate = async (req,res, next) => {
+    console.log("private middleware");
     try {
         const movie = await movieModel.findOne({ title: "movieInfos"});
         if (!movie) {

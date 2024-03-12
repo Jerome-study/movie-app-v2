@@ -5,7 +5,8 @@ import { useFetchBackend } from "../../../../hooks/useFetch";
 
 
 export const PersonComponent = ({beingEdited, setBeingEdited, setDatas,  person, isLoggedIn, id }: {beingEdited : any, setBeingEdited: any, setDatas: any, person : any, isLoggedIn: any, id: number}) => {
-    const { data: user, loading: userLoading } = useFetchBackend(import.meta.env.VITE_API_GETCOMMENTINFO + `/${person.id}`);
+    const url = isLoggedIn? import.meta.env.VITE_API_GETCOMMENTINFO + `/${person.id}` : import.meta.env.VITE_API_GETCOMMENTINFOPUBLIC + `/${person.id}`
+    const { data: user, loading: userLoading } = useFetchBackend(url);
     const [editComment, setEditComment] = useState(person?.comment);
     const [loadingEdit, setLoadingEdit] = useState(false);
     const [errorEdit, setErrorEdit] = useState<any>()
