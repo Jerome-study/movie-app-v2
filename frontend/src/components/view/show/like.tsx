@@ -53,10 +53,6 @@ export const LikeComponent = () => {
         setLike(data?.isLiked)
     }, [data])
    
-    
-
-//    Icon changed heart
-
     return(
         <>
             <div className="text-center d-flex gap-1 align-items-center justify-content-between">

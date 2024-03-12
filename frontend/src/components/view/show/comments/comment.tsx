@@ -9,9 +9,6 @@ import { FaComment } from "react-icons/fa";
 
 export const CommentComponent = () => {
     const { data, isLoggedIn, id, loading} = useContext(ContextLikeAndComment)
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
     const [datas, setDatas] = useState<[PersonCommentProps] | undefined>(data?.comments);
     const [disable, setDisable] = useState(false);
     const [loadingComment, setLoadingComment] = useState(false);
@@ -52,11 +49,11 @@ export const CommentComponent = () => {
 
     return(
         <>
-            <div className="bg-dark px-2 py-1 rounded-3" onClick={handleShow}>
+            <div className="bg-dark px-2 py-1 rounded-3 " data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
                 <FaComment color="white" size={"2rem"} />
             </div>
             {errorComment && errorComment}
-            <OffcanvasComponent loading={loading} setDatas={setDatas} id={id} loadingComment={loadingComment} disable={disable} data={datas} show={show} handleClose={handleClose} handleClick={handleClick} isLoggedIn={isLoggedIn}/>
+            <OffcanvasComponent loading={loading} setDatas={setDatas} id={id} loadingComment={loadingComment} disable={disable} data={datas} handleClick={handleClick} isLoggedIn={isLoggedIn}/>
         </>
     )    
 };

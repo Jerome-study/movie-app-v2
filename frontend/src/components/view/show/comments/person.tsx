@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react"
 import { Button, Spinner } from "react-bootstrap";
 import { instance } from "../../../../utils/utils";
+import { useFetchBackend } from "../../../../hooks/useFetch";
+
 
 export const PersonComponent = ({beingEdited, setBeingEdited, setDatas,  person, isLoggedIn, id }: {beingEdited : any, setBeingEdited: any, setDatas: any, person : any, isLoggedIn: any, id: number}) => {
+    const { data: user, loading: userLoading } = useFetchBackend(import.meta.env.VITE_API_GETCOMMENTINFO + `/${person.id}`);
     const [editComment, setEditComment] = useState(person?.comment);
     const [loadingEdit, setLoadingEdit] = useState(false);
     const [errorEdit, setErrorEdit] = useState<any>()
@@ -31,12 +34,10 @@ export const PersonComponent = ({beingEdited, setBeingEdited, setDatas,  person,
         setBeingEdited("");
         
     }
-
+    
+    
     useEffect(() => {
-        
         setEditComment(person.comment);
-       
-
     }, [beingEdited]);
 
     
@@ -45,9 +46,24 @@ export const PersonComponent = ({beingEdited, setBeingEdited, setDatas,  person,
             <div className="card shadow-sm pt-2 px-2 mb-4">
                 <div className="d-flex align-items-center justify-content-between">
                         <div className="d-flex gap-2 align-items-center">
-                        <img width={50} src={person?.avatar} alt="" />
-                        <p className="fw-bold">{person?.username}</p>
-                    </div>
+                            {!userLoading && 
+                                <>
+                                    <img width={50} src={user?.info?.avatar} alt="" />
+                                    <p className="fw-bold">{user?.info?.username}</p>
+                                </>
+                            }
+                            {userLoading && 
+                                <>
+                                    <div className="col-2 rounded-circle bg-dark mt-1 ps-2" style={{ width: "40px", height: "40px"}}>
+                                        <span className="rounded-circle bg-dark pt-2" style={{ width: "40px", height: "40px"}}></span>
+                                    </div>
+                                    <p className="col-8 placeholder-glow">
+                                        <span className="text-muted col-12 placeholder px-5"></span>
+                                    </p>
+                                </>
+                                
+                            }
+                        </div>
                     <p className="text-muted" style={{ fontSize: "12px"}}>{person?.created_at?.split("T")[0]}</p>
                 </div>
                 <p>{errorEdit}</p>

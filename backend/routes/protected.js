@@ -231,9 +231,7 @@ router.post("/postComment/:id", async (req,res) => {
         const newQuery = {
             $push: {
                 'data.$.comments': {
-                    username:req.user.username,
                     comment: comment,
-                    avatar: req.user.avatar,
                     id: req.user.id
                 }
             },
@@ -276,6 +274,19 @@ router.post("/editComment/:id", async (req,res) => {
 
     } catch(error) {
         console.log(error.message + " comment edit error ");
+    }
+});
+
+router.get("/getCommentInfo/:id", async (req,res) => {
+    try {
+        const { id } = req.params;
+        const user = await userModel.findById(id).select("avatar").select("username")
+        if (!user) {
+            return res.sendStatus(404);
+        }
+        res.send({ info: user})
+    } catch(error) {
+        console.log(error.message + "get comment info error");
     }
 })
 
