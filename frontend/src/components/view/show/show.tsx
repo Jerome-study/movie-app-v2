@@ -38,7 +38,7 @@ export const ShowDesign = () => {
                     <div className="row">
                         <div className="col-12 col-lg-7 mb-3">
                             <DetailsComponent data={data} category={category} />
-                            {/* Fix Responsiveness when in sm */}
+
                             {!loading && 
                                 <div className="row mt-3">
                                     <div className="col-12 col-md-6 mb-2 justify-content-md-between">
@@ -57,6 +57,7 @@ export const ShowDesign = () => {
                                     <Spinner animation="grow" variant="danger" size="sm" />
                                 </div>
                             }
+                            
                         </div>
                         <div className="col-12 col-lg-5">
                             <CastComponent cast={data?.cast}  />

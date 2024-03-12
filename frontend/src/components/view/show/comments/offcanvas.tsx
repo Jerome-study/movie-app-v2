@@ -1,23 +1,24 @@
 import { useState } from "react";
-import { Button, Offcanvas, Spinner } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import { PersonComponent } from "./person";
 import { CommentCreateLoading } from "../../../../loading/commentLoading";
 import { UserProps } from "../../../../definitions/models";
 
 
-export const OffcanvasComponent = ({loading, setDatas, id, loadingComment, show, handleClose, data, handleClick, disable, isLoggedIn }: 
-    {loading: boolean, setDatas: Function, id : number, loadingComment:boolean, show: Boolean, handleClose: Function, data: any, handleClick: (e: any, comment: string) => void, disable: boolean, isLoggedIn: UserProps }
+export const OffcanvasComponent = ({loading, setDatas, id, loadingComment, data, handleClick, disable, isLoggedIn }: 
+    {loading: boolean, setDatas: Function, id : number, loadingComment:boolean, data: any, handleClick: (e: any, comment: string) => void, disable: boolean, isLoggedIn: UserProps }
     ) => {
     const [comment, setComment] = useState("")
     const [beingEdited, setBeingEdited] = useState<string | null>("");
 
     return(
-        <Offcanvas show={show} onHide={handleClose} >
-            <Offcanvas.Header closeButton>
-                <Offcanvas.Title><h2>Comments</h2></Offcanvas.Title>
-            </Offcanvas.Header>
-            <Offcanvas.Body className="pb-5">
-                <form onSubmit={(e) =>{ handleClick(e, comment ), setComment("")} } className="d-flex gap-2 justify-content-between align-items-center" >
+        <div className="offcanvas offcanvas-start" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div className="offcanvas-header">
+                <h5 className="offcanvas-title" id="offcanvasExampleLabel">Comments</h5>
+                <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div className="offcanvas-body">
+            <form onSubmit={(e) =>{ handleClick(e, comment ), setComment("")} } className="d-flex gap-2 justify-content-between align-items-center" >
                     <div className="">
                         <input disabled={disable} value={comment} onChange={(e) => setComment(e.target.value)} className="form-control border-3 " placeholder="write something...." />
                     </div>
@@ -34,9 +35,7 @@ export const OffcanvasComponent = ({loading, setDatas, id, loadingComment, show,
                         {loadingComment && <CommentCreateLoading />}
                         {data?.map((person : any) => {
                             return(
-                                <>
-                                    <PersonComponent beingEdited={beingEdited} setBeingEdited={setBeingEdited} setDatas={setDatas} id={id} person={person} isLoggedIn={isLoggedIn} />
-                                </>
+                                <PersonComponent key={person._id} beingEdited={beingEdited} setBeingEdited={setBeingEdited} setDatas={setDatas} id={id} person={person} isLoggedIn={isLoggedIn} />
                             )
                         })}
                     </div>
@@ -47,7 +46,10 @@ export const OffcanvasComponent = ({loading, setDatas, id, loadingComment, show,
                     <Spinner animation="border" variant="danger" size="sm" />
                 </div>
                }
-            </Offcanvas.Body>
-        </Offcanvas>
+                
+            </div>
+        </div>
     )
 }
+
+

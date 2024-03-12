@@ -18,18 +18,10 @@ const likeBySchema = new mongoose.Schema({
 
 
 const commentSchema = new mongoose.Schema({
-    username: {
-        type: String,
-        required: true,
-    },
     comment: {
         type: String,
     },
-
-    avatar: {
-        type: String,
-        required: true
-    },
+     
     id: {
         type: String,
         required: true,
