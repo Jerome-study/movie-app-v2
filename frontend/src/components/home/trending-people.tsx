@@ -2,13 +2,13 @@ import { useFetchPrivate } from "../../hooks/useFetchPrivate"
 import { CardTrendingComponent } from "./card-trending";
 import { TrendingCardSkeleton } from "../../loading/skeletontrending";
 import { PersonProps } from "../../definitions/models";
-
+import { RefreshButton } from "../../Refresh";
 
 export const TrendingPeopleComponent = () => {
-    const { data, loading, error } = useFetchPrivate(`${import.meta.env.VITE_TRENDING_PEOPLE_URL}?api_key=`);
+    const { data, loading, error, refetch } = useFetchPrivate(`${import.meta.env.VITE_TRENDING_PEOPLE_URL}?api_key=`);
     
     if (error) {
-        return <h1>Something went wrong</h1>
+        return <RefreshButton refetch={refetch} />
     }
 
 

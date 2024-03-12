@@ -13,6 +13,7 @@ import { Protected } from "./ProtectedLayout";
 import { ProfilePage } from "./page/private/profile";
 import { EditProfilePage } from "./page/private/editprofile";
 import { WatchListPage } from "./page/private/watch_list";
+import { ErrorPage } from "./Error";
 function App() {
     return(
         <>
@@ -21,7 +22,7 @@ function App() {
                 <Route element={<Layout />}>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/search/:category" element={<SearchPage />} />
-                    <Route path="*" element={<h1>Page not found</h1>}/>
+                    <Route path="*" element={<ErrorPage />}/>
 
                     {/* Private Routes */}
                     <Route element={<Protected />}>

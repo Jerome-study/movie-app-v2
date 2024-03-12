@@ -3,13 +3,14 @@ import { useFetchPrivate } from "../../hooks/useFetchPrivate";
 import { CarouselSkeleton } from "../../loading/skeletoncarousel";
 import { viewShow } from '../../utils/utils';
 import { useNavigate } from 'react-router-dom';
+import { RefreshButton } from '../../Refresh';
 
 export const HeroComponent = () => {
     const navigate = useNavigate();
-    const { data, loading, error } = useFetchPrivate(`${import.meta.env.VITE_NOW_PLAYING_URL}?api_key=`, )
+    const { data, loading, error, refetch } = useFetchPrivate(`${import.meta.env.VITE_NOW_PLAYING_URL}?api_key=`, )
 
     if (error) {
-        return <h1>SOmethiong went wrong</h1>
+        return <RefreshButton refetch={refetch} />
     }
 
     return(

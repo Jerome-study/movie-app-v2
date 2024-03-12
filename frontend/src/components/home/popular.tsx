@@ -2,12 +2,13 @@ import { useFetchPrivate } from "../../hooks/useFetchPrivate"
 import { CardComponent } from "./card-component";
 import { CardSkeleton } from "../../loading/skeletoncard";
 import { ShowProps } from "../../definitions/models";
+import { RefreshButton } from "../../Refresh";
 
 export const PopularComponent = () => {
-    const { data, loading, error } = useFetchPrivate(`${import.meta.env.VITE_POPULAR_URL}?api_key=`);
+    const { data, loading, error, refetch } = useFetchPrivate(`${import.meta.env.VITE_POPULAR_URL}?api_key=`);
 
     if (error) {
-        return <h1>Something Went Wrong</h1>
+        return <RefreshButton refetch={refetch} />
     }
 
     return(

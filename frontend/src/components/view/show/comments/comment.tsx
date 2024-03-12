@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { ContextLikeAndComment } from "../interact";
 import { PersonCommentProps } from "../../../../definitions/models";
 import { FaComment } from "react-icons/fa";
-
+import { Navigate } from "react-router-dom";
 
 export const CommentComponent = () => {
     const { data, isLoggedIn, id } = useContext(ContextLikeAndComment)
@@ -52,7 +52,7 @@ export const CommentComponent = () => {
             <div className="bg-dark px-2 py-1 rounded-3 " data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
                 <FaComment color="white" size={"2rem"} />
             </div>
-            {errorComment && errorComment}
+            {errorComment && <Navigate to={"*"} />}
             <OffcanvasComponent setDatas={setDatas} loadingComment={loadingComment} disable={disable} data={datas} handleClick={handleClick} />
         </>
     )    

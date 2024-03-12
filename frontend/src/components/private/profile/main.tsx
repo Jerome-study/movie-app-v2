@@ -6,8 +6,10 @@ import { useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { ProfileSkeleton } from "../../../loading/skeletonProfile";
 import 'react-toastify/dist/ReactToastify.css';
+import { RefreshButton } from "../../../Refresh";
+
 export const MainComponent = () => {
-    const { data, loading , error }: FetchUserProps = useFetchBackend(import.meta.env.VITE_API_GETALL);
+    const { data, loading , error, refetch }: FetchUserProps = useFetchBackend(import.meta.env.VITE_API_GETALL);
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -32,8 +34,13 @@ export const MainComponent = () => {
     }
 
     if (error) {
-        return <h1>Something Went Wrong</h1>
+        return <>
+            <div style={{ minHeight: "90vh"}}>
+                <RefreshButton refetch={refetch} />
+            </div>
+        </>
     }
+
     return(
         <>
             <div className="position-relative" style={{ backgroundColor: "#232B2B"}}>

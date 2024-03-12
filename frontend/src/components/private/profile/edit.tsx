@@ -10,9 +10,10 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Avatar1, Avatar2, Avatar3, Avatar4 } from "../../../utils/Avatars";
 import { SkeletonEdit } from "../../../loading/skeletonEdit";
+import { RefreshButton } from "../../../Refresh";
 
 export const EditPageComponent = () => {
-    const { data, loading, error }: FetchUserProps = useFetchBackend(import.meta.env.VITE_API_GETALL);
+    const { data, loading, error, refetch }: FetchUserProps = useFetchBackend(import.meta.env.VITE_API_GETALL);
     const [avatar, setAvatar] = useState(data?.avatar);
     const navigate = useNavigate();
     const [userError, setUserError] = useState<string>("")
@@ -59,7 +60,11 @@ export const EditPageComponent = () => {
     }
 
     if (error) {
-        return <h1>Something Went Wrong</h1>
+        return <>
+            <div style={{ minHeight: "90vh"}}>
+                <RefreshButton refetch={refetch} />
+            </div>
+        </>
     }
 
     return(

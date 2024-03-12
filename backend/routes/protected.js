@@ -38,7 +38,6 @@ router.post("/editInfo", async (req,res) => {
         res.status(200).send({ message: "Updated"})
 
     } catch(error) {
-        console.log( error.message.split(":")[2])
         res.status(300).send({ error: error.message.split(":")[2]})
     }
 })
@@ -72,7 +71,7 @@ router.post("/addWatch", async (req,res) => {{
         await user.save();
         res.send({ message: "Added To Watch List"})
     } catch(error) {
-        console.log(error.message);
+        res.sendStatus(408)
     }
 }});
 
@@ -85,7 +84,7 @@ router.get("/ifMovieExist/:id", async (req,res) => {
         res.send({message: movieExist});
 
     } catch(error) {
-        console.log(error.message);
+        res.sendStatus(408)
     }
 });
 
@@ -99,12 +98,11 @@ router.delete("/removeWatch/:id", async (req,res) => {
         }}).select('id').select('watch_list');
         
         if (!user) {
-            console.log("d")
             return res.sendStatus(303);
         }
         res.send({ message: user.watch_list.length - 1})
     } catch(error) {
-        console.log(error.message);
+        res.sendStatus(408)
     }
 });
 
@@ -114,7 +112,7 @@ router.get("/getWatchList", async (req,res) => {
         const user = await userModel.findById(req.user.id).select('-password');
         res.send(user.watch_list)
     } catch(error) {
-        console.log(error.message);
+        res.sendStatus(408)
     }
 })
 
@@ -130,7 +128,7 @@ router.get("/ifMovieChecked/:id", async (req,res) => {
         }
         res.send(user.watch_list[0].isChecked);
     } catch(error) {
-        console.log(error.message);
+        res.sendStatus(408)
     }
 })
 
@@ -149,7 +147,6 @@ router.post("/checkMovie/:id", async (req,res) => {
         }
         res.send({ message: "Checked" })
     } catch(error) {
-        console.log(error.message);
         return res.sendStatus(400);
     }
 });
@@ -174,7 +171,7 @@ router.post("/likeMovie/:id", async (req,res) => {
         const movieInfos = await movieModel.findOneAndUpdate({ title: "movieInfos", 'data.id' : id }, newQuery)
         res.send({ message: "liked"})
     } catch(error) {
-        console.log(error.message);
+        res.sendStatus(408)
     }
 })
 
@@ -196,7 +193,7 @@ router.post("/removeLike/:id", async (req,res) => {
         res.send({ message: "removed"})
         
     } catch(error) {
-        console.log(error.message);
+        res.sendStatus(408)
     }
 });
 
@@ -218,7 +215,7 @@ router.get("/movieInfo/:id", middleWareApiPrivate, async (req,res) => {
         const isLiked = await found.likedBy.find(person => person.id == req?.user?.id);
         res.send({ likes: found.likes, isLiked, comments: found.comments })
     } catch(error) {
-        console.log(error.message + 'protected')
+        res.sendStatus(408)
     }
 });
 
@@ -238,11 +235,14 @@ router.post("/postComment/:id", async (req,res) => {
         }
 
         const movieInfos = await movieModel.findOneAndUpdate({ title: "movieInfos", 'data.id': id }, newQuery, {upsert:true, new: true, runValidators: true, timeStamps: true});
+        if (!movieInfos) {
+            return res.sendStatus(408);
+        }
         const movie = await movieModel.findOne({ title: "movieInfos"});
         const found = await movie.data.find(film => film.id === Number(id));
         res.send({ comments: found.comments });
     } catch(error) {
-        console.log(error.message + " comment error  ")
+        res.sendStatus(408)
     }
 });
 
@@ -261,12 +261,15 @@ router.post("/editComment/:id", async (req,res) => {
             new: true,
             arrayFilters: [{ 'element._id' : comment_id}]
         });
+        if (!movieInfos) {
+            return res.sendStatus(408);
+        }
         const movie = await movieModel.findOne({ title: "movieInfos"});
         const found = await movie.data.find(film => film.id === Number(id));
         res.send({ comments: found.comments });
 
     } catch(error) {
-        console.log(error.message + " comment edit error ");
+        res.sendStatus(408)
     }
 });
 
@@ -279,7 +282,7 @@ router.get("/getCommentInfo/:id", async (req,res) => {
         }
         res.send({ info: user})
     } catch(error) {
-        console.log(error.message + "get comment info error");
+        res.sendStatus(408)
     }
 });
 
@@ -294,11 +297,14 @@ router.post("/deleteComment", async (req,res) => {
             }
         }
         const movieInfos = await movieModel.findOneAndUpdate({ title: "movieInfos", 'data.id' : movie_id }, newQuery);
+        if (!movieInfos) {
+            return res.sendStatus(408);
+        }
         const movie = await movieModel.findOne({ title: "movieInfos"});
         const found = await movie.data.find(film => film.id === Number(movie_id));
         res.send({ comments: found.comments });
     } catch(error) {
-        console.log(error.message + "get comment info error");
+        res.sendStatus(408)
     }
 });
 

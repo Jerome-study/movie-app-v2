@@ -31,6 +31,7 @@ export const useFetchBackend = (url: string) => {
     }, [url]);
 
     const refetch = () => {
+        setError(undefined)
         setLoading(true)
         const getData = async () => {
             try {
