@@ -11,10 +11,10 @@ export const TvButtonsComponent = ({ setMovie }: { setMovie: Function}) => {
     
     return(
         <>
-            <div className="border border-3 rounded-pill">
+            <div className="border rounded-3">
                 {buttons.map((button) => {
                     return(
-                        <button value={button} key={button} className={active === button? `${button}-radius tv-button-edit button-size`: "button-size tv-button-edit rounded-3"} onClick={handleClick}>
+                        <button value={button} key={button} className={active === button? `${button}-radius tv-button-edit button-size`: "button-size tv-button-edit text-light"} onClick={handleClick}>
                             {button === "popular" ? "Popular" : button === "airing_today"? "Airing Today" : "Top Rated" }
                         </button>
                     )
