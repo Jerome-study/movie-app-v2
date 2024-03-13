@@ -14,6 +14,7 @@ import { ProfilePage } from "./page/private/profile";
 import { EditProfilePage } from "./page/private/editprofile";
 import { WatchListPage } from "./page/private/watch_list";
 import { ErrorPage } from "./Error";
+import { SubLayout } from "./SubLayout";
 function App() {
     return(
         <>
@@ -21,9 +22,10 @@ function App() {
             <Routes>
                 <Route element={<Layout />}>
                     <Route path="/" element={<HomePage />} />
+                </Route>
+                <Route element={<SubLayout />}>
                     <Route path="/search/:category" element={<SearchPage />} />
                     <Route path="*" element={<ErrorPage />}/>
-
                     {/* Private Routes */}
                     <Route element={<Protected />}>
                         <Route path="/watch_list" element={<WatchListPage />} />

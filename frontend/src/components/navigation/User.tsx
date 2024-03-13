@@ -10,7 +10,6 @@ export const UserSignInComponent = ({ setActive, refetch, data, loading }: NavSi
     const location = useLocation();
     const navigate = useNavigate();
     const logoutButton = async () => {
-        console.log("function run")
         try {
             const response = await instance.post(import.meta.env.VITE_AUTH_LOGOUT);
             if (response.status === 200) {

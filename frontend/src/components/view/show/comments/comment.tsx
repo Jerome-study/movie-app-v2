@@ -38,7 +38,6 @@ export const CommentComponent = () => {
             
         } catch(error: any) {
             setErrorComment("Something went wrong, please refresh")
-            console.log(error.response.data);
         }
         
     }

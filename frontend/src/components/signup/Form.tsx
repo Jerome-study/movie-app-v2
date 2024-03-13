@@ -11,7 +11,6 @@ export const FormComponent = ({ avatar }: { avatar: string}) => {
     const navigate = useNavigate();
     const [error, setError] = useState<string>("");
     const notify = () => {
-        console.log("render toast")
         toast.error(errors.username?.message, {
             toastId: 1
         });

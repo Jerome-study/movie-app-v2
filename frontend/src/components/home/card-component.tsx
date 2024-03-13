@@ -18,12 +18,17 @@ export const CardComponent = ({ movie }: { movie: ShowProps }) => {
                 <>
                 <Card.Img onLoad={() => setLoaded(true)} className="d-none" src={imageUrl + (movie.poster_path || movie.backdrop_path)}/>
                { loaded && 
-                <Card className="flex-shrink-0 border shadow-sm p-1 card-width" onClick={() => viewShow(movie, navigate )} >
-                    <Card.Img className="rounded-0 rounded-top shadow-sm h-75" style={{ backgroundColor:"#eee"}} src={movie.poster_path? imageUrl + (movie.poster_path || movie.backdrop_path): 'corrupt.jpg'} alt="Card image"  />
-                    <Card.Body className="pt-2 ps-2">
-                        <p className="" >{movie.title? movie.title : movie.name}</p>
-                    </Card.Body>
-                </Card>}
+
+                <div className="col-5 col-md-3">
+                    <Card className="flex-shrink-0 shadow-sm bg-dark h-100 rounded-4" onClick={() => viewShow(movie, navigate )} >
+                        <Card.Img className="shadow-sm img-fluid h-75 rounded-0 rounded-top-4 border-none" style={{ backgroundColor:"#eee"}} src={movie.poster_path? imageUrl + (movie.poster_path || movie.backdrop_path): 'corrupt.jpg'} alt="Card image"  />
+                        <div className="px-2 pt-2">
+                            <p style={{ fontSize: "12px"}} className="text-light text-md-center">{movie?.title || movie?.name}</p>
+                        </div>
+                    </Card>
+                    
+                </div>
+                }
                 {!loaded &&
                     <CardSingleSkeleton />
                 }

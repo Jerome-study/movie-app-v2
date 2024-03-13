@@ -45,7 +45,7 @@ export const PersonComponent = ({beingEdited, setBeingEdited, setDatas,  person 
                 movie_id : id
             });
             if (response === null) {
-                return console.log("no data")
+                return setErrorEdit("Please refresh the page, Error");
             }
             setDatas(response.data?.comments);
             setDeleteLoading(false);

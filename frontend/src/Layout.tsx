@@ -1,12 +1,9 @@
-import { Container } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
 
 export const Layout = () => {
     return(
-        <main className="py-5" style={{ backgroundColor: "#f2f2f2", minHeight: "90vh"}} >
-            <Container>
+        <main className="pb-5" style={{ backgroundColor: "#0D0907", minHeight: "90vh"}} >
                 <Outlet />
-            </Container>
         </main>
     )
 }

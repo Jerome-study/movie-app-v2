@@ -16,10 +16,10 @@ export const TrendingCardSkeleton = () => {
     ];
     return(
         <>  
-            <div className="d-flex gap-4 trending-wrap overflow-auto py-3 justify-content-lg-center trending-card-wrapper">
+            <div className="d-flex overflow-auto gap-1 py-4 trending-wrap trending-card-wrapper justify-content-lg-around">
                 {size.map((num: any) => {
                     return(
-                        <Card key={num.id} className="flex-shrink-0 flex-lg-shrink-1 col-lg-5 bg-dark" aria-hidden="true">
+                        <Card key={num.id} className="bg-dark col-4 col-md-3 col-lg-4 mb-4 rounded-4" aria-hidden="true">
                             <div className="trending-card-loading">
                             </div>
                         </Card> 

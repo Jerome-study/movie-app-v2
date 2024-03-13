@@ -5,16 +5,17 @@ import { TvButtonsComponent } from "./tv-buttons";
 import { CardComponent } from "./card-component";
 import { CardSkeleton } from "../../loading/skeletoncard";
 import { ShowProps } from "../../definitions/models";
+import { RefreshButton } from "../../Refresh";
 
 export const TvShowComponents = () => {
     const [url, setUrl] = useState<string>("popular");
-    const { data, loading, error } = useFetchPrivate(`${import.meta.env.VITE_TV_URL}${url}?api_key=`);
+    const { data, loading, error, refetch } = useFetchPrivate(`${import.meta.env.VITE_TV_URL}${url}?api_key=`);
     const setMovie = (button: any) => {
         setUrl(button.value);
     }
     
     if (error) {
-        return <h1>Something Went Wrong</h1>
+        return <RefreshButton refetch={refetch} />
     }
 
     return(
