@@ -7,7 +7,16 @@ import { RefreshButton } from '../../Refresh';
 
 export const HeroComponent = () => {
     const navigate = useNavigate();
-    const { data, loading, error, refetch } = useFetchPrivate(`${import.meta.env.VITE_NOW_PLAYING_URL}?api_key=`, )
+    const { data, loading, error, refetch } = useFetchPrivate(`${import.meta.env.VITE_NOW_PLAYING_URL}?api_key=`, );
+    console.log(data)
+    function setStyles(movie : any) {
+        return {
+            backgroundImage :`linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(13,9,7)), 
+            linear-gradient(to top, rgba(0,0,0,0) 50%, rgba(0,0,0,1)),
+            url(${import.meta.env.VITE_IMG_URL_POSTER + movie?.backdrop_path})`,
+            backgroundRepeat: "no-repeat"
+        }
+    } 
 
     if (error) {
         return <RefreshButton refetch={refetch} />
@@ -18,18 +27,14 @@ export const HeroComponent = () => {
             {loading && <CarouselSkeleton />}
             {!loading && 
             
-            <Carousel className="carouselHero bg-white p-1 shadow rounded border border-2" >
+            <Carousel indicators={false}>
             {!loading && data?.results.map((movie: any) => {
                 return(
-                    <Carousel.Item key={movie.title} className="carousel-item rounded" onClick={() => viewShow(movie, navigate)}>
-                        <img
-                            className="d-block w-100 rounded"
-                            src={import.meta.env.VITE_IMG_URL_POSTER + movie.backdrop_path}
-                            alt="First slide"
-                        ></img>
-                        <Carousel.Caption>
-                        <h3>{movie.title}</h3>
+                    <Carousel.Item className='poster-bg' style={movie?.backdrop_path? setStyles(movie) : {}} key={movie.title} onClick={() => viewShow(movie, navigate)}>
                         
+                        <Carousel.Caption>
+                            <h1>{movie.title}</h1>
+                            <p>{movie?.tagline}</p>
                         </Carousel.Caption>
                     </Carousel.Item>
                 )
