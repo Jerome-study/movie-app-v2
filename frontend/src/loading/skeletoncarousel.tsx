@@ -5,10 +5,8 @@ export const CarouselSkeleton = () => {
     
     return(
         <>   
-            <div className="p-1 bg-white rounded shadow">
-                <div className="carousel-loading rounded" >
-                        
-                </div>
+            <div className="poster-bg placeholder-glow h-100">
+                <div className="col-12 placeholder bg-dark poster-bg-loading"></div>
             </div>
         </>
     )
