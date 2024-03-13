@@ -8,7 +8,7 @@ import { RefreshButton } from '../../Refresh';
 export const HeroComponent = () => {
     const navigate = useNavigate();
     const { data, loading, error, refetch } = useFetchPrivate(`${import.meta.env.VITE_NOW_PLAYING_URL}?api_key=`, );
-    console.log(data)
+   
     function setStyles(movie : any) {
         return {
             backgroundImage :`linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(13,9,7)), 

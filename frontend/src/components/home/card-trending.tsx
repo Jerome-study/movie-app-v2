@@ -1,9 +1,9 @@
-import { Card } from "react-bootstrap"
 import { PersonProps } from "../../definitions/models"
 import { viewPerson } from "../../utils/utils"
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { CardSingleTrendingSkeleton } from "../../loading/skeletonTrendingSingle"
+import { Card } from "react-bootstrap"
 
 export const CardTrendingComponent = ({ person }: { person: PersonProps} ) => {
     const navigate = useNavigate();
@@ -15,22 +15,16 @@ export const CardTrendingComponent = ({ person }: { person: PersonProps} ) => {
         <>  
         {person.profile_path && 
             <>
-                <Card.Img onLoad={() => setLoaded(true)} src={imageUrl} className="d-none" style={{ backgroundColor:"#eee"}} />
+                <img src={imageUrl} onLoad={() => setLoaded(true)}className="d-none" style={{ backgroundColor:"#eee"}} />
                 {loaded && 
-                <div onClick={() => viewPerson(person, navigate)} className="flex-shrink-0 flex-lg-shrink-1 col-lg-5">
-                    <Card className="trending-card bg-white">
-                        <div className="d-flex gap-2 p-1">
-                            <div className="col">
-                                <Card.Img src={imageUrl} style={{ backgroundColor:"#eee"}} />
-                            </div>
-                            <div className="col">
-                                <Card.Body className="p-0 pt-2">
-                                    <p className="trending-title">{person.name}</p>
-                                </Card.Body>
-                            </div>
-                        </div>
-                    </Card>
-                </div>
+                    <div onClick={() => viewPerson(person, navigate)} className="card bg-dark col-4 col-md-3 col-lg-4 mb-4 rounded-4">
+                        <Card className="bg-dark text-white h-100 rounded-4" style={{backgroundColor: "#eee"}}>
+                            <Card.Img className="h-100 rounded-4" src={imageUrl} alt="Card image" />
+                            <Card.ImgOverlay className="px-0 d-flex flex-column justify-content-end">
+                                <Card.Text style={{ fontSize: "10px" }} className="text-center bg-dark py-1 text-capitalize">{person?.name}</Card.Text>
+                            </Card.ImgOverlay>
+                        </Card>
+                    </div>
                 }
                 {!loaded && 
                     <CardSingleTrendingSkeleton />

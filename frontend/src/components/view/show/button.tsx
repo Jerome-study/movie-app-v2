@@ -44,7 +44,7 @@ export const ButtonComponent = ({ data, isLoggedIn }: { data: ShowProps, isLogge
     }, [response])
     
     if (loading) {
-        return <Button className="mt-2" variant="warning" disabled>Loading....</Button>
+        return <Button className="mt-2 w-100" variant="warning" disabled>Loading....</Button>
     }
 
     if (error) {
