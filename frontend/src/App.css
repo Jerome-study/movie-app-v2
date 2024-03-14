@@ -51,21 +51,22 @@
 }
 
 .view-loading {
-  width: 18rem;
-  height: 30vh;
+  height: 34.35vh;
 }
 
 
 @media (min-width: 576px) {
-
   .trending-card-loading {
     height: 31.8vh;
+  }
+  .view-loading {
+    height: 35.2vh;
   }
 }
 
 @media (min-width: 768px) {
   .view-loading {
-    height: 39vh;
+    height: 47.05vh;
   }
 
   .trending-card-loading {
@@ -79,7 +80,7 @@
   }
 
   .view-loading {
-    height: 42vh;
+    height: 46.6vh;
   }
 
 }
@@ -91,7 +92,7 @@
   }
 
   .view-loading {
-    height: 30.5vh;
+    height: 36.68vh;
   }
 
   .card-loading-height {
@@ -102,7 +103,7 @@
 
 @media (min-width: 1400px) {
   .view-loading {
-    height: 40vh;
+    height: 52.2vh;
   }
 
 
@@ -141,7 +142,7 @@
 }
 
 .button-size {
-  font-size: .6rem;
+  font-size: .5rem;
 }
 
 

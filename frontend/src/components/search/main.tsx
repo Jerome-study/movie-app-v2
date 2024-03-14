@@ -12,7 +12,7 @@ export const MainComponent = () => {
     }
 
     return(
-        <main>
+        <main className="pt-5" style={{ backgroundColor: "#f2f2f2", minHeight: "90vh"}} >
             <SearchBar category={category}/>
         </main>
     )

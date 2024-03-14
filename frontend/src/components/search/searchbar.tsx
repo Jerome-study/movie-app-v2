@@ -12,7 +12,7 @@ export const SearchBar = ({ category }: { category: string}) => {
     const [data, setData] = useState<any>();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<any>();
-
+    const [noData, setNodata] = useState(false)
     useEffect(() => {
         setData(null);
         setTitle("")
@@ -20,9 +20,16 @@ export const SearchBar = ({ category }: { category: string}) => {
     
     const getData = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setLoading(true)
+        setNodata(false);
+        setLoading(true);
+        setData(null)
         try {
             const response = await axios.get(`${import.meta.env.VITE_SEARCH_URL}/${category}?query=${title}&api_key=${import.meta.env.VITE_API_KEY}`);
+            if (response?.data.results.length === 0) {
+                setLoading(false)
+                setNodata(true)
+                return
+            }
             setData(response.data.results);
             setLoading(false)
         } catch(error) {
@@ -32,39 +39,47 @@ export const SearchBar = ({ category }: { category: string}) => {
     };
 
     if (error) {
-        return <h1>SOmething Went Wrong</h1>
+        return <p>Something went wrong, refresh the page</p>
     }
 
     return(
         <div style={{ minHeight: "92vh"}}>
-            <h1>Search {category === "person"? "Actor/Actress" : category.charAt(0).toUpperCase() + category.slice(1)}</h1>
-            <Form className="d-flex my-3" onSubmit={getData}>
-                <Form.Control
-                type="text"
-                placeholder="Search"
-                className="me-2"
-                aria-label="Search"
-                value={!title? "": title}
-                onChange={(e) => setTitle(e.target.value)}
-                />
-                <Button type="submit" variant="outline-success">Search</Button>
-            </Form>
+            <div className="container">
+                <h1 className="text-center">Search {category === "person"? "Actor/Actress" : category.charAt(0).toUpperCase() + category.slice(1)}</h1>
+                <Form className="d-flex my-3" onSubmit={getData}>
+                    <Form.Control
+                    type="text"
+                    placeholder="Search"
+                    className="me-2"
+                    aria-label="Search"
+                    value={!title? "": title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    />
+                    <Button type="submit" variant="warning">Search</Button>
+                </Form>
+            </div>
             
             {loading && 
                 <>
                     <div className="d-flex justify-content-center align-items-md-center" style={{ minHeight: "50vh"}}>
                         <div>
-                            <Spinner animation="grow" variant="dark" />
-                            <Spinner animation="grow" variant="dark" />
-                            <Spinner animation="grow" variant="dark" />
+                            <Spinner animation="grow" variant="danger" size="sm" />
+                            <Spinner animation="grow" variant="danger" size="sm"/>
+                            <Spinner animation="grow" variant="danger" size="sm"/>
                         </div>
                     </div>
                 </>
             
             }
+            {noData && 
+                <div className="mt-5">
+                    <p className="text-center text-light">There are no results</p>
+                </div>
+            }
+
             {!loading && 
             
-                <div className="row gy-4 pt-4">
+                <div className="row mt-5 gx-0">
                     {data?.map((result: SearchProps) => {
                         return(
                             <SearchResultComponent key={result.id} category={category} result={result} />
