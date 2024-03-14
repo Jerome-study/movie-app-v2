@@ -11,7 +11,7 @@ export const TvButtonsComponent = ({ setMovie }: { setMovie: Function}) => {
     
     return(
         <>
-            <div className="border rounded-3">
+            <div className="bg-dark rounded-4">
                 {buttons.map((button) => {
                     return(
                         <button value={button} key={button} className={active === button? `${button}-radius tv-button-edit button-size`: "button-size tv-button-edit text-light"} onClick={handleClick}>

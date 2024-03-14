@@ -20,18 +20,16 @@ export const TvShowComponents = () => {
 
     return(
         <>
-            <div className="mt-5">
-                <div className="d-flex justify-content-between mb-2">
-                    <div className="">
-                        <h4>TV Show</h4>
+            <div className="mt-3">
+                <div className="d-flex justify-content-between mb-2 gap=2">
+                    <div>
+                        <h4 className="fw-bold">TV Show</h4>
                     </div>
-                     
                     <TvButtonsComponent setMovie={setMovie}/>
-                    
                 </div>
                 {loading && <CardSkeleton />}
                 {!loading && 
-                    <div className="d-flex overflow-auto gap-2 py-4 border-top">
+                    <div className="d-flex overflow-auto gap-3 pt-2 px-2">
                         {data?.results?.map((movie: ShowProps) => {
                             return(
                                 <CardComponent key={movie.id} movie={movie}/>  
