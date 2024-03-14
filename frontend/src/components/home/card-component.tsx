@@ -16,9 +16,9 @@ export const CardComponent = ({ movie }: { movie: ShowProps }) => {
         <>
            {movie.backdrop_path && 
                 <>
-                <Card.Img onLoad={() => setLoaded(true)} className="d-none" src={imageUrl + movie.backdrop_path}/>
+                <Card.Img onLoad={() => setLoaded(true)}  className="d-none" src={imageUrl + movie.backdrop_path}/>
                 <div className="col-8 col-sm-5 col-md-4 col-lg-3  col-xl-2 flex-shrink-0">
-                    <Card className="grow rounded-4 border-0" onClick={() => viewShow(movie, navigate )} >
+                    <Card className={`${loaded && "bg-dark"} grow rounded-4 border-0`} onClick={() => viewShow(movie, navigate )} >
                         {loaded &&
                         <Card.Img className="rounded-4 bg-dark border-none" style={{ backgroundColor:"#eee"}} src={movie.backdrop_path && imageUrl + movie.backdrop_path} alt="Card image"  /> 
                         }

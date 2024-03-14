@@ -1,6 +1,6 @@
 import { useFetchPrivate } from "../../hooks/useFetchPrivate"
 import { CardComponent } from "./card-component";
-import { CardLoading } from "../../loading/skeletoncard";
+import { CardLoading } from "../../loading/loadingSpinner";
 import { ShowProps } from "../../definitions/models";
 import { RefreshButton } from "../../Refresh";
 
@@ -13,7 +13,7 @@ export const TopRatedComponent = () => {
     
     return(
         <>
-            <div className="mt-3">
+            <div className="mt-5">
                 <div className="mb-2">
                     <div>
                         <h4 className="fw-bold">Top Rated Movies</h4>
