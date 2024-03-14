@@ -13,11 +13,11 @@ export const TrendingPeopleComponent = () => {
 
 
     return(
-        <div className="pt-5 sticky-top" style={{ top: "0"}}>
+        <div className="mt-5">
             <h4 className="pb-2 text-lg-center">Trending People Today</h4>
             {loading && <TrendingCardSkeleton />}
             {!loading && 
-                <div className="d-flex overflow-auto gap-1 py-4 trending-wrap trending-card-wrapper justify-content-lg-around">
+                <div className="d-flex overflow-auto gy-3 pt-3 pb-5 gap-3">
                     {data?.results.map((person: PersonProps) => {
                         return(
                             <CardTrendingComponent key={person.id} person={person} />

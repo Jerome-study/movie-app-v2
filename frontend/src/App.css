@@ -467,4 +467,5 @@
 
 .grow:hover {
   transform: scale(1.07);
+  cursor: pointer;
 }
