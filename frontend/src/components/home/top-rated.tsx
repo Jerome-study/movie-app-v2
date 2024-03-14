@@ -1,6 +1,6 @@
 import { useFetchPrivate } from "../../hooks/useFetchPrivate"
 import { CardComponent } from "./card-component";
-import { CardSkeleton } from "../../loading/skeletoncard";
+import { CardLoading } from "../../loading/loadingSpinner";
 import { ShowProps } from "../../definitions/models";
 import { RefreshButton } from "../../Refresh";
 
@@ -14,14 +14,14 @@ export const TopRatedComponent = () => {
     return(
         <>
             <div className="mt-5">
-                <div className="d-flex justify-content-between mb-2">
-                    <div className="">
-                        <h4>Top Rated Movies</h4>
+                <div className="mb-2">
+                    <div>
+                        <h4 className="fw-bold">Top Rated Movies</h4>
                     </div>
                 </div>
-                {loading && <CardSkeleton />}
+                {loading && <CardLoading />}
                 {!loading && 
-                    <div className="d-flex overflow-auto gap-2 py-4 border-top">
+                    <div className="d-flex overflow-auto gap-3 pt-2 px-2">
                         {data?.results?.map((movie: ShowProps) => {
                             return(
                                 <CardComponent key={movie.id} movie={movie}/>  
