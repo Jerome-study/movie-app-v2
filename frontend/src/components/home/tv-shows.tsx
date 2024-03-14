@@ -3,7 +3,7 @@ import { useFetchPrivate } from "../../hooks/useFetchPrivate"
 import { useState } from "react";
 import { TvButtonsComponent } from "./tv-buttons";
 import { CardComponent } from "./card-component";
-import { CardSkeleton } from "../../loading/skeletoncard";
+import { CardLoading } from "../../loading/skeletoncard";
 import { ShowProps } from "../../definitions/models";
 import { RefreshButton } from "../../Refresh";
 
@@ -27,7 +27,7 @@ export const TvShowComponents = () => {
                     </div>
                     <TvButtonsComponent setMovie={setMovie}/>
                 </div>
-                {loading && <CardSkeleton />}
+                {loading && <CardLoading />}
                 {!loading && 
                     <div className="d-flex overflow-auto gap-3 pt-2 px-2">
                         {data?.results?.map((movie: ShowProps) => {

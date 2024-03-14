@@ -1,6 +1,6 @@
 import { useFetchPrivate } from "../../hooks/useFetchPrivate"
 import { CardComponent } from "./card-component";
-import { CardSkeleton } from "../../loading/skeletoncard";
+import { CardLoading } from "../../loading/skeletoncard";
 import { ShowProps } from "../../definitions/models";
 import { RefreshButton } from "../../Refresh";
 
@@ -19,7 +19,7 @@ export const TopRatedComponent = () => {
                         <h4 className="fw-bold">Top Rated Movies</h4>
                     </div>
                 </div>
-                {loading && <CardSkeleton />}
+                {loading && <CardLoading />}
                 {!loading && 
                     <div className="d-flex overflow-auto gap-3 pt-2 px-2">
                         {data?.results?.map((movie: ShowProps) => {
