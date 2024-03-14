@@ -20,7 +20,7 @@ export const TvShowComponents = () => {
 
     return(
         <>
-            <div className="mt-5">
+            <div className="mt-3">
                 <div className="d-flex justify-content-between mb-2 gap-2">
                     <div>
                         <h4 className="fw-bold">TV Show</h4>
