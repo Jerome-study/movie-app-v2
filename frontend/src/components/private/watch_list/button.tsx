@@ -53,7 +53,7 @@ export const ButtonComponent = ({ id, refetch, setGone } : { id: number | undefi
     return(
         <>
             <div>
-                <Button className="dropdown-item" disabled={disable} onClick={checkedShow} style={{ fontSize: "10px"}}>{checked === true? "Undone" : "Done"}</Button>
+                <Button className="dropdown-item" disabled={disable} onClick={checkedShow} style={{ fontSize: "10px"}}>{disable && <Spinner variant="success" size="sm" />}{checked === true? "Undone" : "Done"}</Button>
             </div>
             <div>
                 <Button className="dropdown-item" onClick={removeShow} style={{ fontSize: "10px"}} variant="outline-danger">Remove</Button>
