@@ -1,7 +1,6 @@
 import { UserProps } from "../../../definitions/models"
 import { Link } from "react-router-dom"
 
-
 export const HeroComponent = ({ data }: { data: UserProps}) => {
     return(
         <>
@@ -52,10 +51,6 @@ export const HeroComponent = ({ data }: { data: UserProps}) => {
                                             <h6>Collection</h6>
                                             <hr className="mt-0 mb-4" />
                                             <div className="row pt-1">
-                                                <div className="col-6 mb-3">
-                                                    <h6>Liked</h6>
-                                                    <p className="text-muted">0</p>
-                                                </div>
                                                 <div className="col-6 mb-3">
                                                     <h6>Watch List</h6>
                                                     <p className="text-muted">{data?.watch_list.length}</p>

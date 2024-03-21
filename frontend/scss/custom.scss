@@ -8,6 +8,12 @@ $display-font-sizes: (
   6: .5rem
 );
 
-//Hello
+$dropdown-link-hover-bg: #f0ad4e;
+$dropdown-link-hover-color: #292b2c;
+$dropdown-link-color: "#f7f7f7";
+$dropdown-bg:#292b2c;
+$dropdown-link-active-color:"#292b2c";
+$dropdown-link-active-bg:"#f0ad4e";
+
 
 @import "../node_modules/bootstrap/scss/bootstrap";
