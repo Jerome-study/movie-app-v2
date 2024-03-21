@@ -19,8 +19,8 @@ export const HeroComponent = () => {
     }
     return(
         <>
-            <h1>Watch List</h1>
-            <div className="row gy-4 pt-4">
+            <h1 className="text-center">Watch List</h1>
+            <div className="row mt-5 gx-0">
                 {data?.map((movie: WatchListProps) => {
                     return(
                         <ListComponent key={movie?.data?.id} movie={movie?.data} refetch={refetch} />

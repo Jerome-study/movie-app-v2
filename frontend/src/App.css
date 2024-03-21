@@ -460,4 +460,8 @@
   cursor: pointer;
 }
 
-
+.like-hover:hover {
+  cursor: pointer;
+  background-color: #292b2c;
+  backdrop-filter: blur(10px);
+}

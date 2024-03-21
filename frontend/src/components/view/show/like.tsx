@@ -1,15 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useContext } from "react";
 import { instance } from "../../../utils/utils";
 import { ContextLikeAndComment } from "./interact";
 import { FaHeart } from "react-icons/fa";
 import { Spinner } from "react-bootstrap";
+import { formatCompactNumber } from "../../../utils/utils";
 
 export const LikeComponent = () => {
     const { data, isLoggedIn, id, loading} = useContext(ContextLikeAndComment)
+    const [isCompact, setIsCompact] = useState(true);
     const [count, setCount] = useState(0);
     const [like, setLike] = useState(false);
     const [disable, setDisable] = useState(false);
+    const compactNumber = useMemo(() => formatCompactNumber(count), [count])
     const handleClick = async () => {
         try {
             if (!isLoggedIn) {
@@ -64,7 +67,9 @@ export const LikeComponent = () => {
                
                 }
                 {!loading && 
-                    <h4>{count}</h4>
+                    <div className="like-hover" >
+                        <h4 onClick={() => setIsCompact(prev => !prev)}>{isCompact? compactNumber : count}</h4>
+                    </div>
                 }
             </div>
         </>

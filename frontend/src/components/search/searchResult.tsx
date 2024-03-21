@@ -21,7 +21,7 @@ export const SearchResultComponent = ({ result, category }: { result: SearchProp
                 <>
                     <Card.Img onLoad={() => setLoaded(true) }  className="d-none" src={import.meta.env.VITE_IMG_URL_POSTER + (result.poster_path || result.profile_path)}/>
                     {loaded &&
-                        <div className="col-6 col-sm-4 col-lg-3 col-xl-2 grow rounded-0" onClick={() => viewResult(result, category)}>
+                        <div className="col-6 col-sm-4 col-lg-3 col-xl-2 rounded-0 like-hover" onClick={() => viewResult(result, category)}>
                             <Card className={`text-white h-100 rounded-0 ${loaded && "bg-dark"}`} style={{backgroundColor: "#eee"}}>
                                 <Card.Img className="h-100 rounded-0" src={import.meta.env.VITE_IMG_URL_POSTER + (result.poster_path || result.profile_path)} alt="Card image" />
                                 {category === "person" &&

@@ -1,4 +1,4 @@
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import { useFetchBackend } from "../../../hooks/useFetch";
 import { instance } from "../../../utils/utils";
 import { useEffect, useState } from "react";
@@ -40,7 +40,7 @@ export const ButtonComponent = ({ id, refetch, setGone } : { id: number | undefi
     
 
     if (loading) {
-        return  <Button className="w-100 mt-2" style={{ fontSize: "10px"}} variant={"warning"}>Loading...</Button>
+        return  <Spinner />
     }
 
     if (error) {
@@ -52,13 +52,11 @@ export const ButtonComponent = ({ id, refetch, setGone } : { id: number | undefi
     }
     return(
         <>
-            <div className="row gap-3  mt-1 align-items-center">
-                <div className="col-4">
-                    <Button disabled={disable} onClick={checkedShow} style={{ fontSize: "10px"}} variant={checked === true? "success": "outline-success"}>{checked === true? "Undone" : "Done"}</Button>
-                </div>
-                <div className="col-4">
-                    <Button onClick={removeShow} style={{ fontSize: "10px"}} variant="outline-danger">Remove</Button>
-                </div>
+            <div>
+                <Button className="dropdown-item" disabled={disable} onClick={checkedShow} style={{ fontSize: "10px"}}>{checked === true? "Undone" : "Done"}</Button>
+            </div>
+            <div>
+                <Button className="dropdown-item" onClick={removeShow} style={{ fontSize: "10px"}} variant="outline-danger">Remove</Button>
             </div>
         </>
         
