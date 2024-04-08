@@ -6,7 +6,7 @@ The reason this repo has may commits because I am exploring git and practicing t
 
 All images, name and poster that is related to movies came from **TMDB**.
 
-
+This Website is deployed on a free hosting service!
 
 ![about](https://github.com/Jerome-study/movie-app-v2/assets/119875460/c0edbc69-6561-4e33-bd9f-282b26e079d2)
 ![body-desktop](https://github.com/Jerome-study/movie-app-v2/assets/119875460/255ecf42-f181-49fa-985f-f8deaae76378)
