@@ -13,7 +13,8 @@ All images, name and poster that is related to movies came from **TMDB**.
 ![home-desktop](https://github.com/Jerome-study/movie-app-v2/assets/119875460/aab40844-dd7c-4c22-8499-bfd106326998)
 ![signin](https://github.com/Jerome-study/movie-app-v2/assets/119875460/0005b477-58ca-4ae0-af55-4e651eb74332)
 ![signup](https://github.com/Jerome-study/movie-app-v2/assets/119875460/deed80ff-91e4-4de0-bc41-bd1d9ef0773f)
-![search-desktop](https://github.com/Jerome-study/movie-app-v2/assets/119875460/2f7073b3-2a8e-4f6c-a271-f908736d41d3)
+![search-desktop](https://github.com/Jerome-study/movie-app-v2/assets/119875460/d65003a8-094f-49cc-8e3c-dd36bfc5bc7e)
+![watchlist](https://github.com/Jerome-study/movie-app-v2/assets/119875460/3a74c08f-f316-4137-871a-469d4f80a5ee)
 ![profile-desktop](https://github.com/Jerome-study/movie-app-v2/assets/119875460/7abd523d-4a1f-43f3-9080-ecaf996d921b)
 ![edit-desktop](https://github.com/Jerome-study/movie-app-v2/assets/119875460/6af82595-4b3b-4b53-ab43-c9d83fd33d37)
 
