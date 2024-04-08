@@ -32,9 +32,14 @@ All images, name and poster that is related to movies came from **TMDB**.
 
 **Search**
 
+![search-desktop](https://github.com/Jerome-study/movie-app-v2/assets/119875460/cf9b2b77-701f-40d3-8a48-8626e2377763)
+
+
 
 ![search-mobile](https://github.com/Jerome-study/movie-app-v2/assets/119875460/85cd2218-399e-4434-86fd-6c8b2d888672)
-![search-desktop](https://github.com/Jerome-study/movie-app-v2/assets/119875460/f1fb503e-c362-4ab2-a362-78fb0f8fda0e)
+
+
+
 
 
 **Navbar Authenticated and not**
