@@ -1,4 +1,4 @@
-![image](https://github.com/Jerome-study/movie-app-v2/assets/119875460/8fc61a60-1030-4f30-ae47-232313789737)My second full stack App using MERN stack. This website has authentication, movies and profiles for users.  I try practicing the proper way to code in react. This project contains conditional renderings and reuseable components. But I believe the codes can be optimized more.
+My second full stack App using MERN stack. This website has authentication, movies and profiles for users.  I try practicing the proper way to code in react. This project contains conditional renderings and reuseable components. But I believe the codes can be optimized more.
 
 
 The reason this repo has may commits because I am exploring git and practicing the use of branches.
