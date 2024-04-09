@@ -23,11 +23,13 @@ This Website is deployed on a free hosting service!
 
 
 
+<div align="flex">
+  ![home-mobile](https://github.com/Jerome-study/movie-app-v2/assets/119875460/9dbfda40-72f2-4027-a2ca-ed3f785a5740)
+  ![search-mobile](https://github.com/Jerome-study/movie-app-v2/assets/119875460/85cd2218-399e-4434-86fd-6c8b2d888672)
+  ![navbar-not](https://github.com/Jerome-study/movie-app-v2/assets/119875460/0a78d97c-cf93-404d-94c9-a8e76f7b89e5)
+  ![navbar-authenticated](https://github.com/Jerome-study/movie-app-v2/assets/119875460/64a5384b-a8c2-4ceb-9db9-271424a5bf52)
+  ![edit-mobile](https://github.com/Jerome-study/movie-app-v2/assets/119875460/27f05c92-6b3e-43d9-b94d-9466635f3cb7)
+  ![profile-mobile](https://github.com/Jerome-study/movie-app-v2/assets/119875460/3c0ae9fc-1fff-4a66-aef8-707df0867c2c)  
+</div>
 
-![home-mobile](https://github.com/Jerome-study/movie-app-v2/assets/119875460/9dbfda40-72f2-4027-a2ca-ed3f785a5740)
-![search-mobile](https://github.com/Jerome-study/movie-app-v2/assets/119875460/85cd2218-399e-4434-86fd-6c8b2d888672)
-![navbar-not](https://github.com/Jerome-study/movie-app-v2/assets/119875460/0a78d97c-cf93-404d-94c9-a8e76f7b89e5)
-![navbar-authenticated](https://github.com/Jerome-study/movie-app-v2/assets/119875460/64a5384b-a8c2-4ceb-9db9-271424a5bf52)
-![edit-mobile](https://github.com/Jerome-study/movie-app-v2/assets/119875460/27f05c92-6b3e-43d9-b94d-9466635f3cb7)
-![profile-mobile](https://github.com/Jerome-study/movie-app-v2/assets/119875460/3c0ae9fc-1fff-4a66-aef8-707df0867c2c)
 
