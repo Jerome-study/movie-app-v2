@@ -5,7 +5,7 @@ import { ListComponent } from "./list";
 import { RefreshButton } from "../../../Refresh";
 
 export const HeroComponent = () => {
-    const { data, loading, error, refetch } = useFetchBackend(import.meta.env.VITE_API_WATCH_LIST);
+    const { data, loading, error, refetch } = useFetchBackend("/api/getWatchList");
     if (loading) {
         return <SpinnerLoading />
     }

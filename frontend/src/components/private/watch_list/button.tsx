@@ -5,14 +5,14 @@ import { useEffect, useState } from "react";
 import { RefreshButton } from "../../../Refresh";
 
 export const ButtonComponent = ({ id, refetch, setGone } : { id: number | undefined, refetch: Function, setGone: Function}) => {
-    const { data, loading, error } = useFetchBackend(import.meta.env.VITE_API_WATCH_CHECKED + `/${id}`);
+    const { data, loading, error } = useFetchBackend("/api/ifMovieChecked" + `/${id}`);
     const [checked, setChecked] = useState<boolean | undefined>(data)
     const [disable, setDisabled] = useState<any>()
     const checkedShow = async () => {
         try {
             setDisabled(true)
             setChecked(prev => !prev)
-            await instance.post(import.meta.env.VITE_API_CHECKED + `/${id}`, {
+            await instance.post("/api/checkMovie" + `/${id}`, {
                 checked
             })
             setDisabled(false);
@@ -24,7 +24,7 @@ export const ButtonComponent = ({ id, refetch, setGone } : { id: number | undefi
     const removeShow = async () => {
         try {
             setGone(true)
-            const response = await instance.delete(import.meta.env.VITE_API_REMOVEMOVIE + `/${id}`);
+            const response = await instance.delete("/api/removeWatch" + `/${id}`);
             if (response.data.message === 0) {
                 refetch()
             }

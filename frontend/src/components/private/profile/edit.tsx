@@ -13,7 +13,7 @@ import { SkeletonEdit } from "../../../loading/skeletonEdit";
 import { RefreshButton } from "../../../Refresh";
 
 export const EditPageComponent = () => {
-    const { data, loading, error, refetch }: FetchUserProps = useFetchBackend(import.meta.env.VITE_API_GETALL);
+    const { data, loading, error, refetch }: FetchUserProps = useFetchBackend("/api/getAll");
     const [avatar, setAvatar] = useState(data?.avatar);
     const navigate = useNavigate();
     const [userError, setUserError] = useState<string>("")
@@ -35,7 +35,7 @@ export const EditPageComponent = () => {
             if ( data?.first_name === editData.first_name && data?.last_name === editData.last_name && data?.username === editData.username && data?.nickname === editData.nickname && data?.bio === editData.bio && avatar === data?.avatar) {
                 return navigate("/profile")
             }
-            const response = await instance.post(import.meta.env.VITE_API_EDITINFO, {
+            const response = await instance.post("/api/editInfo", {
                 ...editData,
                 avatar
             });

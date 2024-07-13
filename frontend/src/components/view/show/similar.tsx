@@ -15,11 +15,11 @@ export const SimilarComponent = (props: Props) => {
                         <Fragment key={movie.id}>
                             {movie.poster_path && 
                                 <>
-                                    <Card.Img onLoad={() => setLoaded(true)} className="d-none" src={import.meta.env.VITE_IMG_URL_POSTER + movie.poster_path }/>
+                                    <Card.Img onLoad={() => setLoaded(true)} className="d-none" src={"https://image.tmdb.org/t/p/original" + movie.poster_path }/>
                                     <div className="col-4 col-md-3 col-lg-1" onClick={() => viewShowReload(movie)}>
                                     {loaded && 
                                         <Card className="bg-dark text-white h-100 search-result-card " style={{backgroundColor: "#eee"}}>
-                                            <Card.Img className="h-100" src={import.meta.env.VITE_IMG_URL_POSTER + movie.poster_path } alt={`${movie?.name || movie?.title}`} />
+                                            <Card.Img className="h-100" src={"https://image.tmdb.org/t/p/original" + movie.poster_path } alt={`${movie?.name || movie?.title}`} />
                                         </Card>
                                     }
                                     {!loaded && 

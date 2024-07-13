@@ -8,7 +8,7 @@ import { ShowProps, UserProps } from "../../../definitions/models";
 export const ContextLikeAndComment = createContext<any>({})
 
 export const LikeAndComment = ({ movie, isLoggedIn } : { movie: ShowProps, isLoggedIn: UserProps} ) => {
-    const url = (!isLoggedIn? import.meta.env.VITE_API_GETMOVIEINFO : import.meta.env.VITE_API_MOVIEINFOPRIVATE ) + `/${movie.id}` 
+    const url = (!isLoggedIn? "/public/api/movieInfo" : "/api/movieInfo" ) + `/${movie.id}` 
     const { data, loading, error } = useFetchBackend(url);
     const id = movie?.id
     

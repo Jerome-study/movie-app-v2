@@ -12,12 +12,12 @@ import { LikeAndComment } from "./interact";
 
 export const ShowDesign = () => {
     const { data, category } = useContext(DetailsContext);
-    const { data: isLoggedIn, loading}: FetchUserProps = useFetchBackend(import.meta.env.VITE_API_GETUSER);
+    const { data: isLoggedIn, loading}: FetchUserProps = useFetchBackend("/api/getUser");
 
     const styles = {
         backgroundImage :`linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(13,9,7)), 
         linear-gradient(to top, rgba(0,0,0,0) 50%, rgba(0,0,0,1)),
-        url(${import.meta.env.VITE_IMG_URL_POSTER + data?.backdrop_path})`,
+        url(${"https://image.tmdb.org/t/p/original" + data?.backdrop_path})`,
         backgroundRepeat: "no-repeat"
     }
 

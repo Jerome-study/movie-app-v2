@@ -11,7 +11,7 @@ export const UserSignInComponent = ({ setActive, refetch, data, loading }: NavSi
     const navigate = useNavigate();
     const logoutButton = async () => {
         try {
-            const response = await instance.post(import.meta.env.VITE_AUTH_LOGOUT);
+            const response = await instance.post("/auth/logout");
             if (response.status === 200) {
                 navigate(0);
             }

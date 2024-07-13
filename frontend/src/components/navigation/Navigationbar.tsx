@@ -13,7 +13,7 @@ export let refetchButton : Function;
 export const Navigationbar = () => {
     const location = useLocation();
     const [active, setActive] = useState<string>(location.pathname);
-    const { data, loading, refetch }: FetchUserProps = useFetchBackend(import.meta.env.VITE_API_GETUSER) 
+    const { data, loading, refetch }: FetchUserProps = useFetchBackend("/api/getUser") 
     
     useEffect(() => {
         if (location.pathname.split("").length > 1) {

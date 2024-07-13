@@ -17,7 +17,7 @@ export const SignInComponent = () => {
         const username = data.username;
         const password = data.password
         try {
-            const response = await instance.post(import.meta.env.VITE_AUTH_LOGIN, { username, password });
+            const response = await instance.post("/auth/login", { username, password });
             if (response.data.message) {
                 window.location.href = "/"
             }

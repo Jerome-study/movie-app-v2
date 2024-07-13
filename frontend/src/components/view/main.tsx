@@ -20,7 +20,7 @@ export const MainComponent = () => {
         return <Navigate to={"*"} />
     }
 
-    const { data, loading , error } = useFetchMulti(import.meta.env.VITE_API_BASE_URL + `/${category}/` + id + "?api_key=", category, id);
+    const { data, loading , error } = useFetchMulti("https://api.themoviedb.org/3" + `/${category}/` + id + "?api_key=", category, id);
     if (error?.response?.status === 404) {
         return <Navigate to={"*"} />
     }

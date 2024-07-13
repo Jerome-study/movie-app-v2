@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { RefreshButton } from "../../../Refresh";
 
 export const MainComponent = () => {
-    const { data, loading , error, refetch }: FetchUserProps = useFetchBackend(import.meta.env.VITE_API_GETALL);
+    const { data, loading , error, refetch }: FetchUserProps = useFetchBackend("/api/getAll");
     const location = useLocation();
     const navigate = useNavigate();
 

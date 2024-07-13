@@ -7,13 +7,13 @@ import { RefreshButton } from '../../Refresh';
 
 export const HeroComponent = () => {
     const navigate = useNavigate();
-    const { data, loading, error, refetch } = useFetchPrivate(`${import.meta.env.VITE_NOW_PLAYING_URL}?api_key=`, );
+    const { data, loading, error, refetch } = useFetchPrivate(`https://api.themoviedb.org/3/movie/now_playing?api_key=`, );
    
     function setStyles(movie : any) {
         return {
             backgroundImage :`linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(13,9,7)), 
             linear-gradient(to top, rgba(0,0,0,0) 50%, rgba(0,0,0,1)),
-            url(${import.meta.env.VITE_IMG_URL_POSTER + movie?.backdrop_path})`,
+            url(${"https://image.tmdb.org/t/p/original" + movie?.backdrop_path})`,
             backgroundRepeat: "no-repeat"
         }
     } 

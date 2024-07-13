@@ -10,16 +10,17 @@ export const PersonDesign = () => {
     const { data } = useContext(DetailsContext);
     const [loaded, setLoaded] = useState(false);
     const [loadedShow, setLoadedShow] = useState(false);
+    const baseImgUrl = "https://image.tmdb.org/t/p/original"
     return(
         <div className="py-5">
             <Container>
             <div className="row">
                 <div className="col-12 col-md-5 col-lg-3 details">
                     <h4 className="text-center d-md-none mb-3">{data?.name}</h4>
-                    <img onLoad={() => setTimeout(() => setLoaded(true), 3000)} className="d-none" src={import.meta.env.VITE_IMG_URL_POSTER + `/${data?.profile_path}`} />
+                    <img onLoad={() => setTimeout(() => setLoaded(true), 3000)} className="d-none" src={baseImgUrl + `/${data?.profile_path}`} />
                     <div className="d-flex justify-content-center justify-content-lg-start">
                         {loaded && 
-                            <img className="rounded poster-width rounded-4" src={import.meta.env.VITE_IMG_URL_POSTER + `/${data?.profile_path}`} />
+                            <img className="rounded poster-width rounded-4" src={baseImgUrl + `/${data?.profile_path}`} />
                         } 
                         {!loaded && 
                             <div className="poster-loading poster-width rounded-4 bg-dark">
@@ -47,13 +48,13 @@ export const PersonDesign = () => {
                     {data?.known_for?.map((movie: ShowProps) => {
                         return(
                             <Fragment key={movie.id}>
-                                <Card.Img onLoad={() => setTimeout(() => setLoadedShow(true), 3000)} className="d-none" src={import.meta.env.VITE_IMG_URL_POSTER + movie.poster_path } />
+                                <Card.Img onLoad={() => setTimeout(() => setLoadedShow(true), 3000)} className="d-none" src={baseImgUrl + movie.poster_path } />
                                 <div className="col-4 col-md-3 col-lg-2" onClick={() => viewShowReload(movie)}>
                                     {movie.poster_path && 
                                         <>
                                             {loadedShow &&
                                                 <Card className="bg-dark text-white h-100 search-result-card " style={{backgroundColor: "#eee"}}>
-                                                    <Card.Img className="h-100" src={import.meta.env.VITE_IMG_URL_POSTER + movie.poster_path } alt="Card image" />
+                                                    <Card.Img className="h-100" src={baseImgUrl + movie.poster_path } alt="Card image" />
                                                 </Card>
                                             }
                                             {!loadedShow && 

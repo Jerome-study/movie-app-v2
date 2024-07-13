@@ -39,7 +39,7 @@ export const FormComponent = ({ avatar }: { avatar: string}) => {
     const onSubmit: SubmitHandler<InputFormProps> = async (data) => {
         try {
             data = {...data, avatar}
-            const response = await instance.post(import.meta.env.VITE_AUTH_REGISTER, {
+            const response = await instance.post("/auth/register", {
                 data,
                 
             })

@@ -30,7 +30,6 @@ export const instance = axios.create({
 })
 
 export const formatCompactNumber = (number: number): any => {
-  console.log("run")
     if (number < 1000) {
         return number;
       } else if (number >= 1000 && number < 1_000_000) {

@@ -7,7 +7,7 @@ import { Card } from "react-bootstrap"
 
 export const CardTrendingComponent = ({ person }: { person: PersonProps} ) => {
     const navigate = useNavigate();
-    const imageUrl = import.meta.env.VITE_IMG_URL_POSTER + person.profile_path
+    const imageUrl = "https://image.tmdb.org/t/p/original" + person.profile_path
     const [loaded, setLoaded] = useState(false);
 
 

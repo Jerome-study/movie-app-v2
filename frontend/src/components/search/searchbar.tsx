@@ -24,7 +24,7 @@ export const SearchBar = ({ category }: { category: string}) => {
         setLoading(true);
         setData(null)
         try {
-            const response = await axios.get(`${import.meta.env.VITE_SEARCH_URL}/${category}?query=${title}&api_key=${import.meta.env.VITE_API_KEY}`);
+            const response = await axios.get(`https://api.themoviedb.org/3/search/${category}?query=${title}&api_key=${import.meta.env.VITE_API_KEY}`);
             if (response?.data.results.length === 0) {
                 setLoading(false)
                 setNodata(true)

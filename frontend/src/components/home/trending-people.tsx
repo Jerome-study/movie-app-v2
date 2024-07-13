@@ -5,7 +5,7 @@ import { PersonProps } from "../../definitions/models";
 import { RefreshButton } from "../../Refresh";
 
 export const TrendingPeopleComponent = () => {
-    const { data, loading, error, refetch } = useFetchPrivate(`${import.meta.env.VITE_TRENDING_PEOPLE_URL}?api_key=`);
+    const { data, loading, error, refetch } = useFetchPrivate(`https://api.themoviedb.org/3/person/popular?api_key=`);
     
     if (error) {
         return <RefreshButton refetch={refetch} />

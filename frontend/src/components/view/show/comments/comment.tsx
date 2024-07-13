@@ -28,7 +28,7 @@ export const CommentComponent = () => {
         try {
             setDisable(true)
             setLoadingComment(true)
-            const response = await instance.post(import.meta.env.VITE_API_POSTCOMMENT + `/${id}`, {
+            const response = await instance.post("/api/postComment" + `/${id}`, {
                 comment
             });
             

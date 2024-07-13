@@ -9,7 +9,7 @@ import { RefreshButton } from "../../Refresh";
 
 export const TvShowComponents = () => {
     const [url, setUrl] = useState<string>("popular");
-    const { data, loading, error, refetch } = useFetchPrivate(`${import.meta.env.VITE_TV_URL}${url}?api_key=`);
+    const { data, loading, error, refetch } = useFetchPrivate(`https://api.themoviedb.org/3/tv/${url}?api_key=`);
     const setMovie = (button: any) => {
         setUrl(button.value);
     }

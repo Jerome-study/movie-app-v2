@@ -9,7 +9,7 @@ export const Protected = () => {
         let running = true;
         const getUser = async () => {
             try {
-                const response = await instance.get(import.meta.env.VITE_API_ISLOGGEDIN);
+                const response = await instance.get("/api/isLoggedIn");
                 if (running) {
                     if (!response.data) {
                         return navigate("/")

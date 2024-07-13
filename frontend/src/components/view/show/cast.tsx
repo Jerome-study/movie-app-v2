@@ -13,10 +13,10 @@ export const CastComponent = (props: Props) => {
                 {cast?.map((person) => {
                     return(
                         <div key={person.id} className="col-3 col-lg-4 col-xl-3 flex-shrink-0 ">
-                            <Card.Img onLoad={() => setLoaded(true)} className="d-none" src={person.profile_path &&  import.meta.env.VITE_IMG_URL_POSTER + person?.profile_path || "/corrupt.jpg"} />
+                            <Card.Img onLoad={() => setLoaded(true)} className="d-none" src={person.profile_path &&  "https://image.tmdb.org/t/p/original" + person?.profile_path || "/corrupt.jpg"} />
                             {loaded &&
                                 <Card className="border mb-2  border-1" onClick={() => viewPersonReload(person)}>
-                                    <Card.Img className="h-100" variant="top" src={person.profile_path &&  import.meta.env.VITE_IMG_URL_POSTER + person?.profile_path || "/corrupt.jpg"} />
+                                    <Card.Img className="h-100" variant="top" src={person.profile_path &&  "https://image.tmdb.org/t/p/original" + person?.profile_path || "/corrupt.jpg"} />
                                 </Card>
                             }
                             {!loaded &&

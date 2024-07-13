@@ -25,7 +25,7 @@ export const LikeComponent = () => {
             setDisable(true)
             setCount((prev : number) => prev + 1);
             setLike(prev => !prev)
-            await instance.post(import.meta.env.VITE_API_LIKEMOVIE + `/${id}`);
+            await instance.post("/api/likeMovie" + `/${id}`);
             setDisable(false)
         } catch(error: any) {
             console.log(error.response?.data)
@@ -43,7 +43,7 @@ export const LikeComponent = () => {
             }
             setCount((prev : number) => prev - 1);
             setLike(prev => !prev)
-            await instance.post(import.meta.env.VITE_API_REMOVELIKE + `/${id}`);
+            await instance.post("/api/removeLike" + `/${id}`);
             setDisable(false)
             
         } catch(error: any) {

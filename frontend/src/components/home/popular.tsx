@@ -5,7 +5,7 @@ import { ShowProps } from "../../definitions/models";
 import { RefreshButton } from "../../Refresh";
 
 export const PopularComponent = () => {
-    const { data, loading, error, refetch } = useFetchPrivate(`${import.meta.env.VITE_POPULAR_URL}?api_key=`);
+    const { data, loading, error, refetch } = useFetchPrivate(`https://api.themoviedb.org/3/movie/popular?api_key=`);
 
     if (error) {
         return <RefreshButton refetch={refetch} />

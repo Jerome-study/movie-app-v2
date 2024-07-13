@@ -11,7 +11,7 @@ import { Navigate } from "react-router-dom";
 
 export const PersonComponent = ({beingEdited, setBeingEdited, setDatas,  person }: PersonInfoCommentProps ) => {
     const { isLoggedIn, id } = useContext(ContextLikeAndComment)
-    const url = isLoggedIn? import.meta.env.VITE_API_GETCOMMENTINFO + `/${person.id}` : import.meta.env.VITE_API_GETCOMMENTINFOPUBLIC + `/${person.id}`
+    const url = isLoggedIn? "/api/getCommentInfo" + `/${person.id}` : "/public/api/getCommentInfo" + `/${person.id}`
     const { data: user, loading: userLoading } = useFetchBackend(url);
     const [editComment, setEditComment] = useState(person?.comment);
     const [loadingEdit, setLoadingEdit] = useState(false);
@@ -25,7 +25,7 @@ export const PersonComponent = ({beingEdited, setBeingEdited, setDatas,  person 
         }
         try {
             setLoadingEdit(true)
-            const response = await instance.post(import.meta.env.VITE_API_EDITCOMMENT + `/${id}`, {
+            const response = await instance.post("/api/editComment" + `/${id}`, {
                 editComment,
                 comment_id: person?._id
             });
@@ -40,7 +40,7 @@ export const PersonComponent = ({beingEdited, setBeingEdited, setDatas,  person 
     const deleteComment = async () => {
         try {
             setDeleteLoading(true);
-            const response = await instance.post(import.meta.env.VITE_API_DELETECOMMENT, {
+            const response = await instance.post("/api/deleteComment", {
                 comment_id : person._id,
                 movie_id : id
             });

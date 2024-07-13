@@ -14,9 +14,9 @@ export const useFetchMulti = (url: string, category: string, id: number | string
             try {
                 const firstResponse = await axios.get(url + import.meta.env.VITE_API_KEY);
                 const finalResponse = category === "person"?
-                await axios.get(`${import.meta.env.VITE_SEARCH_MULTI}?query=${firstResponse.data.name}` + `&api_key=${import.meta.env.VITE_API_KEY}`):
-                await axios.get(import.meta.env.VITE_API_BASE_URL + `/${category}/${firstResponse?.data.id}/credits?api_key=${import.meta.env.VITE_API_KEY}`);
-                const similarResponse: any = category !== "person" && await axios.get(import.meta.env.VITE_API_BASE_URL + `/${category}/` + `${id}/similar?api_key=${import.meta.env.VITE_API_KEY}`);
+                await axios.get(`https://api.themoviedb.org/3/search/multi?query=${firstResponse.data.name}` + `&api_key=${import.meta.env.VITE_API_KEY}`):
+                await axios.get("https://api.themoviedb.org/3" + `/${category}/${firstResponse?.data.id}/credits?api_key=${import.meta.env.VITE_API_KEY}`);
+                const similarResponse: any = category !== "person" && await axios.get("https://api.themoviedb.org/3" + `/${category}/` + `${id}/similar?api_key=${import.meta.env.VITE_API_KEY}`);
                 
                 if (running) {
                     setData(category === "person"? {...finalResponse.data.results[0], ...firstResponse.data}:{...finalResponse.data, ...firstResponse.data, similar: similarResponse.data.results } );

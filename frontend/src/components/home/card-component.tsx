@@ -7,7 +7,7 @@ import { CardSingleSkeleton } from "../../loading/skeletonCardSingle";
 
 export const CardComponent = ({ movie }: { movie: ShowProps }) => {
     const navigate = useNavigate();
-    const imageUrl = import.meta.env.VITE_IMG_URL_POSTER
+    const imageUrl = "https://image.tmdb.org/t/p/original"
     const [loaded, setLoaded] = useState(false)
 
     
